@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.main_left_menu.CalificationsFragment"
+    android:background="@color/gray_300">
+
+
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout
+        android:id="@+id/uppanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        app:umanoPanelHeight="100dp">
+       <android.support.constraint.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+           <android.support.v7.widget.RecyclerView
+               android:id="@+id/subject_list"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_marginBottom="8dp"
+               android:layout_marginEnd="8dp"
+               android:layout_marginStart="8dp"
+               android:layout_marginTop="8dp"
+               fancy:layout_constraintBottom_toBottomOf="parent"
+               fancy:layout_constraintEnd_toEndOf="parent"
+               fancy:layout_constraintStart_toStartOf="parent"
+               fancy:layout_constraintTop_toTopOf="parent" />
+
+
+           <LinearLayout
+               android:id="@+id/loader"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="vertical"
+               fancy:layout_constraintEnd_toEndOf="parent"
+               fancy:layout_constraintHorizontal_bias="0.502"
+               fancy:layout_constraintStart_toStartOf="parent"
+               fancy:layout_constraintTop_toTopOf="@+id/subject_list"
+               android:visibility="invisible"
+               >
+
+               <android.support.v7.widget.CardView
+
+                   android:layout_width="match_parent"
+                   android:layout_height="150dp"
+                   android:layout_margin="10dp">
+
+                   <com.airbnb.lottie.LottieAnimationView
+                       android:layout_width="100dp"
+                       android:layout_height="100dp"
+                       android:layout_gravity="center|left"
+                       android:layout_margin="20dp"
+                       fancy:lottie_autoPlay="true"
+                       fancy:lottie_fileName="skeleton_loading.json"
+                       fancy:lottie_loop="true" />
+
+               </android.support.v7.widget.CardView>
+               <android.support.v7.widget.CardView
+
+                   android:layout_width="match_parent"
+                   android:layout_height="150dp"
+                   android:layout_margin="10dp">
+
+                   <com.airbnb.lottie.LottieAnimationView
+                       android:layout_width="100dp"
+                       android:layout_height="100dp"
+                       android:layout_gravity="center|left"
+                       android:layout_margin="20dp"
+                       fancy:lottie_autoPlay="true"
+                       fancy:lottie_fileName="skeleton_loading.json"
+                       fancy:lottie_loop="true" />
+
+               </android.support.v7.widget.CardView>
+               <android.support.v7.widget.CardView
+
+                   android:layout_width="match_parent"
+                   android:layout_height="150dp"
+                   android:layout_margin="10dp">
+
+                   <com.airbnb.lottie.LottieAnimationView
+                       android:layout_width="100dp"
+                       android:layout_height="100dp"
+                       android:layout_gravity="center|left"
+                       android:layout_margin="20dp"
+                       fancy:lottie_autoPlay="true"
+                       fancy:lottie_fileName="skeleton_loading.json"
+                       fancy:lottie_loop="true" />
+
+               </android.support.v7.widget.CardView>
+
+           </LinearLayout>
+
+
+       </android.support.constraint.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:orientation="vertical"
+            android:background="@color/white">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/gray_200"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Promedio del semestre"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                                android:id="@+id/average"
+                                android:layout_width="0dp"
+                                android:layout_height="15dp"
+                                android:layout_weight="3"
+                                android:layout_gravity="center_vertical"
+                                app:rcBackgroundColor="@color/gray_300"
+                                app:rcBackgroundPadding="2dp"
+                                app:rcMax="100"
+                                app:rcProgress="0"
+                                app:rcProgressColor="@color/red_400"
+                                app:rcRadius="2dp"
+                                app:rcReverse="true" />
+                            <TextView
+                                android:id="@+id/average_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/red_400"
+                                android:paddingLeft="2dp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Avance del semestre"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                                android:id="@+id/semester_percentage"
+                                android:layout_width="0dp"
+                                android:layout_height="15dp"
+                                android:layout_weight="3"
+                                android:layout_gravity="center_vertical"
+                                app:rcBackgroundColor="@color/gray_300"
+                                app:rcBackgroundPadding="2dp"
+                                app:rcMax="100"
+                                app:rcProgress="0"
+                                app:rcProgressColor="@color/green_700"
+                                app:rcRadius="2dp"
+                                app:rcReverse="true" />
+                            <TextView
+                                android:id="@+id/semester_percentage_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/green_700"
+                                android:paddingLeft="2dp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Materias cursadas"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                                android:id="@+id/subjects_cursed"
+                                android:layout_width="0dp"
+                                android:layout_height="15dp"
+                                android:layout_weight="3"
+                                android:layout_gravity="center_vertical"
+                                app:rcBackgroundColor="@color/gray_300"
+                                app:rcBackgroundPadding="2dp"
+                                app:rcMax="9"
+                                app:rcProgress="0"
+                                app:rcProgressColor="@color/blue_500"
+                                app:rcRadius="2dp"
+                                app:rcReverse="true" />
+                            <TextView
+                                android:id="@+id/subjects_cursed_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/blue_500"
+                                android:paddingLeft="2dp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                android:gravity="center">
+
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/open_kardex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    fancy:fb_borderColor="@color/gray_200"
+                    fancy:fb_borderWidth="1dp"
+                    fancy:fb_defaultColor="@color/red_400"
+                    fancy:fb_focusColor="@color/red_300"
+                    fancy:fb_iconPosition="left"
+                    fancy:fb_radius="5dp"
+                    fancy:fb_text="Abrir kardex (G)"
+                    fancy:fb_textColor="@color/white" />
+
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/open_idiom_kardex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    fancy:fb_borderColor="@color/gray_200"
+                    fancy:fb_borderWidth="1dp"
+                    fancy:fb_defaultColor="@color/red_400"
+                    fancy:fb_focusColor="@color/red_300"
+                    fancy:fb_iconPosition="left"
+                    fancy:fb_radius="5dp"
+                    fancy:fb_text="Abrir kardex (I)"
+                    fancy:fb_textColor="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="5dp">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/loader_document"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    fancy:lottie_fileName="file_animation.json"
+                    fancy:lottie_autoPlay="true"
+                    fancy:lottie_loop="true"/>
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+    
+
+
+
+</FrameLayout>
