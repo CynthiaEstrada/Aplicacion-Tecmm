@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "765490223441",
+    "firebase_url": "https://chatescolar-882c8.firebaseio.com",
+    "project_id": "chatescolar-882c8",
+    "storage_bucket": "chatescolar-882c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:765490223441:android:b05ec28ddbae7631e11b70",
+        "android_client_info": {
+          "package_name": "mx.com.othings.edcore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "765490223441-4tpnjg7c5pb3u9lkrapt805i2eb6i0vo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPvi4na56q1_df6BTQOuxWrt5XDPNOB7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "765490223441-4tpnjg7c5pb3u9lkrapt805i2eb6i0vo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

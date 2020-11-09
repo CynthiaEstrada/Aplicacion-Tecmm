@@ -4,29 +4,24 @@ package mx.com.othings.edcore.Activities;
 
 import android.os.Bundle;
 
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
+import 	com.google.android.material.navigation.NavigationView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.pavlospt.roundedletterview.RoundedLetterView;
 
-import es.dmoral.toasty.Toasty;
+import mx.com.othings.edcore.Activities.ChatGeneral.ChatGeneral;
 import mx.com.othings.edcore.Fragments.main_left_menu.CalificationsFragment;
 import mx.com.othings.edcore.Fragments.PanelControlFragment;
 import mx.com.othings.edcore.Fragments.main_left_menu.StudentInformationFragment;
 import mx.com.othings.edcore.Fragments.main_left_menu.StudentScheduleFragment;
-import mx.com.othings.edcore.Lib.Configurations.StudentConfigurations;
-import mx.com.othings.edcore.Lib.Models.Student;
-import mx.com.othings.edcore.Lib.Resources.OnlineResourceListener;
-import mx.com.othings.edcore.Lib.Utilities;
 import mx.com.othings.edcore.R;
 
 public class ControlPanel extends TemplateActivity
@@ -56,7 +51,7 @@ public class ControlPanel extends TemplateActivity
 
         setDefaultFragment();
 
-        service.Online().getStudentInformation(new OnlineResourceListener() {
+       /* service.Online().getStudentInformation(new OnlineResourceListener() {
             @Override
             public void onResponse(Object response) {
 
@@ -74,7 +69,7 @@ public class ControlPanel extends TemplateActivity
             public void onError(int error_code, String error_message) {
                 Toasty.error(ControlPanel.this, error_message , Toast.LENGTH_LONG, true).show();
             }
-        });
+        });*/
 
 
     }

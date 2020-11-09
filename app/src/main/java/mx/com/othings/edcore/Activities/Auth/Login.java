@@ -2,8 +2,11 @@ package mx.com.othings.edcore.Activities.Auth;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -52,6 +55,12 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(Login.this, ControlPanel.class);
+
+                startActivity(intent);
+
+
+/*
                 final String registration_tag = registration_tag_input.getText().toString();
                 final String password = password_input.getText().toString();
 
@@ -128,17 +137,17 @@ public class Login extends AppCompatActivity {
                 }
                 else{
                     Toasty.error(Login.this,"La matricula consta de 8 números", Toast.LENGTH_LONG, true).show();
-                }
+                }*/
                 
             }
         });
 
-        keep_me_authneticated_check_box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*keep_me_authneticated_check_box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 KEEP_ME_ATHENTICATED = isChecked;
             }
-        });
+        });*/
 
     }
 }

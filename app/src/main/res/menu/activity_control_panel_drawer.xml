@@ -17,6 +17,10 @@
             android:icon="@drawable/schedule_icon"
             android:title="Horario" />
         <item
+            android:id="@+id/chat"
+            android:icon="@drawable/chat_icon"
+            android:title="Chat" />
+        <item
             android:id="@+id/user"
             android:icon="@drawable/user_icon"
             android:title="Mi cuenta" />

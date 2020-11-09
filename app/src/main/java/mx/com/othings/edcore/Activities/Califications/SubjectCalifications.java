@@ -1,6 +1,6 @@
 package mx.com.othings.edcore.Activities.Califications;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import mx.com.othings.edcore.R;

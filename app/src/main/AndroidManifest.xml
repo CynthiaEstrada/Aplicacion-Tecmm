@@ -68,6 +68,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Activities.TemplateActivity" />
         <activity android:name=".Activities.PDFReader" />
+        <activity android:name=".Activities.ChatGeneral.ChatGeneral" />
         <activity
             android:name=".Activities.Permissions.CheckPermisions"
             android:screenOrientation="portrait" />

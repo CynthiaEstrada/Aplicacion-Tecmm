@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activities.Tasks.MainActivity">
 
-    <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/icono"
         android:src="@drawable/ic_suma"
         android:layout_width="wrap_content"
