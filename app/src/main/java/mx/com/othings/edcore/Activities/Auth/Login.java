@@ -3,11 +3,16 @@ package mx.com.othings.edcore.Activities.Auth;
 import android.content.Intent;
 import android.os.Handler;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,6 +20,11 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import es.dmoral.toasty.Toasty;
 import mx.com.othings.edcore.Activities.Permissions.CheckPermisions;
@@ -23,6 +33,7 @@ import mx.com.othings.edcore.App;
 import mx.com.othings.edcore.Lib.Auth.OAuthAuthentication;
 import mx.com.othings.edcore.Lib.Auth.OAuthListener;
 import mx.com.othings.edcore.Lib.Configurations.StudentConfigurations;
+import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.Lib.Models.User;
 import mx.com.othings.edcore.Lib.Service;
 import mx.com.othings.edcore.R;
@@ -37,6 +48,13 @@ public class Login extends AppCompatActivity {
     private LottieAnimationView loader_animation;
     private OAuthAuthentication oauth;
     private Service service;
+    private FirebaseDatabase dataBase;
+    private DatabaseReference referenceUsuarios;
+
+    private FirebaseAuth mAuth;
+
+
+    private static String controlNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +68,53 @@ public class Login extends AppCompatActivity {
         loader_animation = findViewById(R.id.loader_animation);
         oauth = new OAuthAuthentication(this);
         service = new Service(this);
+        dataBase = FirebaseDatabase.getInstance();
+        referenceUsuarios = dataBase.getReference("Usuarios");
+
+        mAuth = FirebaseAuth.getInstance();
+
+        mAuth.createUserWithEmailAndPassword("za15011331@zapopan.tecmm.edu.mx", "15011331")
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+
+                        } else {
+
+                        }
+
+                    }
+                });
 
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Student estudiante1 = new Student();
+                Student estudiante2 = new Student();
+                estudiante1.prueba("Cynthia", "12345", 15011331, "za15011331@zapopan.tecmm.edu.mx");
+                estudiante2.prueba("Jaime", "12345", 15011057, "za15011057@zapopan.tecmm.edu.mx");
 
-                Intent intent = new Intent(Login.this, ControlPanel.class);
+                mAuth.signInWithEmailAndPassword("za15011331@zapopan.tecmm.edu.mx", "15011331")
+                        .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    setControlNumber(registration_tag_input.getText().toString());
 
-                startActivity(intent);
+                                    Intent intent = new Intent(Login.this, ControlPanel.class);
+
+                                    startActivity(intent);
+                                } else {
+                                    // If sign in fails, display a message to the user.
+
+                                }
+
+                            }
+                        });
+
+
 
 
 /*
@@ -87,7 +144,7 @@ public class Login extends AppCompatActivity {
                                     );
                                 }
 
-                                if(service.sdb().isFirstTimeUse()){
+                               */ if(service.sdb().isFirstTimeUse()){
 
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
@@ -95,13 +152,16 @@ public class Login extends AppCompatActivity {
 
                                             Intent intent = new Intent(Login.this,CheckPermisions.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                            service.sdb().saveUser(new User(registration_tag,password));
+                                           // service.sdb().saveUser(new User(registration_tag,password));*/
+                                            referenceUsuarios.push().setValue(estudiante1);
                                             startActivity(intent);
+                                            //
 
-                                        }
+
+                }
                                     },2000);
 
-                                }
+                                }/*
                                 else{
 
                                     new Handler().postDelayed(new Runnable() {
@@ -149,5 +209,13 @@ public class Login extends AppCompatActivity {
             }
         });*/
 
+    }
+
+    public String getControlNumber() {
+        return controlNumber;
+    }
+
+    public void setControlNumber(String controlNumber) {
+        this.controlNumber = controlNumber;
     }
 }

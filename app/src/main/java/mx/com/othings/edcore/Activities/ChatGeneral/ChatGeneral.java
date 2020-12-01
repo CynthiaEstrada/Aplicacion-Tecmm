@@ -25,6 +25,8 @@ import com.codetroopers.betterpickers.radialtimepicker.CircleView;
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +37,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import mx.com.othings.edcore.Activities.Auth.Login;
+import mx.com.othings.edcore.Activities.ControlPanel;
 import mx.com.othings.edcore.AdapterMensajes;
 import mx.com.othings.edcore.Mensaje;
 import mx.com.othings.edcore.MensajeEnviar;
@@ -61,6 +65,7 @@ public class ChatGeneral extends AppCompatActivity {
     private static final int PHOTO_SEND = 1;
     private static final int PHOTO_PERFIL = 2;
     private String fotoPerfilCadena;
+    private static String controlNumber;
 
 
 
@@ -70,8 +75,14 @@ public class ChatGeneral extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_chat_general);
 
+        Login login = new Login();
+        controlNumber = login.getControlNumber();
+        System.out.println(controlNumber);
+
         fotoPerfil = (CircularImageView) findViewById(R.id.fotoPerfil);
         nombre = (TextView) findViewById(R.id.nombre);
+        nombre.setText(controlNumber);
+
         fotoPerfilCadena = "";
         rvMensajes = (RecyclerView) findViewById(R.id.rvMensajes);
         txtMensaje = (EditText) findViewById(R.id.txtMensaje);
@@ -87,10 +98,15 @@ public class ChatGeneral extends AppCompatActivity {
         rvMensajes.setLayoutManager(l);
         rvMensajes.setAdapter(adapter);
 
+
+
+
+
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(), nombre.getText().toString(),fotoPerfilCadena, "1", ServerValue.TIMESTAMP));
+                txtMensaje.setText("");
             }
         });
 
@@ -173,7 +189,7 @@ public class ChatGeneral extends AppCompatActivity {
                     taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            MensajeEnviar m = new MensajeEnviar("Usuario te ha mandado una foto", uri.toString(),nombre.getText().toString(), fotoPerfilCadena, "2", ServerValue.TIMESTAMP);
+                            MensajeEnviar m = new MensajeEnviar(nombre.getText().toString() + " te ha mandado una foto", uri.toString(),nombre.getText().toString(), fotoPerfilCadena, "2", ServerValue.TIMESTAMP);
                             databaseReference.push().setValue(m);
                         }
                     });
@@ -193,7 +209,7 @@ public class ChatGeneral extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             fotoPerfilCadena = uri.toString();
-                            MensajeEnviar m = new MensajeEnviar("Usuario ha actualizado su foto de perfil", uri.toString(),nombre.getText().toString(), fotoPerfilCadena, "2", ServerValue.TIMESTAMP);
+                            MensajeEnviar m = new MensajeEnviar(nombre.getText().toString() +" ha actualizado su foto de perfil", uri.toString(),nombre.getText().toString(), fotoPerfilCadena, "2", ServerValue.TIMESTAMP);
                             databaseReference.push().setValue(m);
                             Glide.with(ChatGeneral.this).load(uri.toString()).into(fotoPerfil);
                         }
@@ -204,5 +220,14 @@ public class ChatGeneral extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+
+        }
     }
 }

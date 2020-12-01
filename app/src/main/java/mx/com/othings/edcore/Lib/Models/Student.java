@@ -184,4 +184,11 @@ public class Student {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
+    public void prueba(String nombre, String password, int controlNumber, String email){
+        setLast_name(nombre);
+        setPassword(password);
+        setStudent_id(controlNumber);
+        setEmail(email);
+    }
 }
