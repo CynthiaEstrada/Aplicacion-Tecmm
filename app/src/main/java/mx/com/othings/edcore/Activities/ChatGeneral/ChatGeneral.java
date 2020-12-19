@@ -1,6 +1,5 @@
 package mx.com.othings.edcore.Activities.ChatGeneral;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,10 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.codetroopers.betterpickers.radialtimepicker.CircleView;
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -33,16 +29,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import mx.com.othings.edcore.Activities.Auth.Login;
-import mx.com.othings.edcore.Activities.ControlPanel;
-import mx.com.othings.edcore.AdapterMensajes;
-import mx.com.othings.edcore.Mensaje;
-import mx.com.othings.edcore.MensajeEnviar;
-import mx.com.othings.edcore.MensajeRecibir;
+import mx.com.othings.edcore.Adapters.Mensajes.MensajeriaAdaptador;
+import mx.com.othings.edcore.Lib.Firebase.Mensajeria.Mensaje;
+import mx.com.othings.edcore.Lib.Logica.LMensaje;
+import mx.com.othings.edcore.Lib.Models.Student;
+import mx.com.othings.edcore.Persistencia.UsuarioDAO;
 import mx.com.othings.edcore.R;
 
 
@@ -56,7 +53,7 @@ public class ChatGeneral extends AppCompatActivity {
     private Button btnEnviar;
     private ImageButton btnEnviarFoto;
 
-    private AdapterMensajes adapter;
+    private MensajeriaAdaptador adapter;
 
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
@@ -66,6 +63,9 @@ public class ChatGeneral extends AppCompatActivity {
     private static final int PHOTO_PERFIL = 2;
     private String fotoPerfilCadena;
     private static String controlNumber;
+
+    private FirebaseAuth mAuth;
+    private String NOMBRE_USUARIO;
 
 
 
@@ -81,7 +81,6 @@ public class ChatGeneral extends AppCompatActivity {
 
         fotoPerfil = (CircularImageView) findViewById(R.id.fotoPerfil);
         nombre = (TextView) findViewById(R.id.nombre);
-        nombre.setText(controlNumber);
 
         fotoPerfilCadena = "";
         rvMensajes = (RecyclerView) findViewById(R.id.rvMensajes);
@@ -92,8 +91,9 @@ public class ChatGeneral extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Chat"); //Sala de Chat(Nombre)
         storage = FirebaseStorage.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
-        adapter = new AdapterMensajes(this);
+        adapter = new MensajeriaAdaptador(this);
         LinearLayoutManager l = new LinearLayoutManager(this);
         rvMensajes.setLayoutManager(l);
         rvMensajes.setAdapter(adapter);
@@ -105,8 +105,16 @@ public class ChatGeneral extends AppCompatActivity {
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(), nombre.getText().toString(),fotoPerfilCadena, "1", ServerValue.TIMESTAMP));
-                txtMensaje.setText("");
+                String mensajeEnviar= txtMensaje.getText().toString();
+                if(mensajeEnviar.isEmpty()){
+                    Mensaje mensaje = new Mensaje();
+                    mensaje.setMensaje(mensajeEnviar);
+                    mensaje.setContieneFoto(false);
+                    mensaje.setKeyEmisor(UsuarioDAO.getInstance().getKeyUsusario());
+                    databaseReference.push().setValue(mensaje);
+                    txtMensaje.setText("");
+                }
+
             }
         });
 
@@ -142,8 +150,9 @@ public class ChatGeneral extends AppCompatActivity {
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                MensajeRecibir m = snapshot.getValue(MensajeRecibir.class);
-                adapter.addMensajes(m);
+                Mensaje mensaje = snapshot.getValue(Mensaje.class);
+                LMensaje lMensaje = new LMensaje(snapshot.getKey(), mensaje);
+                adapter.addMensajes(lMensaje);
             }
 
             @Override
@@ -189,14 +198,18 @@ public class ChatGeneral extends AppCompatActivity {
                     taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            MensajeEnviar m = new MensajeEnviar(nombre.getText().toString() + " te ha mandado una foto", uri.toString(),nombre.getText().toString(), fotoPerfilCadena, "2", ServerValue.TIMESTAMP);
-                            databaseReference.push().setValue(m);
+                            Mensaje mensaje = new Mensaje();
+                            mensaje.setMensaje(" te ha enviado una foto");
+                            mensaje.setUrlFoto(uri.toString());
+                            mensaje.setContieneFoto(true);
+                            mensaje.setKeyEmisor(UsuarioDAO.getInstance().getKeyUsusario());
+                            databaseReference.push().setValue(mensaje);
                         }
                     });
 
                 }
             });
-        }else if(requestCode == PHOTO_PERFIL && resultCode == RESULT_OK){
+        }/*else if(requestCode == PHOTO_PERFIL && resultCode == RESULT_OK){
             Uri u = data.getData();
             storageReference = storage.getReference("foto_Perfil");
             final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
@@ -209,7 +222,7 @@ public class ChatGeneral extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             fotoPerfilCadena = uri.toString();
-                            MensajeEnviar m = new MensajeEnviar(nombre.getText().toString() +" ha actualizado su foto de perfil", uri.toString(),nombre.getText().toString(), fotoPerfilCadena, "2", ServerValue.TIMESTAMP);
+                            MensajeEnviar m = new MensajeEnviar(NOMBRE_USUARIO +" ha actualizado su foto de perfil", uri.toString(),NOMBRE_USUARIO, fotoPerfilCadena, "2", ServerValue.TIMESTAMP);
                             databaseReference.push().setValue(m);
                             Glide.with(ChatGeneral.this).load(uri.toString()).into(fotoPerfil);
                         }
@@ -217,7 +230,7 @@ public class ChatGeneral extends AppCompatActivity {
 
                 }
             });
-        }
+        }*/
 
 
     }
@@ -225,8 +238,26 @@ public class ChatGeneral extends AppCompatActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            btnEnviar.setEnabled(false);
+            DatabaseReference reference = database.getReference("Usuarios/" + currentUser.getUid());
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Student estudiante = snapshot.getValue(Student.class);
+                    NOMBRE_USUARIO = estudiante.getName();
+                    nombre.setText(NOMBRE_USUARIO);
+                    btnEnviar.setEnabled(true);
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }else{
 
         }
     }

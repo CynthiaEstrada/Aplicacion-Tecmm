@@ -1,5 +1,8 @@
 package mx.com.othings.edcore.Lib.Models;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.ServerValue;
+
 public class Student {
 
     private int id_user;
@@ -23,7 +26,11 @@ public class Student {
     private String from_state;
     private String registration_tag;
 
-    public Student(){}
+    private String perfil_photo;
+
+    public Student(){
+
+    }
 
     public int getId_user() {
         return id_user;
@@ -185,10 +192,22 @@ public class Student {
         this.photo = photo;
     }
 
-    public void prueba(String nombre, String password, int controlNumber, String email){
-        setLast_name(nombre);
+    public String getPerfil_photo() {
+        return perfil_photo;
+    }
+
+    public void setPerfil_photo(String perfil_photo) {
+        this.perfil_photo = perfil_photo;
+    }
+
+
+
+    public void prueba(String nombre, String password, int controlNumber, String email, String photo_url){
+        setName(nombre);
         setPassword(password);
         setStudent_id(controlNumber);
         setEmail(email);
+        setPerfil_photo(photo_url);
+
     }
 }

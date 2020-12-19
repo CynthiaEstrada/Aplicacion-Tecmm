@@ -1,4 +1,4 @@
-package mx.com.othings.edcore;
+package mx.com.othings.edcore.Holder;
 
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
@@ -7,7 +7,9 @@ import android.widget.TextView;
 
 import com.github.siyamed.shapeimageview.CircularImageView;
 
-public class HolderMensajes extends RecyclerView.ViewHolder {
+import mx.com.othings.edcore.R;
+
+public class MensajeriaHolder extends RecyclerView.ViewHolder {
 
     private TextView nombre;
     private TextView mensaje;
@@ -15,7 +17,7 @@ public class HolderMensajes extends RecyclerView.ViewHolder {
     private CircularImageView fotoMensajePerfil;
     private ImageView fotoMensaje;
 
-    public HolderMensajes(View itemView) {
+    public MensajeriaHolder(View itemView) {
         super(itemView);
 
         nombre = (TextView) itemView.findViewById(R.id.nombreMensaje);

@@ -15,11 +15,12 @@ import android.widget.RelativeLayout;
 import mx.com.othings.edcore.Activities.BlocDeNotas.BlocDeNotas;
 import mx.com.othings.edcore.Activities.BlocDeNotas.ListaDeNotas;
 import mx.com.othings.edcore.Activities.ChatGeneral.ChatGeneral;
+import mx.com.othings.edcore.Activities.EventosFacebook.EventosActivity;
 import mx.com.othings.edcore.R;
 
 public class PanelControlFragment extends Fragment {
 
-    CardView Chat, Notes;
+    CardView Chat, Notes, Eventos;
     Activity chatActivity;
 
 
@@ -54,6 +55,15 @@ public class PanelControlFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ListaDeNotas.class);
+                startActivity(intent);
+            }
+        });
+
+        Eventos = view.findViewById(R.id.cardEventos);
+        Eventos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), EventosActivity.class);
                 startActivity(intent);
             }
         });

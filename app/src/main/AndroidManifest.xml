@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".Activities.BlocDeNotas.ListaDeNotas"></activity>
+        <activity android:name=".Activities.EventosFacebook.EventosActivity"></activity>
+        <activity android:name=".Activities.BlocDeNotas.ListaDeNotas" />
         <activity android:name=".Activities.BlocDeNotas.BlocDeNotas" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

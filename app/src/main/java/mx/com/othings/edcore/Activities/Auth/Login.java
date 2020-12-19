@@ -49,7 +49,6 @@ public class Login extends AppCompatActivity {
     private OAuthAuthentication oauth;
     private Service service;
     private FirebaseDatabase dataBase;
-    private DatabaseReference referenceUsuarios;
 
     private FirebaseAuth mAuth;
 
@@ -69,7 +68,6 @@ public class Login extends AppCompatActivity {
         oauth = new OAuthAuthentication(this);
         service = new Service(this);
         dataBase = FirebaseDatabase.getInstance();
-        referenceUsuarios = dataBase.getReference("Usuarios");
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -92,8 +90,8 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 final Student estudiante1 = new Student();
                 Student estudiante2 = new Student();
-                estudiante1.prueba("Cynthia", "12345", 15011331, "za15011331@zapopan.tecmm.edu.mx");
-                estudiante2.prueba("Jaime", "12345", 15011057, "za15011057@zapopan.tecmm.edu.mx");
+                estudiante1.prueba("Cynthia", "12345", 15011331, "za15011331@zapopan.tecmm.edu.mx", estudiante1.getPerfil_photo());
+                estudiante2.prueba("Jaime", "12345", 15011057, "za15011057@zapopan.tecmm.edu.mx", null);
 
                 mAuth.signInWithEmailAndPassword("za15011331@zapopan.tecmm.edu.mx", "15011331")
                         .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
@@ -153,7 +151,9 @@ public class Login extends AppCompatActivity {
                                             Intent intent = new Intent(Login.this,CheckPermisions.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                            // service.sdb().saveUser(new User(registration_tag,password));*/
-                                            referenceUsuarios.push().setValue(estudiante1);
+                                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                                            DatabaseReference reference = dataBase.getReference("Usuarios/" + currentUser.getUid());
+                                            reference.setValue(estudiante1);
                                             startActivity(intent);
                                             //
 
