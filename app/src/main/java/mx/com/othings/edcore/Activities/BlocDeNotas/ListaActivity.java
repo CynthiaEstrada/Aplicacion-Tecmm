@@ -1,19 +1,16 @@
 package mx.com.othings.edcore.Activities.BlocDeNotas;
 
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import es.dmoral.toasty.Toasty;
-import mx.com.othings.edcore.R;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +22,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import mx.com.othings.edcore.R;
+import mx.com.othings.edcore.Activities.BlocDeNotas.adapters.NotesListAdapter;
+import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
+import mx.com.othings.edcore.Activities.BlocDeNotas.hash.Sha;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -34,14 +38,14 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 /**
  * Pantalla donde se cargan todas las notas
  */
-public class ListaDeNotas extends AppCompatActivity {
+public class ListaActivity extends AppCompatActivity {
 
     //Objetos de la interfaz
     private ListView listViewNotes;
     private EditText editTextSearch;
 
     private ComponentNotes componentNotes;          //Objeto que nos permite realizar las operaciones con la BDD
-    private Note listNotes;              //ArrayList que contendrá todas las notas de la BDD
+    private ArrayList<Note> listNotes;              //ArrayList que contendrá todas las notas de la BDD
 
     private int alphabeticalOrder = 1;              //Variable que controla el orden alfabetico
     private final String SHA = "SHA-1";             //Constante que guarda el tipo de hash
@@ -189,7 +193,7 @@ public class ListaDeNotas extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_settings:
-                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                Intent intent = new Intent(ListaActivity.this, SettingsActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -200,7 +204,7 @@ public class ListaDeNotas extends AppCompatActivity {
      *Llamamos a EditTextActivity
      */
     public void addNote(View view) {
-        Intent intent = new Intent(MainActivity.this, EditTextActivity.class);
+        Intent intent = new Intent(ListaActivity.this, BlocActivity.class);
         startActivity(intent);
     }
 
@@ -234,7 +238,7 @@ public class ListaDeNotas extends AppCompatActivity {
                     note.setUserId(user);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("note", note);
-                    Intent intent = new Intent(MainActivity.this, EditTextActivity.class);
+                    Intent intent = new Intent(ListaActivity.this, BlocActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } else if (options[i].equals("Ocultar contenido")) {
@@ -266,7 +270,7 @@ public class ListaDeNotas extends AppCompatActivity {
      *Ventana de dialogo que pide la contraseña
      */
     private void passwordAlertDialog(final Note note) {
-        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ListaActivity.this);
         final View customLayout = getLayoutInflater().inflate(R.layout.dialog_password, null);
         alertDialog.setView(customLayout);
 
@@ -299,6 +303,7 @@ public class ListaDeNotas extends AppCompatActivity {
     public void alphabeticalOrder(View view) {
         if (listNotes != null) {
             //Clonamos listNotes para que luego no tengamos que consultar la BDD
+            //ArrayList<Note> listNotesCopy = (ArrayList<Note>) listNotes.clone();
             ArrayList<Note> listNotesCopy = (ArrayList<Note>) listNotes.clone();
             switch (alphabeticalOrder) {
                 case 1:
@@ -361,3 +366,4 @@ public class ListaDeNotas extends AppCompatActivity {
         listViewNotes.setAdapter(notesListAdapter);
     }
 }
+

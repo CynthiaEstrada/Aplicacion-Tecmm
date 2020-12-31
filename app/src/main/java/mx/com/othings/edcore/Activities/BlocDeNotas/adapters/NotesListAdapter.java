@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.example.projectnotes.R;
-import com.example.projectnotes.pojos.Note;
+import mx.com.othings.edcore.R;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
 
 import java.util.List;
 

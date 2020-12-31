@@ -5,8 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.projectnotes.pojos.Note;
-import com.example.projectnotes.pojos.User;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
 
 import java.util.ArrayList;
 

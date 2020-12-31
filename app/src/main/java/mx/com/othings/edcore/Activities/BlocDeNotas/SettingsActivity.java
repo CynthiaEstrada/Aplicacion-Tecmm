@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projectnotes.R;
+import mx.com.othings.edcore.R;
 
 /**
  * Pantalla de Ajustes

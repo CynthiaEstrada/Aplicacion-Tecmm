@@ -10,54 +10,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03659c9d-ad6f-45fd-854a-fa934dd38b22" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/assets/facebook.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/SettingsActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/SettingsFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/adapters/NotesListAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/complements/DriveServiceHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/complements/GoogleDriveFileHolder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/complements/TtsManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/componentBd/ComponentNotes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/componentBd/NotesOpenHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/hash/Sha.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/pojos/Note.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/pojos/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/EventosFacebook/EventosActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/EventosFacebook/facebook.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Lib/Logica/LMensaje.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Lib/Logica/LStudent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Persistencia/UsuarioDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/edit_text_round.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_sort_by_alpha1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/button_floating.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/edit_text_note.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_check.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_volume.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_eventos.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_show_image.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_volley_volley_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_auth_17_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_auth_base_17_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/Auth/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/BlocActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/ListaActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/RegistryActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/SplashActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/button_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/button_round_border.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_attach.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_lock.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_security.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_share.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_usuario.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/bg_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/progressbar_gradient.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_registry.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_password.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/listview_item.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/progress_dialog_backup.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/progress_dialog_reset.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/progress_dialog_save.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_edit_text_attach.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_edit_text_share.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/preferences.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_findbugs_jsr305_2_0_1_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/Auth/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/Auth/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/BlocDeNotas.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/BlocDeNotas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/ListaDeNotas.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/ListaDeNotas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/ChatGeneral/ChatGeneral.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/ChatGeneral/ChatGeneral.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/ChatGeneral/FragmentChat.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/AdapterMensajes.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Adapters/Mensajes/MensajeriaAdaptador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/FragmentConversacion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/BlocDeNotas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/ListaDeNotas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/SettingsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/SettingsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/SettingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/SettingsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/adapters/NotesListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/adapters/NotesListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/complements/TtsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/complements/TtsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/componentBd/ComponentNotes.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/componentBd/ComponentNotes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Fragments/PanelControlFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Fragments/PanelControlFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/HolderMensajes.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Holder/MensajeriaHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Lib/Models/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Lib/Models/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Mensaje.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Lib/Firebase/Mensajeria/Mensaje.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/MensajeEnviar.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/MensajeRecibir.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_bloc_de_notas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_bloc_de_notas.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_lista_de_notas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_lista_de_notas.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_panel_control.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_panel_control.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,8 +102,8 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="device.picker.selection" value="ZY223LSPK9" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas" />
-    <property name="project.structure.last.edited" value="Dependencies" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable-mdpi" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
@@ -122,19 +119,20 @@
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="mx.com.othings.edcore.Fragments" />
     </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="mx.com.othings.edcore.Activities.BlocDeNotas.adapters" />
-      <recent name="mx.com.othings.edcore.Activities.BlocDeNotas.hash" />
-    </key>
     <key name="android.template.-566481696">
       <recent name="mx.com.othings.edcore.Activities.BlocDeNotas" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="mx.com.othings.edcore.Activities.BlocDeNotas" />
+      <recent name="mx.com.othings.edcore.Activities.BlocDeNotas.adapters" />
+      <recent name="mx.com.othings.edcore.Activities.BlocDeNotas.hash" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Cynthia\Documents\Escuela\Residencia\Aplicacion-Tecmm\app\src\main\java\mx\com\othings\edcore\Activities\BlocDeNotas" />
-      <recent name="C:\Users\Cynthia\Documents\Escuela\Residencia\Aplicacion-Tecmm\app\src\main\java\mx\com\othings\edcore\Activities\BlocDeNotas\complements" />
       <recent name="C:\Users\Cynthia\Documents\Escuela\Residencia\Aplicacion-Tecmm\app\src\main\res\drawable-mdpi" />
       <recent name="C:\Users\Cynthia\Documents\Escuela\Residencia\Aplicacion-Tecmm\app\src\main\res\layout" />
-      <recent name="C:\Users\Cynthia\Documents\Escuela\Residencia\Aplicacion-Tecmm\app" />
+      <recent name="C:\Users\Cynthia\Documents\Escuela\Residencia\Aplicacion-Tecmm\app\src\main\res\menu" />
+      <recent name="C:\Users\Cynthia\Documents\Escuela\Residencia\Aplicacion-Tecmm\app\src\main\java\mx\com\othings\edcore\Activities\BlocDeNotas" />
+      <recent name="C:\Users\Cynthia\Documents\Escuela\Residencia\Aplicacion-Tecmm\app\src\main\res\drawable-xhdpi" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -419,18 +417,18 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="200" y="96" key="#PSD" timestamp="1604381169380">
+    <state x="200" y="96" key="#PSD" timestamp="1608766622336">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="200" y="96" key="#PSD/0.0.1366.728@0.0.1366.728" timestamp="1604381169380" />
+    <state x="200" y="96" key="#PSD/0.0.1366.728@0.0.1366.728" timestamp="1608766622336" />
     <state x="402" y="9" key="#app" timestamp="1604412415866">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="402" y="9" key="#app/0.0.1366.728@0.0.1366.728" timestamp="1604412415866" />
-    <state x="687" y="34" key="#com.intellij.ide.util.MemberChooser" timestamp="1607655913872">
+    <state x="687" y="34" key="#com.intellij.ide.util.MemberChooser" timestamp="1608428196223">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="687" y="34" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1607655913872" />
+    <state x="687" y="34" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1608428196223" />
     <state x="414" y="289" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1607651532000">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -443,26 +441,26 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1608267105548" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1608264253488">
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1609007909638">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1608264253488" />
-    <state width="1323" height="178" key="GridCell.Tab.0.bottom" timestamp="1608257360425">
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609007909638" />
+    <state width="1323" height="178" key="GridCell.Tab.0.bottom" timestamp="1609440361188">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608257360425" />
-    <state width="1323" height="178" key="GridCell.Tab.0.center" timestamp="1608257360424">
+    <state width="1323" height="178" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609440361188" />
+    <state width="1323" height="178" key="GridCell.Tab.0.center" timestamp="1609440361188">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1608257360424" />
-    <state width="1323" height="178" key="GridCell.Tab.0.left" timestamp="1608257360424">
+    <state width="1323" height="178" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609440361188" />
+    <state width="1323" height="178" key="GridCell.Tab.0.left" timestamp="1609440361187">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1608257360424" />
-    <state width="1323" height="178" key="GridCell.Tab.0.right" timestamp="1608257360425">
+    <state width="1323" height="178" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609440361187" />
+    <state width="1323" height="178" key="GridCell.Tab.0.right" timestamp="1609440361188">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1608257360425" />
+    <state width="1323" height="178" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609440361188" />
     <state width="1323" height="222" key="GridCell.Tab.1.bottom" timestamp="1603235160856">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -491,10 +489,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1366.728@0.0.1366.728" timestamp="1604891850357" />
-    <state x="379" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1608254618205">
+    <state x="379" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1609004235891">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1608254618205" />
+    <state x="379" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1609004235891" />
     <state x="389" y="0" key="refactoring.ChangeSignatureDialog" timestamp="1604371799082">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

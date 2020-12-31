@@ -21,35 +21,46 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import mx.com.othings.edcore.R;
+import mx.com.othings.edcore.Activities.BlocDeNotas.complements.TtsManager;
+import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Arrays;
 
-import mx.com.othings.edcore.Activities.BlocDeNotas.complements.TtsManager;
-import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
-import mx.com.othings.edcore.R;
+/*
+ *Pantalla del Editor de Notas
+ */
+public class BlocActivity extends AppCompatActivity {
 
-public class BlocDeNotas extends AppCompatActivity {
-
+    //Creación de los objetos de la interfaz
     private EditText editTextTitle, editTextDescription;
     private TextView textViewId, textViewEncode, textViewUserId;
     private ImageView imageViewAttached, imageViewDialog;
     private ImageButton imageButtonVolume;
 
     private Dialog dialogShowImage;                 //Objeto que nos muestra un dialogo con la imagen adjuntada
-         //Objeto que nos permite realizar las operaciones con la BDD
+    private ComponentNotes componentNotes;          //Objeto que nos permite realizar las operaciones con la BDD
     private ProgressDialog progressDialog;          //Objeto que nos muestra la ventana de carga
     private TtsManager ttsManager = null;           //Objeto que nos permite la convertir el texto a voz
 
-    private int stopTtsManager = 0;
+    private int stopTtsManager = 0;                 //Variable de apoyo para parar la lectura del texto
 
+    /*
+     *Método que crea la vista del Activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bloc_de_notas);
-        getSupportActionBar().setTitle("Editor de Notas");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /*getSupportActionBar().setTitle("Editor de Notas");
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);*/
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         init();
 
@@ -66,9 +77,11 @@ public class BlocDeNotas extends AppCompatActivity {
         });
     }
 
-
+    /*
+     *Se crea una ventana diálogo y  añade la imagen que se ha pinchado
+     */
     private void showImage() {
-        dialogShowImage = new Dialog(BlocDeNotas.this);
+        dialogShowImage = new Dialog(BlocActivity.this);
         dialogShowImage.setContentView(R.layout.dialog_show_image);
         imageViewDialog = dialogShowImage.findViewById(R.id.imageViewDialog);
         imageViewDialog.setImageBitmap(((BitmapDrawable) imageViewAttached.getDrawable()).getBitmap());
@@ -124,7 +137,7 @@ public class BlocDeNotas extends AppCompatActivity {
      */
     private void init() {
         componentNotes = new ComponentNotes(this);
-        progressDialog = new ProgressDialog(EditTextActivity.this);
+        progressDialog = new ProgressDialog(BlocActivity.this);
 
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
         editTextDescription = (EditText) findViewById(R.id.editTextDescription);
@@ -169,7 +182,7 @@ public class BlocDeNotas extends AppCompatActivity {
      *Abrimos la galería del dispositivo
      */
     private void openGalery() {
-        if (MainActivity.isPermission) {
+        if (ListaActivity.isPermission) {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent.setType("image/");
             startActivityForResult(intent.createChooser(intent, "Selecione la Aplicación"), 10);
@@ -226,7 +239,7 @@ public class BlocDeNotas extends AppCompatActivity {
                 editTextDescription.getText().toString(), Integer.parseInt(textViewEncode.getText().toString()),
                 imageViewToByte(), new User(Integer.parseInt(textViewUserId.getText().toString())));
 
-        if (MainActivity.isUpdate) {
+        if( ListaActivity.isUpdate) {
             componentNotes.updateNote(note.getNoteId(), note);
         } else {
             componentNotes.insertNote(note);
@@ -239,7 +252,7 @@ public class BlocDeNotas extends AppCompatActivity {
      *Nos lleva al MainActivity
      */
     private void goMain() {
-        Intent intent = new Intent(EditTextActivity.this, MainActivity.class);
+        Intent intent = new Intent(BlocActivity.this, ListaActivity.class);
         startActivity(intent);
         finish();
     }
@@ -284,4 +297,4 @@ public class BlocDeNotas extends AppCompatActivity {
         progressDialog.dismiss();
     }
 }
-}
+

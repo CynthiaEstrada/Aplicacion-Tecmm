@@ -1,4 +1,5 @@
 package mx.com.othings.edcore.Activities.BlocDeNotas.complements;
+
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;

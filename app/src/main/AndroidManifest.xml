@@ -23,9 +23,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".Activities.EventosFacebook.EventosActivity"></activity>
-        <activity android:name=".Activities.BlocDeNotas.ListaDeNotas" />
-        <activity android:name=".Activities.BlocDeNotas.BlocDeNotas" />
+        <activity android:name=".Activities.EventosFacebook.EventosActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".Activities.BlocDeNotas.ListaActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".Activities.BlocDeNotas.BlocActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

@@ -18,6 +18,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 
+import mx.com.othings.edcore.R;
+import mx.com.othings.edcore.Activities.BlocDeNotas.complements.DriveServiceHelper;
+import mx.com.othings.edcore.Activities.BlocDeNotas.complements.GoogleDriveFileHolder;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -32,7 +35,7 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
-import static com.example.projectnotes.complements.DriveServiceHelper.getGoogleDriveService;
+import static mx.com.othings.edcore.Activities.BlocDeNotas.complements.DriveServiceHelper.getGoogleDriveService;
 
 /*
  *Clase donde se carga la interfaz de Ajustes

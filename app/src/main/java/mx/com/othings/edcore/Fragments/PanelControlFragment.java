@@ -12,8 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import mx.com.othings.edcore.Activities.BlocDeNotas.BlocDeNotas;
-import mx.com.othings.edcore.Activities.BlocDeNotas.ListaDeNotas;
+//import mx.com.othings.edcore.Activities.BlocDeNotas.BlocDeNotas;
+//import mx.com.othings.edcore.Activities.BlocDeNotas.ListaDeNotas;
+import mx.com.othings.edcore.Activities.BlocDeNotas.ListaActivity;
 import mx.com.othings.edcore.Activities.ChatGeneral.ChatGeneral;
 import mx.com.othings.edcore.Activities.EventosFacebook.EventosActivity;
 import mx.com.othings.edcore.R;
@@ -54,7 +55,7 @@ public class PanelControlFragment extends Fragment {
         Notes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ListaDeNotas.class);
+                Intent intent = new Intent(getActivity(), ListaActivity.class);
                 startActivity(intent);
             }
         });
