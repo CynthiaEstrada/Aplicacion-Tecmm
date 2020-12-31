@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import mx.com.othings.edcore.Activities.BlocDeNotas.BlocDeNotas;
-import mx.com.othings.edcore.Activities.BlocDeNotas.ListaDeNotas;
+//import mx.com.othings.edcore.Activities.BlocDeNotas.BlocDeNotas;
+//import mx.com.othings.edcore.Activities.BlocDeNotas.ListaDeNotas;
 import mx.com.othings.edcore.Activities.ChatGeneral.ChatGeneral;
 import mx.com.othings.edcore.Activities.EventosFacebook.EventosActivity;
 import mx.com.othings.edcore.R;
@@ -50,7 +50,7 @@ public class PanelControlFragment extends Fragment {
             }
         });
 
-        Notes = view.findViewById(R.id.Notas);
+      /*  Notes = view.findViewById(R.id.Notas);
         Notes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +58,7 @@ public class PanelControlFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+*/
         Eventos = view.findViewById(R.id.cardEventos);
         Eventos.setOnClickListener(new View.OnClickListener() {
             @Override

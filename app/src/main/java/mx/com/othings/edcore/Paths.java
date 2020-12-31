@@ -14,9 +14,7 @@ public enum Paths {
     private String value;
 
     Paths( String v ){
-
         this.value = v;
-
     }
 
     public String getRootPath(){

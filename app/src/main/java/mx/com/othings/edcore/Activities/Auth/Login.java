@@ -3,6 +3,10 @@ package mx.com.othings.edcore.Activities.Auth;
 import android.content.Intent;
 import android.os.Handler;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -25,6 +29,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import es.dmoral.toasty.Toasty;
 import mx.com.othings.edcore.Activities.Permissions.CheckPermisions;
@@ -88,11 +96,30 @@ public class Login extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Student estudiante1 = new Student();
-                Student estudiante2 = new Student();
-                estudiante1.prueba("Cynthia", "12345", 15011331, "za15011331@zapopan.tecmm.edu.mx", estudiante1.getPerfil_photo());
-                estudiante2.prueba("Jaime", "12345", 15011057, "za15011057@zapopan.tecmm.edu.mx", null);
+                final String registration_tag = registration_tag_input.getText().toString();
+                final String password = password_input.getText().toString();
+                Response.Listener<String> res = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonRespuesta = new JSONObject(response);
+                            boolean ok = jsonRespuesta.getBoolean("success");
+                            if(ok==true){
+                                Intent intent = new Intent(Login.this, ControlPanel.class);
+                                startActivity(intent);
+                            }else{
+                                Toasty.error(Login.this,"error al intentar acceder", Toast.LENGTH_LONG, true).show();
+                            }
+                        }catch (JSONException e) {
+                            e.getMessage();
+                        }
+                    }
+                };
+                LoginRequest r = new LoginRequest(registration_tag, password, res);
+                RequestQueue cola = Volley.newRequestQueue(Login.this);
+                cola.add(r);
 
+                /*
                 mAuth.signInWithEmailAndPassword("za15011331@zapopan.tecmm.edu.mx", "15011331")
                         .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -111,7 +138,7 @@ public class Login extends AppCompatActivity {
 
                             }
                         });
-
+*/
 
 
 
@@ -141,8 +168,8 @@ public class Login extends AppCompatActivity {
                                             true
                                     );
                                 }
-
-                               */ if(service.sdb().isFirstTimeUse()){
+                            */ /*
+                                if(service.sdb().isFirstTimeUse()){
 
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
@@ -151,7 +178,7 @@ public class Login extends AppCompatActivity {
                                             Intent intent = new Intent(Login.this,CheckPermisions.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                            // service.sdb().saveUser(new User(registration_tag,password));*/
-                                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                                       /*     FirebaseUser currentUser = mAuth.getCurrentUser();
                                             DatabaseReference reference = dataBase.getReference("Usuarios/" + currentUser.getUid());
                                             reference.setValue(estudiante1);
                                             startActivity(intent);
@@ -161,7 +188,7 @@ public class Login extends AppCompatActivity {
                 }
                                     },2000);
 
-                                }/*
+                                } */ /*
                                 else{
 
                                     new Handler().postDelayed(new Runnable() {

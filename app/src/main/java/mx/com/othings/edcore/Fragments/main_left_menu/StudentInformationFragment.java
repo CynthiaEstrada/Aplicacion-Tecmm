@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.github.siyamed.shapeimageview.RoundedImageView;
 
-import org.w3c.dom.Text;
-
 import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.Lib.SDB;
 import mx.com.othings.edcore.Lib.Utilities;
@@ -44,14 +42,11 @@ public class StudentInformationFragment extends Fragment {
         TextView username = view.findViewById(R.id.user_name);
         RoundedImageView student_img = view.findViewById(R.id.student_img);
         TextView email = view.findViewById(R.id.email);
-        TextView city = view.findViewById(R.id.from_town);
-        TextView state = view.findViewById(R.id.from_state);
+        TextView address = view.findViewById(R.id.address);
         TextView gender = view.findViewById(R.id.gender);
-        TextView phone_number = view.findViewById(R.id.phone_number);
-        TextView blood_type = view.findViewById(R.id.blood_type);
-        TextView nss = view.findViewById(R.id.social_security_number);
-        TextView curp = view.findViewById(R.id.curp);
-        TextView rfc = view.findViewById(R.id.rfc);
+        TextView career = view.findViewById(R.id.career);
+        TextView semester = view.findViewById(R.id.semester);
+        TextView cellphone = view.findViewById(R.id.cellphone);
         TextView birthday = view.findViewById(R.id.birthday);
 
         String full_name = Utilities.capitalizeWords((student.getName()+" "+student.getFirst_name()+" "+ student.getLast_name()).toLowerCase());
