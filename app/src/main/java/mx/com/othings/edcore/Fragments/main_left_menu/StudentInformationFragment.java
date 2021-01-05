@@ -28,7 +28,6 @@ import mx.com.othings.edcore.R;
 public class StudentInformationFragment extends Fragment {
     public StudentInformationFragment() {
         // Required empty public constructor
-
     }
 
     @Override
@@ -65,11 +64,9 @@ public class StudentInformationFragment extends Fragment {
     }
 
     private void charge_user_photo(String image_base_64 , RoundedImageView roundedImageView){
-
         byte [] image_decoded = Utilities.decodeStringToBase64(image_base_64);
         Bitmap bitmap = BitmapFactory.decodeByteArray(image_decoded,0,image_decoded.length);
         roundedImageView.setImageBitmap(bitmap);
     }
-
 
 }
