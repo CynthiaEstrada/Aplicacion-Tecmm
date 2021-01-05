@@ -1,11 +1,5 @@
 package mx.com.othings.edcore.Activities.BlocDeNotas;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import es.dmoral.toasty.Toasty;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,16 +16,21 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import mx.com.othings.edcore.R;
-import mx.com.othings.edcore.Activities.BlocDeNotas.adapters.NotesListAdapter;
-import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
-import mx.com.othings.edcore.Activities.BlocDeNotas.hash.Sha;
-import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
-import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+
+import es.dmoral.toasty.Toasty;
+import mx.com.othings.edcore.Activities.BlocDeNotas.adapters.NotesListAdapter;
+import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
+import mx.com.othings.edcore.R;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
