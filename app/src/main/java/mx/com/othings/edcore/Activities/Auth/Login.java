@@ -66,13 +66,15 @@ public class Login extends AppCompatActivity {
     private static String controlNumber;
 
     private Student student;
-    private User user;                          //Creamos un POJO de apoyo
+    private static User user;                          //Creamos un POJO de apoyo
     private ComponentNotes componentNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        componentNotes = new ComponentNotes(this);
 
         registration_tag_input = findViewById(R.id.registration_tag);
         password_input = findViewById(R.id.password);
@@ -109,6 +111,7 @@ public class Login extends AppCompatActivity {
                                         jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"));
                                 Gson gson = new Gson();
                                 bundle.putString("a", gson.toJson(student));
+                                IniciarNotas(student);
                                 FirebaseCrearUsusario();
                                 Intent intent = new Intent(Login.this, ControlPanel.class);
                                 intent.putExtras(bundle);
@@ -180,21 +183,21 @@ public class Login extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            IniciarNotas();
+                            IniciarNotas(student);
                             Intent intent = new Intent(Login.this, CheckPermisions.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             // service.sdb().saveUser(new User(registration_tag,password));*/
-                                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                                          /*  FirebaseUser currentUser = mAuth.getCurrentUser();
                                             DatabaseReference reference = dataBase.getReference("Usuarios/" + currentUser.getUid());
-                                            reference.setValue(student);
-                                            startActivity(intent);
-                                            //
+                                            reference.setValue(student);*/
+                            startActivity(intent);
+                            //
 
 
-                }
-                                    },2000);
+                        }
+                    },2000);
 
-                                }  /*
+                }  /*
                                 else{
 
                                     new Handler().postDelayed(new Runnable() {
@@ -232,8 +235,8 @@ public class Login extends AppCompatActivity {
                     Toasty.error(Login.this,"La matricula consta de 8 números", Toast.LENGTH_LONG, true).show();
                 }*/
 
-                        }
-                    });
+            }
+        });
 
         /*keep_me_authneticated_check_box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -242,49 +245,55 @@ public class Login extends AppCompatActivity {
             }
         });*/
 
-                }
+    }
 
-                public String getControlNumber () {
-                    return controlNumber;
-                }
+    public String getControlNumber () {
+        return controlNumber;
+    }
 
-                public void setControlNumber (String controlNumber){
-                    this.controlNumber = controlNumber;
-                }
+    public void setControlNumber (String controlNumber){
+        this.controlNumber = controlNumber;
+    }
 
-                private void IniciarNotas () {
-                    //Objeto que nos permite realizar las operaciones con la BDD
-                    mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User user = new mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User(student.getStudent_id());
-                    componentNotes.insertUser(user);
-                    userLogin();
+    private void IniciarNotas (Student student1) {
+        //Objeto que nos permite realizar las operaciones con la BDD
+        System.out.println(student1.getStudent_id() + " EN iniciarNotas");
+        User user = new User(student1.getStudent_id());
+        System.out.println(user.getUserId() + " User iniciarNotas");
 
+        if (componentNotes.insertUser(user) != 0) {
+            userLogin();
+        } else {
+            Toasty.normal(getApplicationContext(), "Fallo al registrar el usuario",
+                    Toast.LENGTH_SHORT).show();
+        }
 
-                }
+    }
 
-                private void userLogin () {
-                    ArrayList<mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User> users = componentNotes.readUsers();
-                    if (users != null) {
-                        Iterator itr = users.iterator();
-                        while (itr.hasNext()) {
-                            user = (User) itr.next();
-                        }
-                    }
-                }
-
-                private void FirebaseCrearUsusario(){
-
-                    mAuth.createUserWithEmailAndPassword(student.getEmail(), String.valueOf(student.getStudent_id()))
-                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-
-                                    } else {
-
-                                    }
-
-                                }
-                            });
-                }
+    private void userLogin () {
+        ArrayList<User> users = componentNotes.readUsers();
+        if (users != null) {
+            Iterator itr = users.iterator();
+            while (itr.hasNext()) {
+                user = (User) itr.next();
             }
+        }
+    }
+
+    private void FirebaseCrearUsusario(){
+
+        mAuth.createUserWithEmailAndPassword(student.getEmail(), String.valueOf(student.getStudent_id()))
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+
+                        } else {
+
+                        }
+
+                    }
+                });
+    }
+}

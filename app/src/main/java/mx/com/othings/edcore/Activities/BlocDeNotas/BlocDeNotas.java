@@ -1,8 +1,5 @@
 package mx.com.othings.edcore.Activities.BlocDeNotas;
 
-import androidx.appcompat.app.AppCompatActivity;
-import es.dmoral.toasty.Toasty;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -21,16 +18,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import mx.com.othings.edcore.R;
-import mx.com.othings.edcore.Activities.BlocDeNotas.complements.TtsManager;
-import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
-import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
-import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Arrays;
+
+import es.dmoral.toasty.Toasty;
+import mx.com.othings.edcore.Activities.BlocDeNotas.complements.TtsManager;
+import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
+import mx.com.othings.edcore.R;
 
 /*
  *Pantalla del Editor de Notas
@@ -57,8 +57,6 @@ public class BlocDeNotas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bloc_de_notas);
-        getSupportActionBar().setTitle("Editor de Notas");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         init();
 

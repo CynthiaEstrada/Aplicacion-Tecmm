@@ -16,13 +16,6 @@ public class User implements Serializable {
         this.userId = userId;
     }
 
-    public User(Integer userId, String email, String password) {
-        this.userId = userId;
-    }
-
-    public User(String email, String password) {
-    }
-
     public Integer getUserId() {
         return userId;
     }

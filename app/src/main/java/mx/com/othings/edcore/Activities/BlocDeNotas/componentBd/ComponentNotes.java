@@ -5,10 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
-
-import java.util.ArrayList;
 
 /*
  *Clase con la que manejamos las tablas USER y NOTE  de la BDD
@@ -43,6 +43,7 @@ public class ComponentNotes {
      *Insertamos un usuario en la BDD
      */
     public long insertUser(User user) {
+        System.out.println(user.getUserId());
         openForWrite();
         long registers = 0;
         ContentValues content = new ContentValues();
@@ -72,7 +73,7 @@ public class ComponentNotes {
         }
         User user = null;
         if (cursor.moveToFirst()) {
-            user = new User(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+            user = new User(cursor.getInt(0));
         }
         cursor.close();
         close();
@@ -84,7 +85,7 @@ public class ComponentNotes {
      */
     public ArrayList<User> readUsers() {
         openForWrite();
-        Cursor cursor = notes.rawQuery("select USER_ID", null);
+        Cursor cursor = notes.rawQuery("select USER_ID from USER" , null);
         if (cursor.getCount() == 0) {
             cursor.close();
             close();
@@ -92,7 +93,7 @@ public class ComponentNotes {
         }
         ArrayList<User> users = new ArrayList<>();
         while (cursor.moveToNext()) {
-            users.add(new User(cursor.getInt(0), cursor.getString(1), cursor.getString(2)));
+            users.add(new User(cursor.getInt(0)));
         }
         cursor.close();
         close();
