@@ -15,6 +15,24 @@ public class Student {
     private String semestre;
     private String perfil_photo;
 
+    public Student(){}
+
+    public Student(int student_id, String name, String first_name, String last_name, String birthday, String gender, String address, String cellPhone, String email, String password, String carrera, String semestre, String perfil_photo) {
+        this.student_id = student_id;
+        this.name = name;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.address = address;
+        this.cellPhone = cellPhone;
+        this.email = email;
+        this.password = password;
+        this.carrera = carrera;
+        this.semestre = semestre;
+        this.perfil_photo = perfil_photo;
+    }
+
     public int getStudent_id() {
         return student_id;
     }
@@ -70,7 +88,6 @@ public class Student {
     public void setCellPhone(String cellPhone) {
         this.cellPhone = cellPhone;
     }
-
 
     public String getBirthday() {
         return birthday;

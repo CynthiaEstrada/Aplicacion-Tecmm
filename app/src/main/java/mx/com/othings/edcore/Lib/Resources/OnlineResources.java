@@ -147,7 +147,7 @@ public class OnlineResources {
         User user = sdb.getUser();
         final AsyncHttpClient httpClient = new AsyncHttpClient();
 
-        httpClient.get(Paths.WEB_EDCORE_LOGIN_PATH.getWebEdcoreLoginPath(student.getRegistration_tag(), user.getPassword()), new AsyncHttpResponseHandler() {
+        httpClient.get(Paths.WEB_EDCORE_LOGIN_PATH.getWebEdcoreLoginPath(student.getFirst_name(), user.getPassword()), new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -219,7 +219,7 @@ public class OnlineResources {
         User user = sdb.getUser();
         final AsyncHttpClient httpClient = new AsyncHttpClient();
 
-        httpClient.get(Paths.WEB_EDCORE_LOGIN_PATH.getWebEdcoreLoginPath(student.getRegistration_tag(), user.getPassword()), new AsyncHttpResponseHandler() {
+        httpClient.get(Paths.WEB_EDCORE_LOGIN_PATH.getWebEdcoreLoginPath(student.getFirst_name(), user.getPassword()), new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
