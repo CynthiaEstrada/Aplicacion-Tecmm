@@ -11,6 +11,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="myNotes">"Mis notas"</string>
+    <string name="sync_pref">Copia de Seguridad</string>
+    <string name="sync_pref_summary">Todas las notas serán copiadas a  un almacenamiento externo</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
