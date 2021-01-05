@@ -1,10 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.satyan:sugar:1.5@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b415d1f7c2cfd1a9db6d7dcad37d3028/jetified-sugar-1.5/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a3e6017913e0051f2f237908e2e97ce8/jetified-sugar-1.5/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a3e6017913e0051f2f237908e2e97ce8/jetified-sugar-1.5/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a3e6017913e0051f2f237908e2e97ce8/jetified-sugar-1.5/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a463a344942360415f556d4187426e15/jetified-sugar-1.5/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a463a344942360415f556d4187426e15/jetified-sugar-1.5/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a463a344942360415f556d4187426e15/jetified-sugar-1.5/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.satyan/sugar/1.5/514daaf0c68f315441bee8acebffd81e116a7f/sugar-1.5-javadoc.jar!/" />

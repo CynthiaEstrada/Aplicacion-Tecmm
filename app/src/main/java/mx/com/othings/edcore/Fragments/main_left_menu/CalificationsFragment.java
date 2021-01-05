@@ -25,6 +25,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 import mx.com.othings.edcore.Activities.PDFReader;
 import mx.com.othings.edcore.Adapters.Califications.SubjectListAdapter;
 import mx.com.othings.edcore.Lib.Models.Califications.StudentNotes;
+import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.Lib.Resources.OnlineResourceListener;
 import mx.com.othings.edcore.Lib.Service;
 import mx.com.othings.edcore.R;
@@ -48,7 +49,7 @@ public class CalificationsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.service = new Service(getActivity());
+       // this.service = new Service(getActivity());
 
     }
 
@@ -57,7 +58,12 @@ public class CalificationsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_califications, container, false);
-        final RecyclerView recyclerView = view.findViewById(R.id.subject_list);
+
+        String texto = getArguments().getString("a");
+        Gson gson = new Gson();
+        Student student = gson.fromJson(texto, Student.class);
+
+       /* final RecyclerView recyclerView = view.findViewById(R.id.subject_list);
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         final RoundCornerProgressBar average = view.findViewById(R.id.average);
         final RoundCornerProgressBar semester_percentage = view.findViewById(R.id.semester_percentage);
@@ -205,7 +211,7 @@ public class CalificationsFragment extends Fragment {
             }
         });
 
-
+*/
         return view;
     }
 

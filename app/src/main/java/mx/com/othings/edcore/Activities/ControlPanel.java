@@ -18,9 +18,8 @@ import android.widget.TextView;
 import com.github.pavlospt.roundedletterview.RoundedLetterView;
 import com.google.gson.Gson;
 
-import mx.com.othings.edcore.Activities.ChatGeneral.ChatGeneral;
 import mx.com.othings.edcore.Fragments.main_left_menu.CalificationsFragment;
-import mx.com.othings.edcore.Fragments.PanelControlFragment;
+import mx.com.othings.edcore.Fragments.main_left_menu.PanelControlFragment;
 import mx.com.othings.edcore.Fragments.main_left_menu.StudentInformationFragment;
 import mx.com.othings.edcore.Fragments.main_left_menu.StudentScheduleFragment;
 import mx.com.othings.edcore.Lib.Models.Student;
@@ -129,7 +128,9 @@ public class ControlPanel extends TemplateActivity
 
     private void setDefaultFragment(){
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new PanelControlFragment()).commit();
+        Fragment fragment = new PanelControlFragment();
+        fragment.setArguments(args);
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,fragment).commit();
         navigationView.getMenu().getItem(0).setChecked(true);
         getSupportActionBar().setTitle(navigationView.getMenu().getItem(0).getTitle());
 

@@ -33,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
 
 import mx.com.othings.edcore.Activities.Auth.Login;
 import mx.com.othings.edcore.Adapters.Mensajes.MensajeriaAdaptador;
@@ -67,6 +68,8 @@ public class ChatGeneral extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String NOMBRE_USUARIO;
 
+    Bundle args = new Bundle();
+
 
 
     @Override
@@ -75,8 +78,14 @@ public class ChatGeneral extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_chat_general);
 
+        Bundle bundle = getIntent().getExtras();
+        String texto = bundle.getString("a");
+
+        Gson gson = new Gson();
+        Student student = gson.fromJson(texto, Student.class);
+
         Login login = new Login();
-        controlNumber = login.getControlNumber();
+        controlNumber = student.getStudent_id() + "";
         System.out.println(controlNumber);
 
         fotoPerfil = (CircularImageView) findViewById(R.id.fotoPerfil);
