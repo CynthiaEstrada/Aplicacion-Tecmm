@@ -43,7 +43,7 @@ public class OAuthAuthentication {
     public void authenticate( OAuthListener oAuthListener){
 
         Student student = gson.fromJson( sp.getString("user",null) , Student.class );
-        authenticate(student.getRegistration_tag(), student.getPassword(), oAuthListener );
+        authenticate(student.getFirst_name(), student.getPassword(), oAuthListener );
 
     }
 

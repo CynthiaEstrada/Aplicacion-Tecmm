@@ -29,10 +29,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
 import mx.com.othings.edcore.Activities.Permissions.CheckPermisions;
@@ -57,10 +60,7 @@ public class Login extends AppCompatActivity {
     private OAuthAuthentication oauth;
     private Service service;
     private FirebaseDatabase dataBase;
-
     private FirebaseAuth mAuth;
-
-
     private static String controlNumber;
 
     @Override
@@ -73,10 +73,11 @@ public class Login extends AppCompatActivity {
         keep_me_authneticated_check_box = findViewById(R.id.checkBox);
         login_btn = findViewById(R.id.login_btn);
         loader_animation = findViewById(R.id.loader_animation);
-        oauth = new OAuthAuthentication(this);
+        //oauth = new OAuthAuthentication(this);
         service = new Service(this);
         dataBase = FirebaseDatabase.getInstance();
 
+        //Student student;
         mAuth = FirebaseAuth.getInstance();
 
         mAuth.createUserWithEmailAndPassword("za15011331@zapopan.tecmm.edu.mx", "15011331")
@@ -96,6 +97,7 @@ public class Login extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Bundle bundle = new Bundle();
                 final String registration_tag = registration_tag_input.getText().toString();
                 final String password = password_input.getText().toString();
                 Response.Listener<String> res = new Response.Listener<String>() {
@@ -105,7 +107,17 @@ public class Login extends AppCompatActivity {
                             JSONObject jsonRespuesta = new JSONObject(response);
                             boolean ok = jsonRespuesta.getBoolean("success");
                             if(ok==true){
+                                final Student student = new Student(jsonRespuesta.getInt("IdAlumno"),
+                                        jsonRespuesta.getString("Nombre"), jsonRespuesta.getString("ApellidoPaterno"),
+                                        jsonRespuesta.getString("ApellidoMaterno"), jsonRespuesta.getString("FechaNacimiento"),
+                                        jsonRespuesta.getString("Sexo"), jsonRespuesta.getString("Direccion"),
+                                        jsonRespuesta.getString("Telefono"), jsonRespuesta.getString("Email"),
+                                        jsonRespuesta.getString("Password"), jsonRespuesta.getString("Carrera"),
+                                        jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"));
+                                Gson gson = new Gson();
+                                bundle.putString("a", gson.toJson(student));
                                 Intent intent = new Intent(Login.this, ControlPanel.class);
+                                intent.putExtras(bundle);
                                 startActivity(intent);
                             }else{
                                 Toasty.error(Login.this,"error al intentar acceder", Toast.LENGTH_LONG, true).show();
