@@ -10,54 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03659c9d-ad6f-45fd-854a-fa934dd38b22" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/BlocDeNotas.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/ListaDeNotas.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/SettingsActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/SettingsFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/adapters/NotesListAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/complements/DriveServiceHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/complements/GoogleDriveFileHolder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/complements/TtsManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/componentBd/ComponentNotes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/componentBd/NotesOpenHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/hash/Sha.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/pojos/Note.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/pojos/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/bg_round.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/button_floating.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/button_round.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/button_round_border.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/color_gradient.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/edit_text_note.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_attach.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_check.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_launcher_background.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_launcher_foreground.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_lock.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_security.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_share.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_usuario.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_volume.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/progressbar_gradient.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/listview_item.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/my_listview.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/progress_dialog_backup.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/progress_dialog_reset.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/progress_dialog_save.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_edit_text_attach.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_edit_text_share.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/preferences.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_basement_17_1_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/Auth/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/Auth/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/componentBd/ComponentNotes.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/componentBd/ComponentNotes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/pojos/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/pojos/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Fragments/main_left_menu/PanelControlFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Fragments/main_left_menu/PanelControlFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -454,22 +411,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609782097191" />
-    <state width="1323" height="180" key="GridCell.Tab.0.bottom" timestamp="1609829527384">
+    <state width="1323" height="180" key="GridCell.Tab.0.bottom" timestamp="1609859947042">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609829527384" />
-    <state width="1323" height="180" key="GridCell.Tab.0.center" timestamp="1609829527384">
+    <state width="1323" height="180" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609859947042" />
+    <state width="1323" height="180" key="GridCell.Tab.0.center" timestamp="1609859947040">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609829527384" />
-    <state width="1323" height="180" key="GridCell.Tab.0.left" timestamp="1609829527384">
+    <state width="1323" height="180" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609859947040" />
+    <state width="1323" height="180" key="GridCell.Tab.0.left" timestamp="1609859947039">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609829527384" />
-    <state width="1323" height="180" key="GridCell.Tab.0.right" timestamp="1609829527384">
+    <state width="1323" height="180" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609859947039" />
+    <state width="1323" height="180" key="GridCell.Tab.0.right" timestamp="1609859947041">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609829527384" />
+    <state width="1323" height="180" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609859947041" />
     <state width="1323" height="222" key="GridCell.Tab.1.bottom" timestamp="1603235160856">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

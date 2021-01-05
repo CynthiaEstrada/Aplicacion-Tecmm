@@ -20,8 +20,12 @@ import com.github.siyamed.shapeimageview.RoundedImageView;
 import com.google.gson.Gson;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import mx.com.othings.edcore.Activities.BlocDeNotas.ListaDeNotas;
+import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
 import mx.com.othings.edcore.Activities.ChatGeneral.ChatGeneral;
 import mx.com.othings.edcore.Activities.EventosFacebook.EventosActivity;
 import mx.com.othings.edcore.Lib.Models.Student;
@@ -33,7 +37,7 @@ public class PanelControlFragment extends Fragment {
     CardView Chat, Notes, Eventos;
     Activity chatActivity;
 
-
+    Student student;
 
     public PanelControlFragment() {
 
@@ -46,7 +50,7 @@ public class PanelControlFragment extends Fragment {
 
        String texto = getArguments().getString("a");
         Gson gson = new Gson();
-        Student student = gson.fromJson(texto, Student.class);
+        student = gson.fromJson(texto, Student.class);
 
         Chat = view.findViewById(R.id.cardSocial);
         Chat.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +94,8 @@ public class PanelControlFragment extends Fragment {
         Bitmap bitmap = BitmapFactory.decodeByteArray(image_decoded,0,image_decoded.length);
         roundedImageView.setImageBitmap(bitmap);
     }
+
+
 
 
 }

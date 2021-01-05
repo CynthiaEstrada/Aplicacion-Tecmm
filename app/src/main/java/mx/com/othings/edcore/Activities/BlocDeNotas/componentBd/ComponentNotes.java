@@ -46,44 +46,24 @@ public class ComponentNotes {
         openForWrite();
         long registers = 0;
         ContentValues content = new ContentValues();
-        content.put("EMAIL", user.getEmail());
-        content.put("PASSWORD", user.getPassword());
+        content.put("USER_ID", user.getUserId());
         registers = notes.insert("USER", null, content);
         close();
         return registers;
     }
 
-    /*
-     *Eliminamos un usuario de la BDD a partir del email
-     */
-    public long deleteUser(String email) {
-        openForWrite();
-        long registers = 0;
-        registers = notes.delete("USER", "EMAIL = '" + email + "'", null);
-        close();
-        return registers;
-    }
 
     /*
      *Actualizamos un usuario de la BDD según el email
      */
-    public long updateUser(String email, User user) {
-        openForWrite();
-        long registers = 0;
-        ContentValues content = new ContentValues();
-        content.put("EMAIL", user.getEmail());
-        content.put("PASSWORD", user.getPassword());
-        registers = notes.update("USER", content, "EMAIL = '" + email + "'", null);
-        close();
-        return registers;
-    }
+
 
     /*
      *Leemos un usuario de la BDD con el id
      */
     public User readUser(Integer userId) {
         openForWrite();
-        Cursor cursor = notes.rawQuery("select USER_ID, EMAIL, PASSWORD from USER where USER_ID = " + userId,
+        Cursor cursor = notes.rawQuery("select USER_ID from USER where USER_ID = " + userId,
                 null);
         if (cursor.getCount() == 0) {
             cursor.close();
@@ -104,7 +84,7 @@ public class ComponentNotes {
      */
     public ArrayList<User> readUsers() {
         openForWrite();
-        Cursor cursor = notes.rawQuery("select USER_ID, EMAIL, PASSWORD from USER", null);
+        Cursor cursor = notes.rawQuery("select USER_ID", null);
         if (cursor.getCount() == 0) {
             cursor.close();
             close();
