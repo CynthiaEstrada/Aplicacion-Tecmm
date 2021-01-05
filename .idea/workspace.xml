@@ -10,6 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03659c9d-ad6f-45fd-854a-fa934dd38b22" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Fragments/main_left_menu/CalificationsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Fragments/main_left_menu/CalificationsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Fragments/main_left_menu/StudentInformationFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Fragments/main_left_menu/StudentInformationFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_califications.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_califications.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/modules/jwtreader/jwtreader.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
@@ -472,22 +476,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609782097191" />
-    <state width="1323" height="180" key="GridCell.Tab.0.bottom" timestamp="1609859947042">
+    <state width="852" height="278" key="GridCell.Tab.0.bottom" timestamp="1609866032257">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609859947042" />
-    <state width="1323" height="180" key="GridCell.Tab.0.center" timestamp="1609859947040">
+    <state width="852" height="278" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609866032257" />
+    <state width="852" height="278" key="GridCell.Tab.0.center" timestamp="1609866032256">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609859947040" />
-    <state width="1323" height="180" key="GridCell.Tab.0.left" timestamp="1609859947039">
+    <state width="852" height="278" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609866032256" />
+    <state width="852" height="278" key="GridCell.Tab.0.left" timestamp="1609866032256">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609859947039" />
-    <state width="1323" height="180" key="GridCell.Tab.0.right" timestamp="1609859947041">
+    <state width="852" height="278" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609866032256" />
+    <state width="852" height="278" key="GridCell.Tab.0.right" timestamp="1609866032256">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609859947041" />
+    <state width="852" height="278" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609866032256" />
     <state width="1323" height="222" key="GridCell.Tab.1.bottom" timestamp="1603235160856">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
