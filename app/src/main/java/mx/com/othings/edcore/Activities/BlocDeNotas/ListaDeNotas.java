@@ -21,8 +21,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -31,8 +29,6 @@ import es.dmoral.toasty.Toasty;
 import mx.com.othings.edcore.Activities.BlocDeNotas.adapters.NotesListAdapter;
 import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
-import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
-import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.R;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -54,9 +50,6 @@ public class ListaDeNotas extends AppCompatActivity {
     public static boolean isPermission;             //Variable que controla los permisos
     public static boolean isUpdate;                 //Variable que controla si hacemos un update o insert en el EditTextActivity
 
-    Bundle bundle, args;
-    String texto;
-
     /**
      * Se crea la interfaz del activity
      */
@@ -64,11 +57,6 @@ public class ListaDeNotas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_notas);
-
-        bundle = getIntent().getExtras();
-        texto = bundle.getString("a");
-        Gson gson = new Gson();
-        Student student = gson.fromJson(texto, Student.class);
 
         init();
 
@@ -215,12 +203,7 @@ public class ListaDeNotas extends AppCompatActivity {
      */
     public void addNote(View view) {
 
-        /*Gson gson = new Gson();
-        Student student = gson.fromJson(texto, Student.class);
-        bundle.putString("a", gson.toJson(student));*/
-
         Intent intent = new Intent(ListaDeNotas.this, BlocDeNotas.class);
-        //intent.putExtras(bundle);
         startActivity(intent);
     }
 

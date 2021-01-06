@@ -26,6 +26,7 @@ import es.dmoral.toasty.Toasty;
 import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
 import mx.com.othings.edcore.Fragments.main_left_menu.CalificationsFragment;
+import mx.com.othings.edcore.Fragments.main_left_menu.InscripcionFragment;
 import mx.com.othings.edcore.Fragments.main_left_menu.PanelControlFragment;
 import mx.com.othings.edcore.Fragments.main_left_menu.StudentInformationFragment;
 import mx.com.othings.edcore.Fragments.main_left_menu.StudentScheduleFragment;
@@ -128,6 +129,9 @@ public class ControlPanel extends TemplateActivity
 
         if (id == R.id.panel_control) {
             changeFragment(new PanelControlFragment(),"Panel de control");
+        }
+        else if( id == R.id.inscripcion_control ){
+            changeFragment(new InscripcionFragment(),"Inscripción");
         }
         else if( id == R.id.califications ){
             changeFragment(new CalificationsFragment(),"Calificaciones");

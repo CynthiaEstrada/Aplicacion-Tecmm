@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,8 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -31,8 +28,6 @@ import es.dmoral.toasty.Toasty;
 import mx.com.othings.edcore.Activities.BlocDeNotas.complements.TtsManager;
 import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
-import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
-import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.R;
 
 /*
@@ -43,7 +38,7 @@ public class BlocDeNotas extends AppCompatActivity {
     //Creación de los objetos de la interfaz
     private EditText editTextTitle, editTextDescription;
     private TextView textViewId, textViewEncode, textViewUserId;
-    private ImageView imageViewAttached, imageViewDialog;
+    private ImageView imageViewAttached, imageViewDialog, addImage;
     private ImageButton imageButtonVolume;
 
     private Dialog dialogShowImage;                 //Objeto que nos muestra un dialogo con la imagen adjuntada
@@ -53,8 +48,6 @@ public class BlocDeNotas extends AppCompatActivity {
 
     private int stopTtsManager = 0;                 //Variable de apoyo para parar la lectura del texto
 
-    Bundle args, bundle;
-    String texto;
     /*
      *Método que crea la vista del Activity
      */
@@ -74,6 +67,13 @@ public class BlocDeNotas extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showImage();
+            }
+        });
+
+        addImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGalery();
             }
         });
     }
@@ -146,6 +146,7 @@ public class BlocDeNotas extends AppCompatActivity {
         textViewUserId = (TextView) findViewById(R.id.textViewUserId);
         imageButtonVolume = (ImageButton) findViewById(R.id.imageButtonVolume);
         imageViewAttached = (ImageView) findViewById(R.id.imageView);
+        addImage = (ImageView) findViewById(R.id.addImage);
     }
 
     /*
@@ -161,22 +162,6 @@ public class BlocDeNotas extends AppCompatActivity {
         }
     }
 
-    /*
-     *Comprobamos cual de los botones del ActionBar ha sido selecionado y la lanzamos la funcion correspondiente
-     */
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.item_clip:
-                openGalery();
-                break;
-
-            case R.id.item_share:
-                shareNote();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     /*
      *Abrimos la galería del dispositivo
@@ -249,18 +234,11 @@ public class BlocDeNotas extends AppCompatActivity {
     }
 
     /*
-     *Nos lleva al MainActivity
+     *Nos lleva a la lista de notas
      */
     private void goMain() {
 
-        args = new Bundle();
-        bundle = getIntent().getExtras();
-        texto = bundle.getString("a");
-        args.putString("a", texto);
-
         Intent intent = new Intent(BlocDeNotas.this, ListaDeNotas.class);
-
-        intent.putExtras(args);
         startActivity(intent);
         finish();
     }
