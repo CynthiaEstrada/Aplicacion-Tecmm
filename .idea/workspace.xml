@@ -10,14 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03659c9d-ad6f-45fd-854a-fa934dd38b22" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/Auth/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/Auth/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/BlocDeNotas.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/BlocDeNotas.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/ListaDeNotas.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/ListaDeNotas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/Permissions/CheckPermisions.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/Permissions/CheckPermisions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Fragments/main_left_menu/PanelControlFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Fragments/main_left_menu/PanelControlFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/activity_control_panel_drawer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/activity_control_panel_drawer.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -415,22 +410,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609782097191" />
-    <state width="1323" height="180" key="GridCell.Tab.0.bottom" timestamp="1609891390511">
+    <state width="1323" height="180" key="GridCell.Tab.0.bottom" timestamp="1609893226680">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609891390511" />
-    <state width="1323" height="180" key="GridCell.Tab.0.center" timestamp="1609891390511">
+    <state width="1323" height="180" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1609893226680" />
+    <state width="1323" height="180" key="GridCell.Tab.0.center" timestamp="1609893226679">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609891390511" />
-    <state width="1323" height="180" key="GridCell.Tab.0.left" timestamp="1609891390510">
+    <state width="1323" height="180" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1609893226679" />
+    <state width="1323" height="180" key="GridCell.Tab.0.left" timestamp="1609893226679">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609891390510" />
-    <state width="1323" height="180" key="GridCell.Tab.0.right" timestamp="1609891390511">
+    <state width="1323" height="180" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1609893226679" />
+    <state width="1323" height="180" key="GridCell.Tab.0.right" timestamp="1609893226679">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609891390511" />
+    <state width="1323" height="180" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1609893226679" />
     <state width="639" height="222" key="GridCell.Tab.1.bottom" timestamp="1609878338432">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -481,12 +476,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/ListaDeNotas.java</url>
-          <line>72</line>
+          <line>74</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/ListaDeNotas.java</url>
-          <line>323</line>
+          <line>331</line>
           <properties class="mx.com.othings.edcore.Activities.BlocDeNotas.ListaDeNotas" method="fillListView" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>

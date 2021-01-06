@@ -54,6 +54,9 @@ public class ListaDeNotas extends AppCompatActivity {
     public static boolean isPermission;             //Variable que controla los permisos
     public static boolean isUpdate;                 //Variable que controla si hacemos un update o insert en el EditTextActivity
 
+    Bundle bundle, args;
+    String texto;
+
     /**
      * Se crea la interfaz del activity
      */
@@ -62,9 +65,8 @@ public class ListaDeNotas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_notas);
 
-        Bundle bundle = getIntent().getExtras();
-        String texto = bundle.getString("a");
-
+        bundle = getIntent().getExtras();
+        texto = bundle.getString("a");
         Gson gson = new Gson();
         Student student = gson.fromJson(texto, Student.class);
 
@@ -212,7 +214,13 @@ public class ListaDeNotas extends AppCompatActivity {
      *Llamamos a EditTextActivity
      */
     public void addNote(View view) {
+
+        Gson gson = new Gson();
+        Student student = gson.fromJson(texto, Student.class);
+        bundle.putString("a", gson.toJson(student));
+
         Intent intent = new Intent(ListaDeNotas.this, BlocDeNotas.class);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 

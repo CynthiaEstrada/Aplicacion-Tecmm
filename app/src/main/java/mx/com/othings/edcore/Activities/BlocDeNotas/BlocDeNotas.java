@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -30,6 +32,7 @@ import mx.com.othings.edcore.Activities.BlocDeNotas.complements.TtsManager;
 import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
+import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.R;
 
 /*
@@ -50,6 +53,8 @@ public class BlocDeNotas extends AppCompatActivity {
 
     private int stopTtsManager = 0;                 //Variable de apoyo para parar la lectura del texto
 
+    Bundle args, bundle;
+    String texto;
     /*
      *Método que crea la vista del Activity
      */
@@ -109,8 +114,6 @@ public class BlocDeNotas extends AppCompatActivity {
 
             //Se obtiene el la nota del objeto Bundle y se ñadden los valores a la interfaz
             Note note = (Note) bundle.getSerializable("note");
-
-            System.out.println("User id: " + note.getUserId());
 
             Note noteImage = componentNotes.readNote(note.getNoteId());
             editTextTitle.setText(note.getTitle());
@@ -251,7 +254,19 @@ public class BlocDeNotas extends AppCompatActivity {
      *Nos lleva al MainActivity
      */
     private void goMain() {
+
+        args = new Bundle();
+        bundle = getIntent().getExtras();
+        texto = bundle.getString("a");
+        args.putString("a", texto);
+
         Intent intent = new Intent(BlocDeNotas.this, ListaDeNotas.class);
+
+        Gson gson = new Gson();
+        Student student = gson.fromJson(texto, Student.class);
+        bundle.putString("a", gson.toJson(student));
+
+        intent.putExtras(bundle);
         startActivity(intent);
         finish();
     }
