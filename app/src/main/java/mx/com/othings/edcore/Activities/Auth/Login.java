@@ -32,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,12 +42,14 @@ import java.util.Iterator;
 import es.dmoral.toasty.Toasty;
 import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
+import mx.com.othings.edcore.Activities.Califications.CalificationsRequest;
 import mx.com.othings.edcore.Activities.Permissions.CheckPermisions;
 import mx.com.othings.edcore.Activities.ControlPanel;
 import mx.com.othings.edcore.App;
 import mx.com.othings.edcore.Lib.Auth.OAuthAuthentication;
 import mx.com.othings.edcore.Lib.Auth.OAuthListener;
 import mx.com.othings.edcore.Lib.Configurations.StudentConfigurations;
+import mx.com.othings.edcore.Lib.Models.Califications.SubjectCalification;
 import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.Lib.Service;
 import mx.com.othings.edcore.R;
@@ -66,6 +69,7 @@ public class Login extends AppCompatActivity {
     private static String controlNumber;
 
     private Student student;
+    private SubjectCalification subject;
     private static User user;                          //Creamos un POJO de apoyo
     private ComponentNotes componentNotes;
 
@@ -93,8 +97,34 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Bundle bundle = new Bundle();
+                final Gson gson = new Gson();
                 final String registration_tag = registration_tag_input.getText().toString();
                 final String password = password_input.getText().toString();
+
+                Response.Listener<String> res2 = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonRespuesta = new JSONObject(response);
+                            boolean ok = jsonRespuesta.getBoolean("success");
+                            if (ok == true) {
+                                subject = new SubjectCalification(jsonRespuesta.getString("Nombre"), jsonRespuesta.getInt("CalificacionParcial"));
+
+                                bundle.putString("b", gson.toJson(subject));
+
+                            } else {
+                                Toasty.error(Login.this, "error al intentar acceder", Toast.LENGTH_LONG, true).show();
+                            }
+                        } catch (JSONException e) {
+                            e.getMessage();
+                        }
+                    }
+                };
+
+                CalificationsRequest cal = new CalificationsRequest(registration_tag, res2);
+                RequestQueue cola2 = Volley.newRequestQueue(Login.this);
+                cola2.add(cal);
+
                 Response.Listener<String> res = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -102,6 +132,7 @@ public class Login extends AppCompatActivity {
                             JSONObject jsonRespuesta = new JSONObject(response);
                             boolean ok = jsonRespuesta.getBoolean("success");
                             if (ok == true) {
+                                //Obtener Información Alumno
                                 student = new Student(jsonRespuesta.getInt("IdAlumno"),
                                         jsonRespuesta.getString("Nombre"), jsonRespuesta.getString("ApellidoPaterno"),
                                         jsonRespuesta.getString("ApellidoMaterno"), jsonRespuesta.getString("FechaNacimiento"),
@@ -109,8 +140,9 @@ public class Login extends AppCompatActivity {
                                         jsonRespuesta.getString("Telefono"), jsonRespuesta.getString("Email"),
                                         jsonRespuesta.getString("Password"), jsonRespuesta.getString("Carrera"),
                                         jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"));
-                                Gson gson = new Gson();
+
                                 bundle.putString("a", gson.toJson(student));
+
                                 IniciarNotas(student);
                                 FirebaseCrearUsusario();
                                 Intent intent = new Intent(Login.this, ControlPanel.class);
@@ -127,6 +159,8 @@ public class Login extends AppCompatActivity {
                 LoginRequest r = new LoginRequest(registration_tag, password, res);
                 RequestQueue cola = Volley.newRequestQueue(Login.this);
                 cola.add(r);
+
+
 
                 /*
                 mAuth.signInWithEmailAndPassword("za15011331@zapopan.tecmm.edu.mx", "15011331")

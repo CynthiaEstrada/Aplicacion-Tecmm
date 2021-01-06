@@ -25,6 +25,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 import mx.com.othings.edcore.Activities.PDFReader;
 import mx.com.othings.edcore.Adapters.Califications.SubjectListAdapter;
 import mx.com.othings.edcore.Lib.Models.Califications.StudentNotes;
+import mx.com.othings.edcore.Lib.Models.Califications.SubjectCalification;
 import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.Lib.Resources.OnlineResourceListener;
 import mx.com.othings.edcore.Lib.Service;
@@ -57,10 +58,6 @@ public class CalificationsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_califications, container, false);
 
-        String texto = getArguments().getString("a");
-        Gson gson = new Gson();
-        Student student = gson.fromJson(texto, Student.class);
-
         final RecyclerView recyclerView = view.findViewById(R.id.subject_list);
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         final RoundCornerProgressBar average = view.findViewById(R.id.average);
@@ -83,6 +80,13 @@ public class CalificationsFragment extends Fragment {
         semester_percetage_title.setText("Promedio Semestre");
         subjects_cursed.setProgress((float) 2 );
         subjects_cursed_title.setText("Total materias cursadas");
+
+        String textoCalificaciones = getArguments().getString("b");
+        Gson gson = new Gson();
+        SubjectCalification calification = gson.fromJson(textoCalificaciones, SubjectCalification.class);
+        System.out.println("----------------------------------------------------------------");
+        System.out.println(calification.getSubject());
+        System.out.println(calification.getAverage());
 
 /*
         RecyclerView.Adapter adapter = new SubjectListAdapter(studentNotes.getSubjectCalificationList(), R.layout.subject_item, new SubjectListAdapter.OnItemClickListener() {

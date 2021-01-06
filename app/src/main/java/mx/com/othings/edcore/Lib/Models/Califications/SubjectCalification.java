@@ -11,7 +11,7 @@ public class SubjectCalification {
     private List<Score> scoreList;
     private double average;
 
-    public SubjectCalification(String subject, int list_number, List<Score> scoreList, double average) {
+    public SubjectCalification(String subject, double average) {
         this.subject = subject;
         this.list_number = list_number;
         this.scoreList = scoreList;
