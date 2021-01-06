@@ -40,13 +40,6 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Activities.MapsActivity"
-            android:label="@string/title_activity_maps">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".Activities.Auth.Splash"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
@@ -65,16 +58,12 @@
             android:label="Edcore"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".Activities.Califications.SubjectCalifications"
-            android:screenOrientation="portrait" />
         <activity android:name=".Activities.TemplateActivity" />
         <activity android:name=".Activities.PDFReader" />
         <activity android:name=".Activities.ChatGeneral.ChatGeneral" />
         <activity
             android:name=".Activities.Permissions.CheckPermisions"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activities.Tasks.MainActivity" />
     </application>
 
 </manifest>

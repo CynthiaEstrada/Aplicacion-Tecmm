@@ -32,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -99,15 +100,15 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONObject jsonRespuesta = new JSONObject(response);
-                            boolean ok = jsonRespuesta.getBoolean("success");
-                            if (ok == true) {
-                                subject = new SubjectCalification(jsonRespuesta.getString("Nombre"), jsonRespuesta.getInt("CalificacionParcial"));
+                            JSONArray array = new JSONArray(response);
+                            JSONObject cali = array.getJSONObject(0);
+                            for(int i=0; i<=array.length(); i++){
 
-                                bundle.putString("b", gson.toJson(subject));
-                            } else {
-                                Toasty.error(Login.this, "error al intentar acceder", Toast.LENGTH_LONG, true).show();
+
+
                             }
+                            subject = new SubjectCalification(cali.getString("Nombre"), cali.getInt("CalificacionParcial"));
+                            bundle.putString("b", gson.toJson(subject));
                         } catch (JSONException e) {
                             e.getMessage();
                         }
