@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
@@ -22,6 +23,7 @@ import mx.com.othings.edcore.Adapters.Permissions.PermissionsAdapter;
 import mx.com.othings.edcore.Fragments.permissions.CameraPermission;
 import mx.com.othings.edcore.Fragments.permissions.LocationPermission;
 import mx.com.othings.edcore.Fragments.permissions.ReadAndWriteMemory;
+import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.R;
 
 public class CheckPermisions extends TemplateActivity implements StepperLayout.StepperListener{
@@ -29,6 +31,8 @@ public class CheckPermisions extends TemplateActivity implements StepperLayout.S
     private StepperLayout stepperLayout;
     private List<Fragment> permissionFragments;
     private PermissionsAdapter permissionsAdapter;
+
+    Bundle args = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +140,16 @@ public class CheckPermisions extends TemplateActivity implements StepperLayout.S
                 @Override
                 public void run() {
 
+                    Bundle bundle = getIntent().getExtras();
+                    String texto = bundle.getString("a");
+                    args.putString("a", texto);
+
+                    Gson gson = new Gson();
+                    Student student = gson.fromJson(texto, Student.class);
+                    bundle.putString("a", gson.toJson(student));
+
                     Intent intent = new Intent(CheckPermisions.this,ControlPanel.class);
+                    intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 

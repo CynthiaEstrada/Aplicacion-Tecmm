@@ -186,6 +186,9 @@ public class Login extends AppCompatActivity {
                             IniciarNotas(student);
                             Intent intent = new Intent(Login.this, CheckPermisions.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            Gson gson = new Gson();
+                            bundle.putString("a", gson.toJson(student));
+                            intent.putExtras(bundle);
                             // service.sdb().saveUser(new User(registration_tag,password));*/
                                           /*  FirebaseUser currentUser = mAuth.getCurrentUser();
                                             DatabaseReference reference = dataBase.getReference("Usuarios/" + currentUser.getUid());

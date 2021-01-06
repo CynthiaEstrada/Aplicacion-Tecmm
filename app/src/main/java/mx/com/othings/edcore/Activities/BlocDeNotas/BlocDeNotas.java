@@ -109,6 +109,9 @@ public class BlocDeNotas extends AppCompatActivity {
 
             //Se obtiene el la nota del objeto Bundle y se ñadden los valores a la interfaz
             Note note = (Note) bundle.getSerializable("note");
+
+            System.out.println("User id: " + note.getUserId());
+
             Note noteImage = componentNotes.readNote(note.getNoteId());
             editTextTitle.setText(note.getTitle());
             editTextDescription.setText(note.getDescription());

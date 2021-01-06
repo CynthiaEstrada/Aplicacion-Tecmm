@@ -21,6 +21,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -30,6 +32,7 @@ import mx.com.othings.edcore.Activities.BlocDeNotas.adapters.NotesListAdapter;
 import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
+import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.R;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -58,6 +61,12 @@ public class ListaDeNotas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_notas);
+
+        Bundle bundle = getIntent().getExtras();
+        String texto = bundle.getString("a");
+
+        Gson gson = new Gson();
+        Student student = gson.fromJson(texto, Student.class);
 
         init();
 

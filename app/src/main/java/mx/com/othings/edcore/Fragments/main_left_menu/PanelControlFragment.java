@@ -71,7 +71,12 @@ public class PanelControlFragment extends Fragment {
         Notes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                final Bundle bundle = new Bundle();
+                String texto = getArguments().getString("a");
                 Intent intent = new Intent(getActivity(), ListaDeNotas.class);
+                bundle.putString("a", texto);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
