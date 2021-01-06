@@ -66,15 +66,12 @@ public class Login extends AppCompatActivity {
     private static String controlNumber;
 
     private Student student;
-    private static User user;                          //Creamos un POJO de apoyo
-    private ComponentNotes componentNotes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        componentNotes = new ComponentNotes(this);
 
         registration_tag_input = findViewById(R.id.registration_tag);
         password_input = findViewById(R.id.password);
@@ -111,7 +108,6 @@ public class Login extends AppCompatActivity {
                                         jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"));
                                 Gson gson = new Gson();
                                 bundle.putString("a", gson.toJson(student));
-                                IniciarNotas(student);
                                 FirebaseCrearUsusario();
                                 Intent intent = new Intent(Login.this, ControlPanel.class);
                                 intent.putExtras(bundle);
@@ -183,7 +179,6 @@ public class Login extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            IniciarNotas(student);
                             Intent intent = new Intent(Login.this, CheckPermisions.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             Gson gson = new Gson();
@@ -258,30 +253,6 @@ public class Login extends AppCompatActivity {
         this.controlNumber = controlNumber;
     }
 
-    private void IniciarNotas (Student student1) {
-        //Objeto que nos permite realizar las operaciones con la BDD
-        System.out.println(student1.getStudent_id() + " EN iniciarNotas");
-        User user = new User(student1.getStudent_id());
-        System.out.println(user.getUserId() + " User iniciarNotas");
-
-        if (componentNotes.insertUser(user) != 0) {
-            userLogin();
-        } else {
-            Toasty.normal(getApplicationContext(), "Fallo al registrar el usuario",
-                    Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    private void userLogin () {
-        ArrayList<User> users = componentNotes.readUsers();
-        if (users != null) {
-            Iterator itr = users.iterator();
-            while (itr.hasNext()) {
-                user = (User) itr.next();
-            }
-        }
-    }
 
     private void FirebaseCrearUsusario(){
 

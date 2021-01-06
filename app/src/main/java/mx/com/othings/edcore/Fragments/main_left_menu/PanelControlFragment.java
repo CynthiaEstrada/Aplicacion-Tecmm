@@ -48,7 +48,8 @@ public class PanelControlFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_panel_control, container, false);
 
-       String texto = getArguments().getString("a");
+
+        String texto = getArguments().getString("a");
         Gson gson = new Gson();
         student = gson.fromJson(texto, Student.class);
 

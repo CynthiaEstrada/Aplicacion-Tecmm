@@ -43,7 +43,7 @@ public class ComponentNotes {
      *Insertamos un usuario en la BDD
      */
     public long insertUser(User user) {
-        System.out.println(user.getUserId());
+        System.out.println("En Components: " + user.getUserId());
         openForWrite();
         long registers = 0;
         ContentValues content = new ContentValues();
@@ -111,7 +111,6 @@ public class ComponentNotes {
         content.put("DESCRIPTION", note.getDescription());
         content.put("IMAGE", note.getImage());
         content.put("ENCODE", note.getEncode());
-        content.put("USER_ID", note.getUserId().getUserId());
         registers = notes.insert("NOTE", null, content);
         close();
         return registers;
@@ -139,7 +138,6 @@ public class ComponentNotes {
         content.put("DESCRIPTION", note.getDescription());
         content.put("IMAGE", note.getImage());
         content.put("ENCODE", note.getEncode());
-        content.put("USER_ID", note.getUserId().getUserId());
         registers = notes.update("NOTE", content, "NOTE_ID = " + noteId, null);
         close();
         return registers;
@@ -150,7 +148,7 @@ public class ComponentNotes {
      */
     public Note readNote(Integer noteId) {
         openForWrite();
-        Cursor cursor = notes.rawQuery("select NOTE_ID, TITLE, DESCRIPTION, ENCODE, IMAGE, USER_ID" +
+        Cursor cursor = notes.rawQuery("select NOTE_ID, TITLE, DESCRIPTION, ENCODE, IMAGE" +
                 " from NOTE where NOTE_ID = " + noteId, new String[]{});
         if (cursor.getCount() == 0) {
             cursor.close();
@@ -160,7 +158,7 @@ public class ComponentNotes {
         Note note = null;
         if (cursor.moveToFirst()) {
             note = new Note(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
-                    cursor.getInt(3), cursor.getBlob(4), new User(cursor.getInt(5)));
+                    cursor.getInt(3), cursor.getBlob(4));
         }
         cursor.close();
         close();
@@ -172,7 +170,7 @@ public class ComponentNotes {
      */
     public ArrayList<Note> readNotes() {
         openForWrite();
-        Cursor cursor = notes.rawQuery("select NOTE_ID, TITLE, DESCRIPTION, ENCODE, USER_ID from NOTE", null);
+        Cursor cursor = notes.rawQuery("select NOTE_ID, TITLE, DESCRIPTION, ENCODE from NOTE", null);
         if (cursor.getCount() == 0) {
             cursor.close();
             close();
@@ -181,7 +179,7 @@ public class ComponentNotes {
         ArrayList<Note> listNotes = new ArrayList<>();
         while (cursor.moveToNext()) {
             listNotes.add(new Note(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
-                    cursor.getInt(3), readUser(cursor.getInt(4))));
+                    cursor.getInt(3)));
         }
         cursor.close();
         close();

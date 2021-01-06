@@ -14,10 +14,17 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.pavlospt.roundedletterview.RoundedLetterView;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import es.dmoral.toasty.Toasty;
+import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
 import mx.com.othings.edcore.Fragments.main_left_menu.CalificationsFragment;
 import mx.com.othings.edcore.Fragments.main_left_menu.PanelControlFragment;
 import mx.com.othings.edcore.Fragments.main_left_menu.StudentInformationFragment;
@@ -31,10 +38,15 @@ public class ControlPanel extends TemplateActivity
 
     private NavigationView navigationView;
     Bundle args = new Bundle();
+    private static User user;                          //Creamos un POJO de apoyo
+    private ComponentNotes componentNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        componentNotes = new ComponentNotes(this);
+        componentNotes.readUsers();
 
         Bundle bundle = getIntent().getExtras();
         String texto = bundle.getString("a");
@@ -42,6 +54,9 @@ public class ControlPanel extends TemplateActivity
 
         Gson gson = new Gson();
         Student student = gson.fromJson(texto, Student.class);
+
+        IniciarNotas(student);
+        userLogin();
 
         setContentView(R.layout.activity_control_panel);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -59,6 +74,7 @@ public class ControlPanel extends TemplateActivity
         final RoundedLetterView user_letter_view = navigationView.getHeaderView(0).findViewById(R.id.user_letter);
         final TextView username = navigationView.getHeaderView(0).findViewById(R.id.username);
         final TextView email = navigationView.getHeaderView(0).findViewById(R.id.email);
+
 
         setDefaultFragment();
 
@@ -151,5 +167,30 @@ public class ControlPanel extends TemplateActivity
         Bitmap bitmap = BitmapFactory.decodeByteArray(image_decoded,0,image_decoded.length);
 
     }*/
+
+    private void IniciarNotas (Student student1) {
+        //Objeto que nos permite realizar las operaciones con la BDD
+        User user = new User(student1.getStudent_id());
+
+        if (componentNotes.insertUser(user) != 0) {
+            System.out.println("Se guardo con exito");
+        } else {
+            Toasty.normal(getApplicationContext(), "Fallo al registrar el usuario",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void userLogin () {
+        ArrayList<User> users = componentNotes.readUsers();
+        if (users != null) {
+            Iterator itr = users.iterator();
+
+            while (itr.hasNext()) {
+                user = (User) itr.next();
+                System.out.println("UserLogin: " + user.getUserId());
+            }
+        }
+    }
 
 }

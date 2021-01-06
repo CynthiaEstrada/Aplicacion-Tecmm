@@ -215,12 +215,12 @@ public class ListaDeNotas extends AppCompatActivity {
      */
     public void addNote(View view) {
 
-        Gson gson = new Gson();
+        /*Gson gson = new Gson();
         Student student = gson.fromJson(texto, Student.class);
-        bundle.putString("a", gson.toJson(student));
+        bundle.putString("a", gson.toJson(student));*/
 
         Intent intent = new Intent(ListaDeNotas.this, BlocDeNotas.class);
-        intent.putExtras(bundle);
+        //intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -230,7 +230,7 @@ public class ListaDeNotas extends AppCompatActivity {
     private void showAlertDialog(final Note note) {
         switch (note.getEncode()) {
             case 0:
-                CharSequence[] options = {"Ver o Modificar", "Ocultar contenido", "Eliminar"};
+                CharSequence[] options = {"Ver o Modificar", "Eliminar"};
                 defaultAlertDialog(note, options);
                 break;
         }
@@ -247,27 +247,11 @@ public class ListaDeNotas extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (options[i].equals("Ver o Modificar")) {
                     isUpdate = true;
-                    User user = componentNotes.readUser(note.getUserId().getUserId());
-                    note.setUserId(user);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("note", note);
                     Intent intent = new Intent(ListaDeNotas.this, BlocDeNotas.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                } else if (options[i].equals("Ocultar contenido")) {
-                    Note noteUpdate = componentNotes.readNote(note.getNoteId());
-                    noteUpdate.setEncode(1);
-                    if (componentNotes.updateNote(note.getNoteId(), noteUpdate) != 0) {
-                        fillListView();
-
-                        Toasty.normal(getApplicationContext(), "Contenido ocultado", Toast.LENGTH_SHORT).show();
-                    }
-                } else if (options[i].equals("Mostrar contenido")) {
-                    Note noteUpdate = componentNotes.readNote(note.getNoteId());
-                    noteUpdate.setEncode(0);
-                    if (componentNotes.updateNote(note.getNoteId(), noteUpdate) != 0) {
-                        fillListView();
-                    }
                 } else if (options[i].equals("Eliminar")) {
                     if (componentNotes.deleteNote(note.getNoteId()) != 0) {
                         fillListView();

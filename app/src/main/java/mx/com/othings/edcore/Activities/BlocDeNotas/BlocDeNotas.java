@@ -114,13 +114,11 @@ public class BlocDeNotas extends AppCompatActivity {
 
             //Se obtiene el la nota del objeto Bundle y se ñadden los valores a la interfaz
             Note note = (Note) bundle.getSerializable("note");
-
             Note noteImage = componentNotes.readNote(note.getNoteId());
             editTextTitle.setText(note.getTitle());
             editTextDescription.setText(note.getDescription());
             textViewId.setText(noteImage.getNoteId().toString());
             textViewEncode.setText(noteImage.getEncode().toString());
-            textViewUserId.setText(noteImage.getUserId().getUserId().toString());
 
             //Se comprueba que la nota tiene una imagen
             if (noteImage.getImage() != null) {
@@ -239,7 +237,7 @@ public class BlocDeNotas extends AppCompatActivity {
 
         Note note = new Note(Integer.parseInt(textViewId.getText().toString()), editTextTitle.getText().toString(),
                 editTextDescription.getText().toString(), Integer.parseInt(textViewEncode.getText().toString()),
-                imageViewToByte(), new User(Integer.parseInt(textViewUserId.getText().toString())));
+                imageViewToByte());
 
         if (ListaDeNotas.isUpdate) {
             componentNotes.updateNote(note.getNoteId(), note);
@@ -262,11 +260,7 @@ public class BlocDeNotas extends AppCompatActivity {
 
         Intent intent = new Intent(BlocDeNotas.this, ListaDeNotas.class);
 
-        Gson gson = new Gson();
-        Student student = gson.fromJson(texto, Student.class);
-        bundle.putString("a", gson.toJson(student));
-
-        intent.putExtras(bundle);
+        intent.putExtras(args);
         startActivity(intent);
         finish();
     }
