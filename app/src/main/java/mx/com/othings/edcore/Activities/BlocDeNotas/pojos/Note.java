@@ -12,26 +12,23 @@ public class Note implements Serializable {
     private String description;
     private byte[] image;
     private Integer encode;
-    private User userId;
 
     public Note() {
     }
 
-    public Note(Integer noteId, String title, String description, Integer encode, byte[] image, User userId) {
+    public Note(Integer noteId, String title, String description, Integer encode, byte[] image) {
         this.noteId = noteId;
         this.title = title;
         this.description = description;
         this.image = image;
         this.encode = encode;
-        this.userId = userId;
     }
 
-    public Note(Integer noteId, String title, String description, Integer encode, User userId) {
+    public Note(Integer noteId, String title, String description, Integer encode) {
         this.noteId = noteId;
         this.title = title;
         this.description = description;
         this.encode = encode;
-        this.userId = userId;
     }
 
     public Integer getNoteId() {
@@ -56,14 +53,6 @@ public class Note implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
     }
 
     public byte[] getImage() {

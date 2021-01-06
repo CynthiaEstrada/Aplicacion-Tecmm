@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import mx.com.othings.edcore.R;
-import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
-
 import java.util.List;
+
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
+import mx.com.othings.edcore.R;
 
 /**
  * Clase que nos permite ingresar los valores de un ArrayList<Note> en un ListView
@@ -49,12 +49,10 @@ public class NotesListAdapter extends ArrayAdapter<Note> {
         TextView textViewEncode = (TextView) v.findViewById(R.id.textViewEncode);
         TextView textViewTitle = (TextView) v.findViewById(R.id.textViewTitle);
         TextView textViewDescription = (TextView) v.findViewById(R.id.textViewDescription);
-
         //Dependiendo del valor de encode mostramos la descripcion de la nota
         switch (note.getEncode()) {
             case 0:
                 textViewId.setText(note.getNoteId().toString());
-                textViewUserId.setText(note.getUserId().getUserId().toString());
                 textViewEncode.setText(note.getEncode().toString());
                 textViewTitle.setText(note.getTitle());
                 textViewDescription.setText(note.getDescription());
@@ -62,7 +60,6 @@ public class NotesListAdapter extends ArrayAdapter<Note> {
 
             case 1:
                 textViewId.setText(note.getNoteId().toString());
-                textViewUserId.setText(note.getUserId().getUserId().toString());
                 textViewEncode.setText(note.getEncode().toString());
                 textViewTitle.setText(note.getTitle());
                 break;

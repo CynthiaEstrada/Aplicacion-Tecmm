@@ -14,24 +14,54 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.pavlospt.roundedletterview.RoundedLetterView;
+import com.google.gson.Gson;
 
-import mx.com.othings.edcore.Activities.ChatGeneral.ChatGeneral;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import es.dmoral.toasty.Toasty;
+import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
 import mx.com.othings.edcore.Fragments.main_left_menu.CalificationsFragment;
-import mx.com.othings.edcore.Fragments.PanelControlFragment;
+import mx.com.othings.edcore.Fragments.main_left_menu.InscripcionFragment;
+import mx.com.othings.edcore.Fragments.main_left_menu.PanelControlFragment;
 import mx.com.othings.edcore.Fragments.main_left_menu.StudentInformationFragment;
 import mx.com.othings.edcore.Fragments.main_left_menu.StudentScheduleFragment;
+import mx.com.othings.edcore.Lib.Models.Student;
+import mx.com.othings.edcore.Lib.Utilities;
 import mx.com.othings.edcore.R;
 
 public class ControlPanel extends TemplateActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private NavigationView navigationView;
+    Bundle args = new Bundle();
+    private static User user;                          //Creamos un POJO de apoyo
+    private ComponentNotes componentNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        componentNotes = new ComponentNotes(this);
+        componentNotes.readUsers();
+
+        Bundle bundle = getIntent().getExtras();
+        String texto = bundle.getString("a");
+        args.putString("a", texto);
+
+        String texto2 = bundle.getString("b");
+        args.putString("b", texto2);
+
+        Gson gson = new Gson();
+        Student student = gson.fromJson(texto, Student.class);
+
+        IniciarNotas(student);
+        userLogin();
+
         setContentView(R.layout.activity_control_panel);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,29 +79,14 @@ public class ControlPanel extends TemplateActivity
         final TextView username = navigationView.getHeaderView(0).findViewById(R.id.username);
         final TextView email = navigationView.getHeaderView(0).findViewById(R.id.email);
 
+
         setDefaultFragment();
 
-       /* service.Online().getStudentInformation(new OnlineResourceListener() {
-            @Override
-            public void onResponse(Object response) {
+        String full_name = Utilities.capitalizeWords((student.getName()+" "+student.getFirst_name()+" "+ student.getLast_name()).toLowerCase());
 
-                Student student = (Student) response;
-                String full_name = Utilities.capitalizeWords((student.getName()+" "+student.getFirst_name()+" "+ student.getLast_name()).toLowerCase());
-
-                service.sdb().getStudentConfiguration().setStudent(StudentConfigurations.STUDENT_INFORMATION,student);
-                user_letter_view.setTitleText(String.valueOf(student.getName().toCharArray()[0]));
-                username.setText(full_name);
-                email.setText(student.getEmail().toLowerCase());
-
-            }
-
-            @Override
-            public void onError(int error_code, String error_message) {
-                Toasty.error(ControlPanel.this, error_message , Toast.LENGTH_LONG, true).show();
-            }
-        });*/
-
-
+        user_letter_view.setTitleText(String.valueOf(student.getName().toCharArray()[0]));
+        username.setText(full_name);
+        email.setText(student.getEmail().toLowerCase());
     }
 
     @Override
@@ -114,7 +129,9 @@ public class ControlPanel extends TemplateActivity
 
         if (id == R.id.panel_control) {
             changeFragment(new PanelControlFragment(),"Panel de control");
-
+        }
+        else if( id == R.id.inscripcion_control ){
+            changeFragment(new InscripcionFragment(),"Inscripción");
         }
         else if( id == R.id.califications ){
             changeFragment(new CalificationsFragment(),"Calificaciones");
@@ -124,6 +141,7 @@ public class ControlPanel extends TemplateActivity
         }
         else if( id == R.id.user){
             changeFragment(new StudentInformationFragment(),"Mi cuenta");
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -133,14 +151,16 @@ public class ControlPanel extends TemplateActivity
 
     private void setDefaultFragment(){
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new PanelControlFragment()).commit();
+        Fragment fragment = new PanelControlFragment();
+        fragment.setArguments(args);
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,fragment).commit();
         navigationView.getMenu().getItem(0).setChecked(true);
         getSupportActionBar().setTitle(navigationView.getMenu().getItem(0).getTitle());
 
     }
 
     private void changeFragment(Fragment fragment, String title){
-
+        fragment.setArguments(args);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame,fragment).commit();
         getSupportActionBar().setTitle(title);
@@ -154,5 +174,30 @@ public class ControlPanel extends TemplateActivity
         Bitmap bitmap = BitmapFactory.decodeByteArray(image_decoded,0,image_decoded.length);
 
     }*/
+
+    private void IniciarNotas (Student student1) {
+        //Objeto que nos permite realizar las operaciones con la BDD
+        User user = new User(student1.getStudent_id());
+
+        if (componentNotes.insertUser(user) != 0) {
+            System.out.println("Se guardo con exito");
+        } else {
+            Toasty.normal(getApplicationContext(), "Fallo al registrar el usuario",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void userLogin () {
+        ArrayList<User> users = componentNotes.readUsers();
+        if (users != null) {
+            Iterator itr = users.iterator();
+
+            while (itr.hasNext()) {
+                user = (User) itr.next();
+                System.out.println("UserLogin: " + user.getUserId());
+            }
+        }
+    }
 
 }

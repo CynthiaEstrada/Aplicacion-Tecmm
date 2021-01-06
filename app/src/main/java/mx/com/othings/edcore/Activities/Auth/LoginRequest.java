@@ -16,9 +16,9 @@ public class LoginRequest extends StringRequest {
         parametros.put("IdAlumno", ncontrol+"");
         parametros.put("Password", password+"");
     }
+    
     @Override
     protected Map<String, String> getParams(){
-        System.out.println(parametros);
         return parametros;
     }
 }

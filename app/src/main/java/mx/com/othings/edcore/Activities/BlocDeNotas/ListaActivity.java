@@ -1,11 +1,5 @@
 package mx.com.othings.edcore.Activities.BlocDeNotas;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import es.dmoral.toasty.Toasty;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,23 +16,27 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import mx.com.othings.edcore.R;
-import mx.com.othings.edcore.Activities.BlocDeNotas.adapters.NotesListAdapter;
-import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
-import mx.com.othings.edcore.Activities.BlocDeNotas.hash.Sha;
-import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
-import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+
+import es.dmoral.toasty.Toasty;
+import mx.com.othings.edcore.Activities.BlocDeNotas.adapters.NotesListAdapter;
+import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
+import mx.com.othings.edcore.R;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
 /**
  * Pantalla donde se cargan todas las notas
  */
-public class ListaActivity extends AppCompatActivity {
+public class ListaDeNotas extends AppCompatActivity {
 
     //Objetos de la interfaz
     private ListView listViewNotes;
@@ -193,7 +191,7 @@ public class ListaActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_settings:
-                Intent intent = new Intent(ListaActivity.this, SettingsActivity.class);
+                Intent intent = new Intent(ListaDeNotas.this, SettingsActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -204,7 +202,8 @@ public class ListaActivity extends AppCompatActivity {
      *Llamamos a EditTextActivity
      */
     public void addNote(View view) {
-        Intent intent = new Intent(ListaActivity.this, BlocActivity.class);
+
+        Intent intent = new Intent(ListaDeNotas.this, BlocDeNotas.class);
         startActivity(intent);
     }
 
@@ -214,11 +213,8 @@ public class ListaActivity extends AppCompatActivity {
     private void showAlertDialog(final Note note) {
         switch (note.getEncode()) {
             case 0:
-                CharSequence[] options = {"Ver o Modificar", "Ocultar contenido", "Eliminar"};
+                CharSequence[] options = {"Ver o Modificar", "Eliminar"};
                 defaultAlertDialog(note, options);
-                break;
-            case 1:
-                passwordAlertDialog(note);
                 break;
         }
     }
@@ -234,27 +230,11 @@ public class ListaActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (options[i].equals("Ver o Modificar")) {
                     isUpdate = true;
-                    User user = componentNotes.readUser(note.getUserId().getUserId());
-                    note.setUserId(user);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("note", note);
-                    Intent intent = new Intent(ListaActivity.this, BlocActivity.class);
+                    Intent intent = new Intent(ListaDeNotas.this, BlocDeNotas.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                } else if (options[i].equals("Ocultar contenido")) {
-                    Note noteUpdate = componentNotes.readNote(note.getNoteId());
-                    noteUpdate.setEncode(1);
-                    if (componentNotes.updateNote(note.getNoteId(), noteUpdate) != 0) {
-                        fillListView();
-
-                        Toasty.normal(getApplicationContext(), "Contenido ocultado", Toast.LENGTH_SHORT).show();
-                    }
-                } else if (options[i].equals("Mostrar contenido")) {
-                    Note noteUpdate = componentNotes.readNote(note.getNoteId());
-                    noteUpdate.setEncode(0);
-                    if (componentNotes.updateNote(note.getNoteId(), noteUpdate) != 0) {
-                        fillListView();
-                    }
                 } else if (options[i].equals("Eliminar")) {
                     if (componentNotes.deleteNote(note.getNoteId()) != 0) {
                         fillListView();
@@ -266,36 +246,6 @@ public class ListaActivity extends AppCompatActivity {
         alertDialogBuilder.show();
     }
 
-    /*
-     *Ventana de dialogo que pide la contraseña
-     */
-    private void passwordAlertDialog(final Note note) {
-        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ListaActivity.this);
-        final View customLayout = getLayoutInflater().inflate(R.layout.dialog_password, null);
-        alertDialog.setView(customLayout);
-
-        alertDialog.setPositiveButton("Aceptar",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        EditText editTextPassword = customLayout.findViewById(R.id.editTextPassword);
-                        User user = componentNotes.readUser(note.getUserId().getUserId());
-                        if (user.getPassword().equals(Sha.stringToHash(editTextPassword.getText().toString(), SHA))) {
-                            CharSequence[] options = {"Ver o Modificar", "Mostrar contenido", "Eliminar"};
-                            defaultAlertDialog(note, options);
-                        }
-
-                    }
-                });
-
-        alertDialog.setNegativeButton("Cancelar",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-        alertDialog.show();
-    }
 
     /*
      *Orden alfabetico de las notas
@@ -341,7 +291,7 @@ public class ListaActivity extends AppCompatActivity {
 
             }
         }
-    }
+     }
 
     /*
      *Consultamos todas las notas de la BDD y las añadimos al listViewNotes
@@ -366,4 +316,3 @@ public class ListaActivity extends AppCompatActivity {
         listViewNotes.setAdapter(notesListAdapter);
     }
 }
-

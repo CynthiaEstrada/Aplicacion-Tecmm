@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Aplicacion-Tecmm.iml" filepath="$PROJECT_DIR$/.idea/modules/Aplicacion-Tecmm.iml" group="Aplicacion-Tecmm" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Aplicacion-Tecmm/app" />
-      <module fileurl="file://$PROJECT_DIR$/jwtreader/jwtreader.iml" filepath="$PROJECT_DIR$/jwtreader/jwtreader.iml" group="Aplicacion-Tecmm/jwtreader" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="Aplicacion-Tecmm/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jwtreader/jwtreader.iml" filepath="$PROJECT_DIR$/.idea/modules/jwtreader/jwtreader.iml" group="Aplicacion-Tecmm/jwtreader" />
     </modules>
   </component>
 </project>

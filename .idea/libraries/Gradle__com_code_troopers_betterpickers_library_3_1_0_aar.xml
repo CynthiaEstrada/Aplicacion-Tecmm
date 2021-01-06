@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.code-troopers.betterpickers:library:3.1.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4808f0e3ca652b02cc6fb448cc4b108c/jetified-library-3.1.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4808f0e3ca652b02cc6fb448cc4b108c/jetified-library-3.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4808f0e3ca652b02cc6fb448cc4b108c/jetified-library-3.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac4e49ed1bb5b9edee49cfb4b5584260/jetified-library-3.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac4e49ed1bb5b9edee49cfb4b5584260/jetified-library-3.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac4e49ed1bb5b9edee49cfb4b5584260/jetified-library-3.1.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.code-troopers.betterpickers/library/3.1.0/4e51771c926208a9804e036f75afb5ca73a7ab74/library-3.1.0-javadoc.jar!/" />

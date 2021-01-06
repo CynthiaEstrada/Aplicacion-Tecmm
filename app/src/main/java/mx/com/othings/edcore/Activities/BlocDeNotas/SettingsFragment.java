@@ -34,6 +34,9 @@ import java.io.IOException;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
+import mx.com.othings.edcore.Activities.BlocDeNotas.complements.DriveServiceHelper;
+import mx.com.othings.edcore.Activities.BlocDeNotas.complements.GoogleDriveFileHolder;
+import mx.com.othings.edcore.R;
 
 import static mx.com.othings.edcore.Activities.BlocDeNotas.complements.DriveServiceHelper.getGoogleDriveService;
 
@@ -80,14 +83,6 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
-        Preference preferenceChangePassword = (Preference) findPreference("pref_change_password");
-        preferenceChangePassword.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            public boolean onPreferenceClick(final Preference preference) {
-                showDialogChangePassword();
-                return false;
-            }
-        });
-
     }
 
     /*
@@ -107,7 +102,7 @@ public class SettingsFragment extends PreferenceFragment {
 
     /*
      *Se muestra una ventana al usuario y se da aceptar se lanza la pantalla de cambiar la contraseña
-     */
+
     private void showDialogChangePassword() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("¿Quiere cambiar la contraseña?")
@@ -124,7 +119,7 @@ public class SettingsFragment extends PreferenceFragment {
                     }
                 });
         builder.show();
-    }
+    }*/
 
     /*
      *Se muestra una ventana al usuario y se lanza el método de resetDatabase()
@@ -250,7 +245,7 @@ public class SettingsFragment extends PreferenceFragment {
             driveServiceHelper.deleteFolderFile(idFile);
 
             //Subimos a la cuenta el fichero de la base de datos que esta en local
-            driveServiceHelper.uploadFile(new java.io.File("/data/data/com.example.projectnotes/databases/", "notes"),
+            driveServiceHelper.uploadFile(new File("/data/data/com.example.projectnotes/databases/", "notes"),
                     "application/octet-stream", null)
                     .addOnSuccessListener(new OnSuccessListener<GoogleDriveFileHolder>() {
                         @Override
@@ -307,7 +302,7 @@ public class SettingsFragment extends PreferenceFragment {
                                 }
 
                                 //Descargamos el fichero y sobreescribimos el que tenemos en local
-                                driveServiceHelper.downloadFile(new java.io.File("/data/data/com.example.projectnotes/databases/", "notes"),
+                                driveServiceHelper.downloadFile(new File("/data/data/com.example.projectnotes/databases/", "notes"),
                                         "" + idFile + "")
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override

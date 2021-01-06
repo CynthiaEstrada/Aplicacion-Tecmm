@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.OthingsTechnologies:JWTReader:-SNAPSHOT@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9780dce1883f6072355a4d2f9465d3db/JWTReader--SNAPSHOT/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9780dce1883f6072355a4d2f9465d3db/JWTReader--SNAPSHOT/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9780dce1883f6072355a4d2f9465d3db/JWTReader--SNAPSHOT/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f891427f507e36bc204e9db6212e7767/jetified-JWTReader--SNAPSHOT/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f891427f507e36bc204e9db6212e7767/jetified-JWTReader--SNAPSHOT/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f891427f507e36bc204e9db6212e7767/jetified-JWTReader--SNAPSHOT/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

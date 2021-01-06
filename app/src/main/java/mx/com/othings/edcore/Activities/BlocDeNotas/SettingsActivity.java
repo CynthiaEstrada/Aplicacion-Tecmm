@@ -26,7 +26,6 @@ public class SettingsActivity extends AppCompatActivity {
                 return;
             }
             getFragmentManager().beginTransaction().add(R.id.fragment_settings, new SettingsFragment()).commit();
-            SplashActivity.nameActivity = "SettingsActivity";
         }
     }
 }

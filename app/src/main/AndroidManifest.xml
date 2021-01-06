@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -23,15 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".Activities.EventosFacebook.EventosActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"></activity>
-        <activity android:name=".Activities.BlocDeNotas.ListaActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"></activity>
-        <activity android:name=".Activities.BlocDeNotas.BlocActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".Activities.EventosFacebook.EventosActivity"></activity>
+        <activity android:name=".Activities.BlocDeNotas.ListaDeNotas"></activity>
+        <activity android:name=".Activities.BlocDeNotas.BlocDeNotas"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,13 +39,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".Activities.MapsActivity"
-            android:label="@string/title_activity_maps">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".Activities.Auth.Splash"
             android:label="@string/app_name"
@@ -70,16 +58,12 @@
             android:label="Edcore"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".Activities.Califications.SubjectCalifications"
-            android:screenOrientation="portrait" />
         <activity android:name=".Activities.TemplateActivity" />
         <activity android:name=".Activities.PDFReader" />
         <activity android:name=".Activities.ChatGeneral.ChatGeneral" />
         <activity
             android:name=".Activities.Permissions.CheckPermisions"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activities.Tasks.MainActivity" />
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package mx.com.othings.edcore.Activities.Auth;
 import android.content.Intent;
 import android.os.Handler;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -28,23 +29,30 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import es.dmoral.toasty.Toasty;
+import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
 import mx.com.othings.edcore.Activities.Permissions.CheckPermisions;
 import mx.com.othings.edcore.Activities.ControlPanel;
 import mx.com.othings.edcore.App;
 import mx.com.othings.edcore.Lib.Auth.OAuthAuthentication;
 import mx.com.othings.edcore.Lib.Auth.OAuthListener;
 import mx.com.othings.edcore.Lib.Configurations.StudentConfigurations;
+import mx.com.othings.edcore.Lib.Models.Califications.SubjectCalification;
 import mx.com.othings.edcore.Lib.Models.Student;
-import mx.com.othings.edcore.Lib.Models.User;
 import mx.com.othings.edcore.Lib.Service;
 import mx.com.othings.edcore.R;
 import mx.com.othings.jwtreader2.JWT.JWT;
-import com.android.volley.toolbox.StringRequest;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
 
@@ -56,11 +64,12 @@ public class Login extends AppCompatActivity {
     private OAuthAuthentication oauth;
     private Service service;
     private FirebaseDatabase dataBase;
-
     private FirebaseAuth mAuth;
-
-
     private static String controlNumber;
+
+    private Student student;
+    private SubjectCalification subject;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,46 +81,66 @@ public class Login extends AppCompatActivity {
         keep_me_authneticated_check_box = findViewById(R.id.checkBox);
         login_btn = findViewById(R.id.login_btn);
         loader_animation = findViewById(R.id.loader_animation);
-        oauth = new OAuthAuthentication(this);
+        //oauth = new OAuthAuthentication(this);
         service = new Service(this);
         dataBase = FirebaseDatabase.getInstance();
 
+        //Student student;
         mAuth = FirebaseAuth.getInstance();
-
-        mAuth.createUserWithEmailAndPassword("za15011331@zapopan.tecmm.edu.mx", "15011331")
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-
-                        } else {
-
-                        }
-
-                    }
-                });
 
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final Bundle bundle = new Bundle();
+                final Gson gson = new Gson();
                 final String registration_tag = registration_tag_input.getText().toString();
                 final String password = password_input.getText().toString();
+
+                Response.Listener<String> res2 = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array = new JSONArray(response);
+                            JSONObject cali = array.getJSONObject(0);
+                            for(int i=0; i<array.length(); i++){
+
+
+
+                            }
+                            subject = new SubjectCalification(cali.getString("Nombre"), cali.getInt("CalificacionParcial"));
+                            bundle.putString("b", gson.toJson(subject));
+                        } catch (JSONException e) {
+                            e.getMessage();
+                        }
+                    }
+                };
+                CalificationRequest cal = new CalificationRequest(registration_tag, res2);
+                RequestQueue cola2 = Volley.newRequestQueue(Login.this);
+                cola2.add(cal);
+
                 Response.Listener<String> res = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonRespuesta = new JSONObject(response);
                             boolean ok = jsonRespuesta.getBoolean("success");
-                            System.out.println(ok);
-                            if(ok==true){
+                            if (ok == true) {
+                                student = new Student(jsonRespuesta.getInt("IdAlumno"),
+                                        jsonRespuesta.getString("Nombre"), jsonRespuesta.getString("ApellidoPaterno"),
+                                        jsonRespuesta.getString("ApellidoMaterno"), jsonRespuesta.getString("FechaNacimiento"),
+                                        jsonRespuesta.getString("Sexo"), jsonRespuesta.getString("Direccion"),
+                                        jsonRespuesta.getString("Telefono"), jsonRespuesta.getString("Email"),
+                                        jsonRespuesta.getString("Password"), jsonRespuesta.getString("Carrera"),
+                                        jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"));
+                                bundle.putString("a", gson.toJson(student));
+                                FirebaseCrearUsusario();
                                 Intent intent = new Intent(Login.this, ControlPanel.class);
+                                intent.putExtras(bundle);
                                 startActivity(intent);
-                            }else{
-                                Toasty.error(Login.this,"error al intentar acceder", Toast.LENGTH_LONG, true).show();
+                            } else {
+                                Toasty.error(Login.this, "error al intentar acceder", Toast.LENGTH_LONG, true).show();
                             }
-                        }catch (JSONException e) {
+                        } catch (JSONException e) {
                             e.getMessage();
                         }
                     }
@@ -120,17 +149,7 @@ public class Login extends AppCompatActivity {
                 RequestQueue cola = Volley.newRequestQueue(Login.this);
                 cola.add(r);
 
-            }
-        });
-
-        /*login_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*final Student estudiante1 = new Student();
-                Student estudiante2 = new Student();
-                estudiante1.prueba("Cynthia", "12345", 15011331, "za15011331@zapopan.tecmm.edu.mx", estudiante1.getPerfil_photo());
-                estudiante2.prueba("Jaime", "12345", 15011057, "za15011057@zapopan.tecmm.edu.mx", null);
-
+                /*
                 mAuth.signInWithEmailAndPassword("za15011331@zapopan.tecmm.edu.mx", "15011331")
                         .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -149,7 +168,7 @@ public class Login extends AppCompatActivity {
 
                             }
                         });
-
+*/
 
 
 
@@ -179,29 +198,30 @@ public class Login extends AppCompatActivity {
                                             true
                                     );
                                 }
+                            */
+                if (service.sdb().isFirstTimeUse()) {
 
-                                if(service.sdb().isFirstTimeUse()){
-
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-
-                                            Intent intent = new Intent(Login.this,CheckPermisions.class);
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                           // service.sdb().saveUser(new User(registration_tag,password));
-                                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(Login.this, CheckPermisions.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            Gson gson = new Gson();
+                            bundle.putString("a", gson.toJson(student));
+                            intent.putExtras(bundle);
+                            // service.sdb().saveUser(new User(registration_tag,password));*/
+                                          /*  FirebaseUser currentUser = mAuth.getCurrentUser();
                                             DatabaseReference reference = dataBase.getReference("Usuarios/" + currentUser.getUid());
-                                            reference.setValue(estudiante1);
-                                            startActivity(intent);
-                                            //
+                                            reference.setValue(student);*/
+                            startActivity(intent);
+                            //
 
 
+                        }
+                    },2000);
 
-                }
-                                    },2000);*/
-
-                                }
-                                /*else{
+                }  /*
+                                else{
 
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
@@ -236,8 +256,8 @@ public class Login extends AppCompatActivity {
                 }
                 else{
                     Toasty.error(Login.this,"La matricula consta de 8 números", Toast.LENGTH_LONG, true).show();
-                }
-                
+                }*/
+
             }
         });
 
@@ -248,14 +268,31 @@ public class Login extends AppCompatActivity {
             }
         });*/
 
+    }
 
-
-    public String getControlNumber() {
+    public String getControlNumber () {
         return controlNumber;
     }
 
-    public void setControlNumber(String controlNumber) {
+    public void setControlNumber (String controlNumber){
         this.controlNumber = controlNumber;
     }
-}
 
+
+    private void FirebaseCrearUsusario(){
+
+        mAuth.createUserWithEmailAndPassword(student.getEmail(), String.valueOf(student.getStudent_id()))
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+
+                        } else {
+
+                        }
+
+                    }
+                });
+    }
+}

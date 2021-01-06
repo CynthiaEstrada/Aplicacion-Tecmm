@@ -1,8 +1,5 @@
 package mx.com.othings.edcore.Activities.BlocDeNotas;
 
-import androidx.appcompat.app.AppCompatActivity;
-import es.dmoral.toasty.Toasty;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,26 +17,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import mx.com.othings.edcore.R;
-import mx.com.othings.edcore.Activities.BlocDeNotas.complements.TtsManager;
-import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
-import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
-import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Arrays;
 
+import es.dmoral.toasty.Toasty;
+import mx.com.othings.edcore.Activities.BlocDeNotas.complements.TtsManager;
+import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
+import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
+import mx.com.othings.edcore.R;
+
 /*
  *Pantalla del Editor de Notas
  */
-public class BlocActivity extends AppCompatActivity {
+public class BlocDeNotas extends AppCompatActivity {
 
     //Creación de los objetos de la interfaz
     private EditText editTextTitle, editTextDescription;
     private TextView textViewId, textViewEncode, textViewUserId;
-    private ImageView imageViewAttached, imageViewDialog;
+    private ImageView imageViewAttached, imageViewDialog, addImage;
     private ImageButton imageButtonVolume;
 
     private Dialog dialogShowImage;                 //Objeto que nos muestra un dialogo con la imagen adjuntada
@@ -57,10 +55,6 @@ public class BlocActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bloc_de_notas);
-        /*getSupportActionBar().setTitle("Editor de Notas");
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);*/
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         init();
 
@@ -75,13 +69,20 @@ public class BlocActivity extends AppCompatActivity {
                 showImage();
             }
         });
+
+        addImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGalery();
+            }
+        });
     }
 
     /*
      *Se crea una ventana diálogo y  añade la imagen que se ha pinchado
      */
     private void showImage() {
-        dialogShowImage = new Dialog(BlocActivity.this);
+        dialogShowImage = new Dialog(BlocDeNotas.this);
         dialogShowImage.setContentView(R.layout.dialog_show_image);
         imageViewDialog = dialogShowImage.findViewById(R.id.imageViewDialog);
         imageViewDialog.setImageBitmap(((BitmapDrawable) imageViewAttached.getDrawable()).getBitmap());
@@ -118,7 +119,6 @@ public class BlocActivity extends AppCompatActivity {
             editTextDescription.setText(note.getDescription());
             textViewId.setText(noteImage.getNoteId().toString());
             textViewEncode.setText(noteImage.getEncode().toString());
-            textViewUserId.setText(noteImage.getUserId().getUserId().toString());
 
             //Se comprueba que la nota tiene una imagen
             if (noteImage.getImage() != null) {
@@ -137,7 +137,7 @@ public class BlocActivity extends AppCompatActivity {
      */
     private void init() {
         componentNotes = new ComponentNotes(this);
-        progressDialog = new ProgressDialog(BlocActivity.this);
+        progressDialog = new ProgressDialog(BlocDeNotas.this);
 
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
         editTextDescription = (EditText) findViewById(R.id.editTextDescription);
@@ -146,6 +146,7 @@ public class BlocActivity extends AppCompatActivity {
         textViewUserId = (TextView) findViewById(R.id.textViewUserId);
         imageButtonVolume = (ImageButton) findViewById(R.id.imageButtonVolume);
         imageViewAttached = (ImageView) findViewById(R.id.imageView);
+        addImage = (ImageView) findViewById(R.id.addImage);
     }
 
     /*
@@ -161,28 +162,12 @@ public class BlocActivity extends AppCompatActivity {
         }
     }
 
-    /*
-     *Comprobamos cual de los botones del ActionBar ha sido selecionado y la lanzamos la funcion correspondiente
-     */
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.item_clip:
-                openGalery();
-                break;
-
-            case R.id.item_share:
-                shareNote();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     /*
      *Abrimos la galería del dispositivo
      */
     private void openGalery() {
-        if (ListaActivity.isPermission) {
+        if (ListaDeNotas.isPermission) {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent.setType("image/");
             startActivityForResult(intent.createChooser(intent, "Selecione la Aplicación"), 10);
@@ -237,9 +222,9 @@ public class BlocActivity extends AppCompatActivity {
 
         Note note = new Note(Integer.parseInt(textViewId.getText().toString()), editTextTitle.getText().toString(),
                 editTextDescription.getText().toString(), Integer.parseInt(textViewEncode.getText().toString()),
-                imageViewToByte(), new User(Integer.parseInt(textViewUserId.getText().toString())));
+                imageViewToByte());
 
-        if( ListaActivity.isUpdate) {
+        if (ListaDeNotas.isUpdate) {
             componentNotes.updateNote(note.getNoteId(), note);
         } else {
             componentNotes.insertNote(note);
@@ -249,10 +234,11 @@ public class BlocActivity extends AppCompatActivity {
     }
 
     /*
-     *Nos lleva al MainActivity
+     *Nos lleva a la lista de notas
      */
     private void goMain() {
-        Intent intent = new Intent(BlocActivity.this, ListaActivity.class);
+
+        Intent intent = new Intent(BlocDeNotas.this, ListaDeNotas.class);
         startActivity(intent);
         finish();
     }
@@ -297,4 +283,3 @@ public class BlocActivity extends AppCompatActivity {
         progressDialog.dismiss();
     }
 }
-

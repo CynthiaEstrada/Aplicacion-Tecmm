@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.stepstone.stepper:material-stepper:4.3.1@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6ec29231e358731a78e92f13d9e024ab/jetified-material-stepper-4.3.1/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/622e419dd3e1573397c193dee9b04fe0/jetified-material-stepper-4.3.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6ec29231e358731a78e92f13d9e024ab/jetified-material-stepper-4.3.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6ec29231e358731a78e92f13d9e024ab/jetified-material-stepper-4.3.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6ec29231e358731a78e92f13d9e024ab/jetified-material-stepper-4.3.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/622e419dd3e1573397c193dee9b04fe0/jetified-material-stepper-4.3.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/622e419dd3e1573397c193dee9b04fe0/jetified-material-stepper-4.3.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/622e419dd3e1573397c193dee9b04fe0/jetified-material-stepper-4.3.1/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.stepstone.stepper/material-stepper/4.3.1/de3ca58a97d5a8534aad78626e948b2bb35d1f80/material-stepper-4.3.1-javadoc.jar!/" />
