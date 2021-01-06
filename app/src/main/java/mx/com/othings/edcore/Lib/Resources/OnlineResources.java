@@ -93,8 +93,8 @@ public class OnlineResources {
 
                         double average = j.get("average").getAsDouble();
 
-                        SubjectCalification subjectCalification = new SubjectCalification(class_name,list_number,s,average);
-                        subjectCalificationList.add(subjectCalification);
+                       // SubjectCalification subjectCalification = new SubjectCalification(class_name,list_number,s,average);
+                       // subjectCalificationList.add(subjectCalification);
                     }
 
                     JsonObject stadistics = json.get(json.size()-1).getAsJsonObject();

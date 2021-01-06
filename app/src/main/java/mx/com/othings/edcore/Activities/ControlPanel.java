@@ -52,6 +52,9 @@ public class ControlPanel extends TemplateActivity
         String texto = bundle.getString("a");
         args.putString("a", texto);
 
+        String texto2 = bundle.getString("b");
+        args.putString("b", texto2);
+
         Gson gson = new Gson();
         Student student = gson.fromJson(texto, Student.class);
 

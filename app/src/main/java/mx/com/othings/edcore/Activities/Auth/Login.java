@@ -47,6 +47,7 @@ import mx.com.othings.edcore.App;
 import mx.com.othings.edcore.Lib.Auth.OAuthAuthentication;
 import mx.com.othings.edcore.Lib.Auth.OAuthListener;
 import mx.com.othings.edcore.Lib.Configurations.StudentConfigurations;
+import mx.com.othings.edcore.Lib.Models.Califications.SubjectCalification;
 import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.Lib.Service;
 import mx.com.othings.edcore.R;
@@ -66,6 +67,7 @@ public class Login extends AppCompatActivity {
     private static String controlNumber;
 
     private Student student;
+    private SubjectCalification subject;
 
 
     @Override
@@ -85,13 +87,36 @@ public class Login extends AppCompatActivity {
         //Student student;
         mAuth = FirebaseAuth.getInstance();
 
-
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Bundle bundle = new Bundle();
+                final Gson gson = new Gson();
                 final String registration_tag = registration_tag_input.getText().toString();
                 final String password = password_input.getText().toString();
+
+                Response.Listener<String> res2 = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonRespuesta = new JSONObject(response);
+                            boolean ok = jsonRespuesta.getBoolean("success");
+                            if (ok == true) {
+                                subject = new SubjectCalification(jsonRespuesta.getString("Nombre"), jsonRespuesta.getInt("CalificacionParcial"));
+
+                                bundle.putString("b", gson.toJson(subject));
+                            } else {
+                                Toasty.error(Login.this, "error al intentar acceder", Toast.LENGTH_LONG, true).show();
+                            }
+                        } catch (JSONException e) {
+                            e.getMessage();
+                        }
+                    }
+                };
+                CalificationRequest cal = new CalificationRequest(registration_tag, res2);
+                RequestQueue cola2 = Volley.newRequestQueue(Login.this);
+                cola2.add(cal);
+
                 Response.Listener<String> res = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -106,7 +131,6 @@ public class Login extends AppCompatActivity {
                                         jsonRespuesta.getString("Telefono"), jsonRespuesta.getString("Email"),
                                         jsonRespuesta.getString("Password"), jsonRespuesta.getString("Carrera"),
                                         jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"));
-                                Gson gson = new Gson();
                                 bundle.putString("a", gson.toJson(student));
                                 FirebaseCrearUsusario();
                                 Intent intent = new Intent(Login.this, ControlPanel.class);
