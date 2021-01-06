@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -30,6 +32,7 @@ import mx.com.othings.edcore.Activities.BlocDeNotas.complements.TtsManager;
 import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
+import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.R;
 
 /*
@@ -50,6 +53,8 @@ public class BlocDeNotas extends AppCompatActivity {
 
     private int stopTtsManager = 0;                 //Variable de apoyo para parar la lectura del texto
 
+    Bundle args, bundle;
+    String texto;
     /*
      *Método que crea la vista del Activity
      */
@@ -114,7 +119,6 @@ public class BlocDeNotas extends AppCompatActivity {
             editTextDescription.setText(note.getDescription());
             textViewId.setText(noteImage.getNoteId().toString());
             textViewEncode.setText(noteImage.getEncode().toString());
-            textViewUserId.setText(noteImage.getUserId().getUserId().toString());
 
             //Se comprueba que la nota tiene una imagen
             if (noteImage.getImage() != null) {
@@ -233,7 +237,7 @@ public class BlocDeNotas extends AppCompatActivity {
 
         Note note = new Note(Integer.parseInt(textViewId.getText().toString()), editTextTitle.getText().toString(),
                 editTextDescription.getText().toString(), Integer.parseInt(textViewEncode.getText().toString()),
-                imageViewToByte(), new User(Integer.parseInt(textViewUserId.getText().toString())));
+                imageViewToByte());
 
         if (ListaDeNotas.isUpdate) {
             componentNotes.updateNote(note.getNoteId(), note);
@@ -248,7 +252,15 @@ public class BlocDeNotas extends AppCompatActivity {
      *Nos lleva al MainActivity
      */
     private void goMain() {
+
+        args = new Bundle();
+        bundle = getIntent().getExtras();
+        texto = bundle.getString("a");
+        args.putString("a", texto);
+
         Intent intent = new Intent(BlocDeNotas.this, ListaDeNotas.class);
+
+        intent.putExtras(args);
         startActivity(intent);
         finish();
     }

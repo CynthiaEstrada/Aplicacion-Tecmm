@@ -26,6 +26,7 @@
         tools:replace="android:icon">
         <activity android:name=".Activities.EventosFacebook.EventosActivity"></activity>
         <activity android:name=".Activities.BlocDeNotas.ListaDeNotas"></activity>
+        <activity android:name=".Activities.BlocDeNotas.BlocDeNotas"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

@@ -48,7 +48,8 @@ public class PanelControlFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_panel_control, container, false);
 
-       String texto = getArguments().getString("a");
+
+        String texto = getArguments().getString("a");
         Gson gson = new Gson();
         student = gson.fromJson(texto, Student.class);
 
@@ -71,7 +72,12 @@ public class PanelControlFragment extends Fragment {
         Notes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                final Bundle bundle = new Bundle();
+                String texto = getArguments().getString("a");
                 Intent intent = new Intent(getActivity(), ListaDeNotas.class);
+                bundle.putString("a", texto);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

@@ -24,10 +24,9 @@ public class NotesOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase notes) {
 
-        notes.execSQL("create table USER(USER_ID Integer)");
 
         notes.execSQL("create table NOTE(NOTE_ID Integer primary key autoincrement, TITLE text, DESCRIPTION text," +
-                " IMAGE blob, ENCODE Integer DEFAULT 0, USER_ID Integer, FOREIGN KEY(USER_ID) REFERENCES USER(USER_ID))");
+                " IMAGE blob, ENCODE Integer DEFAULT 0, USER_ID Integer)");
 
     }
 
@@ -37,7 +36,6 @@ public class NotesOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase notes, int i, int i1) {
 
-        notes.execSQL("drop table USER");
         notes.execSQL("drop table NOTE");
 
         onCreate(notes);

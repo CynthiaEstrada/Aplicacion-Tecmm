@@ -49,12 +49,10 @@ public class NotesListAdapter extends ArrayAdapter<Note> {
         TextView textViewEncode = (TextView) v.findViewById(R.id.textViewEncode);
         TextView textViewTitle = (TextView) v.findViewById(R.id.textViewTitle);
         TextView textViewDescription = (TextView) v.findViewById(R.id.textViewDescription);
-        System.out.println("Note user id: " + note.getUserId());
         //Dependiendo del valor de encode mostramos la descripcion de la nota
         switch (note.getEncode()) {
             case 0:
                 textViewId.setText(note.getNoteId().toString());
-                textViewUserId.setText(note.getUserId().getUserId().toString());
                 textViewEncode.setText(note.getEncode().toString());
                 textViewTitle.setText(note.getTitle());
                 textViewDescription.setText(note.getDescription());
@@ -62,7 +60,6 @@ public class NotesListAdapter extends ArrayAdapter<Note> {
 
             case 1:
                 textViewId.setText(note.getNoteId().toString());
-                textViewUserId.setText(note.getUserId().getUserId().toString());
                 textViewEncode.setText(note.getEncode().toString());
                 textViewTitle.setText(note.getTitle());
                 break;

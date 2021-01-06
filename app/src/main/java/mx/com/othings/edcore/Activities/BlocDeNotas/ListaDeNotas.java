@@ -21,6 +21,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -30,6 +32,7 @@ import mx.com.othings.edcore.Activities.BlocDeNotas.adapters.NotesListAdapter;
 import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.Note;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
+import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.R;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -51,6 +54,9 @@ public class ListaDeNotas extends AppCompatActivity {
     public static boolean isPermission;             //Variable que controla los permisos
     public static boolean isUpdate;                 //Variable que controla si hacemos un update o insert en el EditTextActivity
 
+    Bundle bundle, args;
+    String texto;
+
     /**
      * Se crea la interfaz del activity
      */
@@ -58,6 +64,11 @@ public class ListaDeNotas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_de_notas);
+
+        bundle = getIntent().getExtras();
+        texto = bundle.getString("a");
+        Gson gson = new Gson();
+        Student student = gson.fromJson(texto, Student.class);
 
         init();
 
@@ -203,7 +214,13 @@ public class ListaDeNotas extends AppCompatActivity {
      *Llamamos a EditTextActivity
      */
     public void addNote(View view) {
+
+        /*Gson gson = new Gson();
+        Student student = gson.fromJson(texto, Student.class);
+        bundle.putString("a", gson.toJson(student));*/
+
         Intent intent = new Intent(ListaDeNotas.this, BlocDeNotas.class);
+        //intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -213,7 +230,7 @@ public class ListaDeNotas extends AppCompatActivity {
     private void showAlertDialog(final Note note) {
         switch (note.getEncode()) {
             case 0:
-                CharSequence[] options = {"Ver o Modificar", "Ocultar contenido", "Eliminar"};
+                CharSequence[] options = {"Ver o Modificar", "Eliminar"};
                 defaultAlertDialog(note, options);
                 break;
         }
@@ -230,27 +247,11 @@ public class ListaDeNotas extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (options[i].equals("Ver o Modificar")) {
                     isUpdate = true;
-                    User user = componentNotes.readUser(note.getUserId().getUserId());
-                    note.setUserId(user);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("note", note);
                     Intent intent = new Intent(ListaDeNotas.this, BlocDeNotas.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                } else if (options[i].equals("Ocultar contenido")) {
-                    Note noteUpdate = componentNotes.readNote(note.getNoteId());
-                    noteUpdate.setEncode(1);
-                    if (componentNotes.updateNote(note.getNoteId(), noteUpdate) != 0) {
-                        fillListView();
-
-                        Toasty.normal(getApplicationContext(), "Contenido ocultado", Toast.LENGTH_SHORT).show();
-                    }
-                } else if (options[i].equals("Mostrar contenido")) {
-                    Note noteUpdate = componentNotes.readNote(note.getNoteId());
-                    noteUpdate.setEncode(0);
-                    if (componentNotes.updateNote(note.getNoteId(), noteUpdate) != 0) {
-                        fillListView();
-                    }
                 } else if (options[i].equals("Eliminar")) {
                     if (componentNotes.deleteNote(note.getNoteId()) != 0) {
                         fillListView();
