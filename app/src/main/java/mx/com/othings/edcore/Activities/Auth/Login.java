@@ -102,7 +102,7 @@ public class Login extends AppCompatActivity {
                         try {
                             JSONArray array = new JSONArray(response);
                             JSONObject cali = array.getJSONObject(0);
-                            for(int i=0; i<=array.length(); i++){
+                            for(int i=0; i<array.length(); i++){
 
 
 
