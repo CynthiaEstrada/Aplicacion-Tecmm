@@ -27,6 +27,8 @@ import mx.com.othings.edcore.Activities.BlocDeNotas.ListaDeNotas;
 import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
 import mx.com.othings.edcore.Activities.BlocDeNotas.pojos.User;
 import mx.com.othings.edcore.Activities.ChatGeneral.ChatGeneral;
+import mx.com.othings.edcore.Activities.ChatGeneral.MenuChat;
+import mx.com.othings.edcore.Activities.ChatGeneral.VerEstudiantes;
 import mx.com.othings.edcore.Activities.EventosFacebook.EventosActivity;
 import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.Lib.Utilities;
@@ -60,7 +62,7 @@ public class PanelControlFragment extends Fragment {
                 System.out.println("antes del texto");
                 final Bundle bundle = new Bundle();
                 String texto = getArguments().getString("a");
-                Intent intent = new Intent(getActivity(), ChatGeneral.class);
+                Intent intent = new Intent(getActivity(), VerEstudiantes.class);
                 System.out.println(texto);
                 bundle.putString("a", texto);
                 intent.putExtras(bundle);

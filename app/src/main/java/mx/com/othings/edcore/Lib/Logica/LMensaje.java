@@ -1,5 +1,9 @@
 package mx.com.othings.edcore.Lib.Logica;
 
+import com.fasterxml.jackson.core.PrettyPrinter;
+
+import org.ocpsoft.prettytime.PrettyTime;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -48,7 +52,11 @@ public class LMensaje {
     public String fechaDeCreacionDelMensaje(){
 
         Date date = new Date(getCreateTimestampLong());
+        PrettyTime prettyTime = new PrettyTime(new Date(), Locale.getDefault());
+        return prettyTime.format(date);
+        /*Date date = new Date(getCreateTimestampLong());
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault());
-        return sdf.format(date);
+        return sdf.format(date);*/
+
     }
 }

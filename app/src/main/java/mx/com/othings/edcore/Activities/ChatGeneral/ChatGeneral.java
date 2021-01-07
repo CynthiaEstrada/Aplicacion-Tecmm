@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,14 +36,19 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import mx.com.othings.edcore.Activities.Auth.Login;
 import mx.com.othings.edcore.Adapters.Mensajes.MensajeriaAdaptador;
 import mx.com.othings.edcore.Lib.Firebase.Mensajeria.Mensaje;
 import mx.com.othings.edcore.Lib.Logica.LMensaje;
+import mx.com.othings.edcore.Lib.Logica.LStudent;
 import mx.com.othings.edcore.Lib.Models.Student;
+import mx.com.othings.edcore.Persistencia.MensajeriaDAO;
 import mx.com.othings.edcore.Persistencia.UsuarioDAO;
 import mx.com.othings.edcore.R;
-
+import mx.com.othings.edcore.Utilidades.Constantes;
 
 
 public class ChatGeneral extends AppCompatActivity {
@@ -56,8 +62,6 @@ public class ChatGeneral extends AppCompatActivity {
 
     private MensajeriaAdaptador adapter;
 
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
     private FirebaseStorage storage;
     private StorageReference storageReference;
     private static final int PHOTO_SEND = 1;
@@ -67,6 +71,8 @@ public class ChatGeneral extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private String NOMBRE_USUARIO;
+
+    private String KEY_RECEPTOR;
 
     Bundle args = new Bundle();
 
@@ -78,14 +84,19 @@ public class ChatGeneral extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_chat_general);
 
-        Bundle bundle = getIntent().getExtras();
+      /*  Bundle bundle = getIntent().getExtras();
         String texto = bundle.getString("a");
 
         Gson gson = new Gson();
         Student student = gson.fromJson(texto, Student.class);
-
-        Login login = new Login();
-        controlNumber = student.getStudent_id() + "";
+*/
+        Bundle bundleMensaje = getIntent().getExtras();
+        if(bundleMensaje != null){
+            KEY_RECEPTOR = bundleMensaje.getString("key_receptor");
+        }else{
+            finish();
+        }
+        //controlNumber = student.getStudent_id() + "";
         System.out.println(controlNumber);
 
         fotoPerfil = (CircularImageView) findViewById(R.id.fotoPerfil);
@@ -97,8 +108,6 @@ public class ChatGeneral extends AppCompatActivity {
         btnEnviar = (Button) findViewById(R.id.btnEnviar);
         btnEnviarFoto = (ImageButton) findViewById(R.id.btnEnviarFoto);
 
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("Chat"); //Sala de Chat(Nombre)
         storage = FirebaseStorage.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
@@ -115,12 +124,12 @@ public class ChatGeneral extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String mensajeEnviar= txtMensaje.getText().toString();
-                if(mensajeEnviar.isEmpty()){
+                if(!mensajeEnviar.isEmpty()){
                     Mensaje mensaje = new Mensaje();
                     mensaje.setMensaje(mensajeEnviar);
                     mensaje.setContieneFoto(false);
                     mensaje.setKeyEmisor(UsuarioDAO.getInstance().getKeyUsusario());
-                    databaseReference.push().setValue(mensaje);
+                    MensajeriaDAO.getInstance().nuevoMensaje(UsuarioDAO.getInstance().getKeyUsusario(), KEY_RECEPTOR, mensaje);
                     txtMensaje.setText("");
                 }
 
@@ -156,12 +165,39 @@ public class ChatGeneral extends AppCompatActivity {
             }
         });
 
-        databaseReference.addChildEventListener(new ChildEventListener() {
+        FirebaseDatabase.
+                getInstance().
+                getReference(Constantes.NODO_MENSAJES).
+                child(UsuarioDAO.getInstance().getKeyUsusario()).
+                child(KEY_RECEPTOR).addChildEventListener(new ChildEventListener() {
+
+            //Trar informacion de firebase y guardarla en una lista temporal
+            Map<String, LStudent> mapUsuariosTemporales = new HashMap<>();
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Mensaje mensaje = snapshot.getValue(Mensaje.class);
-                LMensaje lMensaje = new LMensaje(snapshot.getKey(), mensaje);
-                adapter.addMensajes(lMensaje);
+                final Mensaje mensaje = snapshot.getValue(Mensaje.class);
+                final LMensaje lMensaje = new LMensaje(snapshot.getKey(), mensaje);
+                final int posicion = adapter.addMensajes(lMensaje);
+
+                if(mapUsuariosTemporales.get(mensaje.getKeyEmisor()) != null){
+                    lMensaje.setlStudent(mapUsuariosTemporales.get(mensaje.getKeyEmisor()));
+                    adapter.actualizarMensaje(posicion, lMensaje);
+                }else{
+                    UsuarioDAO.getInstance().obtenerInformacionDeUsuarioPorLlave(mensaje.getKeyEmisor(), new UsuarioDAO.IDevolverUsuario() {
+                        @Override
+                        public void devolverUsuario(LStudent lStudent) {
+                            mapUsuariosTemporales.put(mensaje.getKeyEmisor(), lStudent);
+                            lMensaje.setlStudent(lStudent);
+                            adapter.actualizarMensaje(posicion, lMensaje);
+                        }
+
+                        @Override
+                        public void devolverError(String error) {
+                            Toast.makeText(ChatGeneral.this, "Error: " + error, Toast.LENGTH_SHORT);
+
+                        }
+                    });
+                }
             }
 
             @Override
@@ -212,7 +248,7 @@ public class ChatGeneral extends AppCompatActivity {
                             mensaje.setUrlFoto(uri.toString());
                             mensaje.setContieneFoto(true);
                             mensaje.setKeyEmisor(UsuarioDAO.getInstance().getKeyUsusario());
-                            databaseReference.push().setValue(mensaje);
+                            MensajeriaDAO.getInstance().nuevoMensaje(UsuarioDAO.getInstance().getKeyUsusario(), KEY_RECEPTOR, mensaje);
                         }
                     });
 
@@ -244,7 +280,7 @@ public class ChatGeneral extends AppCompatActivity {
 
     }
 
-    @Override
+   /* @Override
     protected void onPostResume() {
         super.onPostResume();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -269,5 +305,5 @@ public class ChatGeneral extends AppCompatActivity {
         }else{
 
         }
-    }
+    }*/
 }
