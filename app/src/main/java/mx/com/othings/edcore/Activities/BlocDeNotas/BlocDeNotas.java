@@ -241,6 +241,7 @@ public class BlocDeNotas extends AppCompatActivity {
         Intent intent = new Intent(BlocDeNotas.this, ListaDeNotas.class);
         startActivity(intent);
         finish();
+
     }
 
     /*

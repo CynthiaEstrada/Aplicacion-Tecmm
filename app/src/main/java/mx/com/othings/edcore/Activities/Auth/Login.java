@@ -1,6 +1,7 @@
 package mx.com.othings.edcore.Activities.Auth;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 
 import com.android.volley.Request;
@@ -51,6 +52,7 @@ import mx.com.othings.edcore.Lib.Configurations.StudentConfigurations;
 import mx.com.othings.edcore.Lib.Models.Califications.SubjectCalification;
 import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.Lib.Service;
+import mx.com.othings.edcore.Persistencia.UsuarioDAO;
 import mx.com.othings.edcore.R;
 import mx.com.othings.jwtreader2.JWT.JWT;
 
@@ -69,6 +71,7 @@ public class Login extends AppCompatActivity {
 
     private Student student;
     private SubjectCalification subject;
+    private Uri fotoDePerfilUri;
 
 
     @Override
@@ -78,7 +81,7 @@ public class Login extends AppCompatActivity {
 
         registration_tag_input = findViewById(R.id.registration_tag);
         password_input = findViewById(R.id.password);
-        keep_me_authneticated_check_box = findViewById(R.id.checkBox);
+        //keep_me_authneticated_check_box = findViewById(R.id.checkBox);
         login_btn = findViewById(R.id.login_btn);
         loader_animation = findViewById(R.id.loader_animation);
         //oauth = new OAuthAuthentication(this);
@@ -133,7 +136,6 @@ public class Login extends AppCompatActivity {
                                         jsonRespuesta.getString("Password"), jsonRespuesta.getString("Carrera"),
                                         jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"));
                                 bundle.putString("a", gson.toJson(student));
-                                FirebaseCrearUsusario();
                                 Intent intent = new Intent(Login.this, ControlPanel.class);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
@@ -204,11 +206,13 @@ public class Login extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Intent intent = new Intent(Login.this, CheckPermisions.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            System.out.println("Nombre de estudiante: " + student.getName());
+                            FirebaseCrearUsusario(student);
                             Gson gson = new Gson();
                             bundle.putString("a", gson.toJson(student));
+                            Intent intent = new Intent(Login.this, CheckPermisions.class);
                             intent.putExtras(bundle);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             // service.sdb().saveUser(new User(registration_tag,password));*/
                                           /*  FirebaseUser currentUser = mAuth.getCurrentUser();
                                             DatabaseReference reference = dataBase.getReference("Usuarios/" + currentUser.getUid());
@@ -270,26 +274,29 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public String getControlNumber () {
-        return controlNumber;
-    }
 
-    public void setControlNumber (String controlNumber){
-        this.controlNumber = controlNumber;
-    }
+    private void FirebaseCrearUsusario(final Student studentFirebase){
 
-
-    private void FirebaseCrearUsusario(){
+        System.out.println("Studen firebase: " + studentFirebase.getName());
 
         mAuth.createUserWithEmailAndPassword(student.getEmail(), String.valueOf(student.getStudent_id()))
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            /*fotoDePerfilUri = Uri.parse(student.getPerfil_photo());
+                            UsuarioDAO.getInstance().subirFotoUri(fotoDePerfilUri, new UsuarioDAO.IDevolverURLDeFoto() {
+                                @Override
+                                public void devolverUrlString(String url) {
+                                }
+                            });*/
                             // Sign in success, update UI with the signed-in user's information
-
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                            DatabaseReference reference = dataBase.getReference("Usuarios/" + currentUser.getUid());
+                            reference.setValue(studentFirebase);
+                            System.out.println("Se creo con exito el usuario");
                         } else {
-
+                            System.out.println("No se creo con exito el usuario");
                         }
 
                     }

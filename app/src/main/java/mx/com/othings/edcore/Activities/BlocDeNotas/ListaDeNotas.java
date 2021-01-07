@@ -205,6 +205,7 @@ public class ListaDeNotas extends AppCompatActivity {
 
         Intent intent = new Intent(ListaDeNotas.this, BlocDeNotas.class);
         startActivity(intent);
+        finish();
     }
 
     /*
@@ -235,6 +236,7 @@ public class ListaDeNotas extends AppCompatActivity {
                     Intent intent = new Intent(ListaDeNotas.this, BlocDeNotas.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    finish();
                 } else if (options[i].equals("Eliminar")) {
                     if (componentNotes.deleteNote(note.getNoteId()) != 0) {
                         fillListView();

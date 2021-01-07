@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import mx.com.othings.edcore.Holder.MensajeriaHolder;
 import mx.com.othings.edcore.Lib.Logica.LMensaje;
+import mx.com.othings.edcore.Lib.Logica.LStudent;
+import mx.com.othings.edcore.Persistencia.UsuarioDAO;
 import mx.com.othings.edcore.R;
 
 public class MensajeriaAdaptador extends RecyclerView.Adapter<MensajeriaHolder> {
@@ -27,27 +27,42 @@ public class MensajeriaAdaptador extends RecyclerView.Adapter<MensajeriaHolder> 
         this.c = c;
     }
 
-    public void addMensajes(LMensaje lMensaje){
+    public int addMensajes(LMensaje lMensaje){
 
         listMensaje.add(lMensaje);
-
+        int posicion = listMensaje.size()-1;
         notifyItemInserted(listMensaje.size());
+        return posicion;
+    }
+
+    public void actualizarMensaje(int posicion, LMensaje lMensaje){
+        listMensaje.set(posicion, lMensaje);
+        notifyItemChanged(posicion);
     }
 
     @NonNull
     @Override
     public MensajeriaHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(c).inflate(R.layout.card_view_mensajes, parent, false);
-
-        return new MensajeriaHolder(v);
+        View view;
+        if (viewType == 1){
+            view = LayoutInflater.from(c).inflate(R.layout.card_view_mensajes_emisor, parent, false);
+        }else {
+            view = LayoutInflater.from(c).inflate(R.layout.card_view_mensajes_receptor, parent, false);
+        }
+        return new MensajeriaHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MensajeriaHolder holder, int position) {
 
         LMensaje lMensaje = listMensaje.get(position);
+        LStudent lStudent = lMensaje.getlStudent();
 
-        holder.getNombre().setText(lMensaje.getlStudent().getEstudiante().getName());
+        if(lStudent != null){
+            holder.getNombre().setText(lStudent.getEstudiante().getName());
+            Glide.with(c).load(lStudent.getEstudiante().getPerfil_photo()).into(holder.getFotoMensajePerfil());
+
+        }
         holder.getMensaje().setText(lMensaje.getMensaje().getMensaje());
         if(lMensaje.getMensaje().isContieneFoto()){
 
@@ -61,7 +76,6 @@ public class MensajeriaAdaptador extends RecyclerView.Adapter<MensajeriaHolder> 
 
         }
 
-        Glide.with(c).load(lMensaje.getlStudent().getEstudiante().getPerfil_photo()).into(holder.getFotoMensajePerfil());
 
         holder.getHora().setText(lMensaje.fechaDeCreacionDelMensaje());
     }
@@ -69,5 +83,20 @@ public class MensajeriaAdaptador extends RecyclerView.Adapter<MensajeriaHolder> 
     @Override
     public int getItemCount() {
         return listMensaje.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(listMensaje.get(position).getlStudent() != null){
+            if(listMensaje.get(position).getlStudent().getKey().equals(UsuarioDAO.getInstance().getKeyUsusario())){
+                return 1;
+            }else {
+                return -1;
+            }
+        }else{
+            return -1;
+        }
+
+        //return super.getItemViewType(position);
     }
 }

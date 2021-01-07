@@ -47,7 +47,7 @@ public class ControlPanel extends TemplateActivity
         super.onCreate(savedInstanceState);
 
         componentNotes = new ComponentNotes(this);
-        componentNotes.readUsers();
+//        componentNotes.readUsers();
 
         Bundle bundle = getIntent().getExtras();
         String texto = bundle.getString("a");
@@ -59,8 +59,8 @@ public class ControlPanel extends TemplateActivity
         Gson gson = new Gson();
         Student student = gson.fromJson(texto, Student.class);
 
-        IniciarNotas(student);
-        userLogin();
+//        IniciarNotas(student);
+        //userLogin();
 
         setContentView(R.layout.activity_control_panel);
         Toolbar toolbar = findViewById(R.id.toolbar);
