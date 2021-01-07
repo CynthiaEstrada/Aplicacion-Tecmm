@@ -34,6 +34,9 @@ public class CheckPermisions extends TemplateActivity implements StepperLayout.S
 
     Bundle args = new Bundle();
 
+
+    //Quitar permiso de localizazion
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

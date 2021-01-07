@@ -13,13 +13,15 @@ import com.google.gson.Gson;
 
 import mx.com.othings.edcore.Activities.BlocDeNotas.ListaDeNotas;
 import mx.com.othings.edcore.Activities.ChatGeneral.ChatGeneral;
+import mx.com.othings.edcore.ActivityEspeciales;
 import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.R;
+import mx.com.othings.edcore.activity_especialidad;
 
 
 public class InscripcionFragment extends Fragment {
 
-    CardView agendarMateriasCard, DescargarKardexCard;
+    CardView agendarMateriasCard, DescargarKardexCard, escogerEspecialidadCard, especialesCard;
     Student student;
 
 
@@ -45,6 +47,32 @@ public class InscripcionFragment extends Fragment {
                 final Bundle bundle = new Bundle();
                 String texto = getArguments().getString("a");
                 Intent intent = new Intent(getActivity(), ChatGeneral.class); //Cambiar a clase donde esta la activity de agendar materias
+                bundle.putString("a", texto);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        escogerEspecialidadCard = view.findViewById(R.id.cardEspecialidad);
+        escogerEspecialidadCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Bundle bundle = new Bundle();
+                String texto = getArguments().getString("a");
+                Intent intent = new Intent(getActivity(), activity_especialidad.class); //Cambiar a clase donde esta la activity de agendar materias
+                bundle.putString("a", texto);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        especialesCard = view.findViewById(R.id.cardEspeciales);
+        especialesCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Bundle bundle = new Bundle();
+                String texto = getArguments().getString("a");
+                Intent intent = new Intent(getActivity(), ActivityEspeciales.class); //Cambiar a clase donde esta la activity de agendar materias
                 bundle.putString("a", texto);
                 intent.putExtras(bundle);
                 startActivity(intent);

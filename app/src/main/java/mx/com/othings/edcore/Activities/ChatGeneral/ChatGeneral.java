@@ -146,7 +146,7 @@ public class ChatGeneral extends AppCompatActivity {
             }
         });
 
-        fotoPerfil.setOnClickListener(new View.OnClickListener() {
+        /*fotoPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_GET_CONTENT);
@@ -155,7 +155,7 @@ public class ChatGeneral extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(i, "Selecciona un archivo"), PHOTO_PERFIL);
 
             }
-        });
+        });*/
 
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
@@ -170,6 +170,7 @@ public class ChatGeneral extends AppCompatActivity {
                 getReference(Constantes.NODO_MENSAJES).
                 child(UsuarioDAO.getInstance().getKeyUsusario()).
                 child(KEY_RECEPTOR).addChildEventListener(new ChildEventListener() {
+
 
             //Trar informacion de firebase y guardarla en una lista temporal
             Map<String, LStudent> mapUsuariosTemporales = new HashMap<>();
@@ -189,6 +190,7 @@ public class ChatGeneral extends AppCompatActivity {
                             mapUsuariosTemporales.put(mensaje.getKeyEmisor(), lStudent);
                             lMensaje.setlStudent(lStudent);
                             adapter.actualizarMensaje(posicion, lMensaje);
+                            //fotoPerfil =
                         }
 
                         @Override

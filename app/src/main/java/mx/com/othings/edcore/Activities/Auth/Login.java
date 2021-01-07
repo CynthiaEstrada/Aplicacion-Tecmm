@@ -107,6 +107,37 @@ public class Login extends AppCompatActivity {
                 final String registration_tag = registration_tag_input.getText().toString();
                 final String password = password_input.getText().toString();
 
+                Response.Listener<String> res = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonRespuesta = new JSONObject(response);
+                            boolean ok = jsonRespuesta.getBoolean("success");
+                            if (ok == true) {
+                                student = new Student(jsonRespuesta.getInt("IdAlumno"),
+                                        jsonRespuesta.getString("Nombre"), jsonRespuesta.getString("ApellidoPaterno"),
+                                        jsonRespuesta.getString("ApellidoMaterno"), jsonRespuesta.getString("FechaNacimiento"),
+                                        jsonRespuesta.getString("Sexo"), jsonRespuesta.getString("Direccion"),
+                                        jsonRespuesta.getString("Telefono"), jsonRespuesta.getString("Email"),
+                                        jsonRespuesta.getString("Password"), jsonRespuesta.getString("Carrera"),
+                                        jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"));
+                                bundle.putString("a", gson.toJson(student));
+                                FirebaseSingin(student.getEmail(), String.valueOf(student.getStudent_id()));
+                                Intent intent = new Intent(Login.this, ControlPanel.class);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            } else {
+                                Toasty.error(Login.this, "error al intentar acceder", Toast.LENGTH_LONG, true).show();
+                            }
+                        } catch (JSONException e) {
+                            e.getMessage();
+                        }
+                    }
+                };
+                LoginRequest r = new LoginRequest(registration_tag, password, res);
+                RequestQueue cola = Volley.newRequestQueue(Login.this);
+                cola.add(r);
+
 
                 Response.Listener<String> res2 = new Response.Listener<String>() {
                     @Override
@@ -160,36 +191,6 @@ public class Login extends AppCompatActivity {
                 RequestQueue cola2 = Volley.newRequestQueue(Login.this);
                 cola2.add(cal);
 
-                Response.Listener<String> res = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonRespuesta = new JSONObject(response);
-                            boolean ok = jsonRespuesta.getBoolean("success");
-                            if (ok == true) {
-                                student = new Student(jsonRespuesta.getInt("IdAlumno"),
-                                        jsonRespuesta.getString("Nombre"), jsonRespuesta.getString("ApellidoPaterno"),
-                                        jsonRespuesta.getString("ApellidoMaterno"), jsonRespuesta.getString("FechaNacimiento"),
-                                        jsonRespuesta.getString("Sexo"), jsonRespuesta.getString("Direccion"),
-                                        jsonRespuesta.getString("Telefono"), jsonRespuesta.getString("Email"),
-                                        jsonRespuesta.getString("Password"), jsonRespuesta.getString("Carrera"),
-                                        jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"));
-                                bundle.putString("a", gson.toJson(student));
-                                FirebaseSingin(student.getEmail(), String.valueOf(student.getStudent_id()));
-                                Intent intent = new Intent(Login.this, ControlPanel.class);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-                            } else {
-                                Toasty.error(Login.this, "error al intentar acceder", Toast.LENGTH_LONG, true).show();
-                            }
-                        } catch (JSONException e) {
-                            e.getMessage();
-                        }
-                    }
-                };
-                LoginRequest r = new LoginRequest(registration_tag, password, res);
-                RequestQueue cola = Volley.newRequestQueue(Login.this);
-                cola.add(r);
 
                 /*
                 mAuth.signInWithEmailAndPassword("za15011331@zapopan.tecmm.edu.mx", "15011331")

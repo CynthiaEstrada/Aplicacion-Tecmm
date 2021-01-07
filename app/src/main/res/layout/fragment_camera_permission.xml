@@ -34,7 +34,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:text="Por ultimo necesitamos permisos para que la aplicacion pueda acceder a la camara, esto con el fin de que puedas hacer uso de la biblioteca virtual, poder compartir y descargar libros mediante el lector de codigos QR que viene integrado en la aplicacion."
+            android:text="Por ultimo necesitamos permisos para que la aplicacion pueda acceder a la camara, esto con el fin de que puedas hacer uso de las notas."
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
