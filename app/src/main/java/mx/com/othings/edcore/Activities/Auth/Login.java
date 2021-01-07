@@ -136,6 +136,7 @@ public class Login extends AppCompatActivity {
                                         jsonRespuesta.getString("Password"), jsonRespuesta.getString("Carrera"),
                                         jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"));
                                 bundle.putString("a", gson.toJson(student));
+                                FirebaseSingin(student.getEmail(), String.valueOf(student.getStudent_id()));
                                 Intent intent = new Intent(Login.this, ControlPanel.class);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
@@ -297,6 +298,23 @@ public class Login extends AppCompatActivity {
                             System.out.println("Se creo con exito el usuario");
                         } else {
                             System.out.println("No se creo con exito el usuario");
+                        }
+
+                    }
+                });
+    }
+
+    public void FirebaseSingin(String correo, String contraseña){
+        mAuth.signInWithEmailAndPassword(correo, contraseña)
+                .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(Login.this, "Se logeo correctamente.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(Login.this, "Error, credenciales incorrectas.", Toast.LENGTH_SHORT).show();
                         }
 
                     }

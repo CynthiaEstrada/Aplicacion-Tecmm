@@ -10,38 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03659c9d-ad6f-45fd-854a-fa934dd38b22" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_kbeanie_multipicker_1_5_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ocpsoft_prettytime_prettytime_4_0_4_Final_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/ChatGeneral/MenuChat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/ChatGeneral/VerEstudiantes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Holder/UsusarioViewHolder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Persistencia/MensajeriaDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/acticity_menu_chat.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ver_estudiantes.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/card_view_mensajes_emisor.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/card_view_mensajes_receptor.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/card_view_usuario.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_common_2_1_0_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_runtime_2_1_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_viewmodel_2_1_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/Auth/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/Auth/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/BlocDeNotas.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/BlocDeNotas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/ListaDeNotas.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/BlocDeNotas/ListaDeNotas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/ChatGeneral/ChatGeneral.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/ChatGeneral/ChatGeneral.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/ControlPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Activities/ControlPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Adapters/Mensajes/MensajeriaAdaptador.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Adapters/Mensajes/MensajeriaAdaptador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Fragments/main_left_menu/PanelControlFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Fragments/main_left_menu/PanelControlFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Lib/Logica/LMensaje.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Lib/Logica/LMensaje.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Persistencia/UsuarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Persistencia/UsuarioDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Utilidades/Constantes.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mx/com/othings/edcore/Utilidades/Constantes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_chat_general.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_chat_general.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/card_view_mensajes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/card_view_usuario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/card_view_usuario.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -454,22 +426,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1609980831222" />
-    <state width="639" height="171" key="GridCell.Tab.0.bottom" timestamp="1610005663913">
+    <state width="1323" height="168" key="GridCell.Tab.0.bottom" timestamp="1610027390129">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="639" height="171" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1610005663913" />
-    <state width="639" height="171" key="GridCell.Tab.0.center" timestamp="1610005663913">
+    <state width="1323" height="168" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1610027390129" />
+    <state width="1323" height="168" key="GridCell.Tab.0.center" timestamp="1610027390129">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="639" height="171" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1610005663913" />
-    <state width="639" height="171" key="GridCell.Tab.0.left" timestamp="1610005663913">
+    <state width="1323" height="168" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1610027390129" />
+    <state width="1323" height="168" key="GridCell.Tab.0.left" timestamp="1610027390129">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="639" height="171" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1610005663913" />
-    <state width="639" height="171" key="GridCell.Tab.0.right" timestamp="1610005663913">
+    <state width="1323" height="168" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1610027390129" />
+    <state width="1323" height="168" key="GridCell.Tab.0.right" timestamp="1610027390129">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="639" height="171" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1610005663913" />
+    <state width="1323" height="168" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1610027390129" />
     <state width="639" height="222" key="GridCell.Tab.1.bottom" timestamp="1609878338432">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
