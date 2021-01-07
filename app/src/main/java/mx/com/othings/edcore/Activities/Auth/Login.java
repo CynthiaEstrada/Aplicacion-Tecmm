@@ -36,8 +36,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import mx.com.othings.edcore.Activities.BlocDeNotas.componentBd.ComponentNotes;
@@ -48,6 +52,8 @@ import mx.com.othings.edcore.App;
 import mx.com.othings.edcore.Lib.Auth.OAuthAuthentication;
 import mx.com.othings.edcore.Lib.Auth.OAuthListener;
 import mx.com.othings.edcore.Lib.Configurations.StudentConfigurations;
+import mx.com.othings.edcore.Lib.Models.Califications.Score;
+import mx.com.othings.edcore.Lib.Models.Califications.StudentNotes;
 import mx.com.othings.edcore.Lib.Models.Califications.SubjectCalification;
 import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.Lib.Service;
@@ -68,8 +74,8 @@ public class Login extends AppCompatActivity {
     private static String controlNumber;
 
     private Student student;
-    private SubjectCalification subject;
-
+    private StudentNotes studentNotes;
+    double totalSemester = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,19 +102,50 @@ public class Login extends AppCompatActivity {
                 final String registration_tag = registration_tag_input.getText().toString();
                 final String password = password_input.getText().toString();
 
+
                 Response.Listener<String> res2 = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONArray array = new JSONArray(response);
-                            JSONObject cali = array.getJSONObject(0);
-                            for(int i=0; i<array.length(); i++){
+                            List<SubjectCalification> subjectCalificationList = new ArrayList<>();
+                            List<Double> parcial = new ArrayList<>();
 
-
-
+                            for(int i=0; i<array.length(); i++) {
+                                JSONObject j = array.getJSONObject(i);
+                                parcial.add(j.getDouble("CalificacionParcial"));
                             }
-                            subject = new SubjectCalification(cali.getString("Nombre"), cali.getInt("CalificacionParcial"));
-                            bundle.putString("b", gson.toJson(subject));
+
+                            int totalSubject = array.length() / 3;
+                            int nextSubject = 0;
+                            for(int i=0; i<totalSubject; i++){
+
+                                JSONObject cali = array.getJSONObject(nextSubject);
+
+                                String class_name = cali.getString("Nombre");
+                                int list_number = 1;
+                                List<Score> s = new ArrayList<>();
+
+                                s.add(new Score(1,parcial.get(nextSubject),"CP"));
+                                s.add(new Score(2,parcial.get(nextSubject+1),"CP"));
+                                s.add(new Score(3,parcial.get(nextSubject+2),"CP"));
+
+                                double sum = parcial.get(nextSubject) + parcial.get(nextSubject+1) + parcial.get(nextSubject+2);
+                                double average = (float) sum / 3;
+
+                                SubjectCalification subjectCalification = new SubjectCalification(class_name,list_number,s,average);
+                                subjectCalificationList.add(subjectCalification);
+
+                                nextSubject = nextSubject + 3;
+                                totalSemester = (double) totalSemester + (double) average;
+                            }
+                            double semester_average = (double) totalSemester / 2;
+                            double semester_percentage = 70;
+                            int subjects_cursed = 10;
+
+                            studentNotes = new StudentNotes(subjectCalificationList,semester_average,semester_percentage,subjects_cursed);
+
+                            bundle.putString("b", gson.toJson(studentNotes));
                         } catch (JSONException e) {
                             e.getMessage();
                         }

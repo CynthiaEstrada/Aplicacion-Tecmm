@@ -19,6 +19,8 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.google.gson.Gson;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import java.text.DecimalFormat;
+
 import es.dmoral.toasty.Toasty;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -60,7 +62,7 @@ public class CalificationsFragment extends Fragment {
 
         String texto = getArguments().getString("b");
         Gson gson = new Gson();
-        SubjectCalification subject = gson.fromJson(texto, SubjectCalification.class);
+        StudentNotes studentNotes = gson.fromJson(texto, StudentNotes.class);
 
         final RecyclerView recyclerView = view.findViewById(R.id.subject_list);
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -78,15 +80,13 @@ public class CalificationsFragment extends Fragment {
 
         loader.setVisibility(LinearLayout.INVISIBLE);
         CalificationsFragment.this.studentNotes = studentNotes;
-        average.setProgress((float) 91.2);
-        average_title.setText("Promedio General");
-        semester_percentage.setProgress((float)82);
-        semester_percetage_title.setText("Promedio Semestre");
+        average.setProgress((float) studentNotes.getSemester_average());
+        average_title.setText(String.valueOf(studentNotes.getSemester_average()));
+        semester_percentage.setProgress((float)100);
+        semester_percetage_title.setText("%100");
         subjects_cursed.setProgress((float) 2 );
-        subjects_cursed_title.setText("Total materias cursadas");
+        subjects_cursed_title.setText("2");
 
-        System.out.println("Subject: "+ subject.getSubject()+" Promedio: "+ subject.getAverage());
-/*
         RecyclerView.Adapter adapter = new SubjectListAdapter(studentNotes.getSubjectCalificationList(), R.layout.subject_item, new SubjectListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -96,7 +96,6 @@ public class CalificationsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(adapter);
         recyclerView.setAdapter(scaleInAnimationAdapter);
-*/
         return view;
     }
 

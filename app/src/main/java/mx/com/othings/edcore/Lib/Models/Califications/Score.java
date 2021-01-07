@@ -7,7 +7,7 @@ public class Score {
     private String score_type;
     private String score_status;
 
-    public Score(int unit_number, double score, String score_type, String score_status) {
+    public Score(int unit_number, double score, String score_status) {
         this.unit_number = unit_number;
         this.score = score;
         this.score_type = score_type;

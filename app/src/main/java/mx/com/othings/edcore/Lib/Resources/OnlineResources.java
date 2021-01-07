@@ -76,6 +76,7 @@ public class OnlineResources {
                     String response = new String(responseBody);
                     JsonParser parser = new JsonParser();
                     JsonArray json =  parser.parse(response).getAsJsonArray();
+                    /*
                     List<SubjectCalification> subjectCalificationList = new ArrayList<>();
 
                     for( int i = 0 ; i < json.size() - 1 ; i ++){
@@ -103,8 +104,8 @@ public class OnlineResources {
                     int subjects_cursed = stadistics.get("subjects_cursed").getAsInt();
 
                     StudentNotes studentNotes = new StudentNotes(subjectCalificationList,semester_average,semester_percentage,subjects_cursed);
-
-                    onl.onResponse(studentNotes);
+*/
+                   // onl.onResponse(studentNotes);
                 }
 
             }
