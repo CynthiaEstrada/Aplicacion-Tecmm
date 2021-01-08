@@ -32,4 +32,4 @@
         android:text="Aceptar"
         android:layout_gravity="center"/>
 
-</LinearLayout>
+    </LinearLayout>

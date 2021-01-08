@@ -13,15 +13,18 @@ import com.google.gson.Gson;
 
 import mx.com.othings.edcore.Activities.BlocDeNotas.ListaDeNotas;
 import mx.com.othings.edcore.Activities.ChatGeneral.ChatGeneral;
-import mx.com.othings.edcore.ActivityEspeciales;
+import mx.com.othings.edcore.Activities.Inscripcion.ActivityEspeciales;
+import mx.com.othings.edcore.Activities.Inscripcion.ActivityMonitoreoDeGrupos;
+import mx.com.othings.edcore.Activities.Inscripcion.activity_carga_de_materias;
+import mx.com.othings.edcore.ActivityVisualizarPdf;
 import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.R;
-import mx.com.othings.edcore.activity_especialidad;
+import mx.com.othings.edcore.Activities.Inscripcion.activity_especialidad;
 
 
 public class InscripcionFragment extends Fragment {
 
-    CardView agendarMateriasCard, DescargarKardexCard, escogerEspecialidadCard, especialesCard;
+    CardView agendarMateriasCard, DescargarKardexCard, escogerEspecialidadCard, especialesCard, monitoreoDeGruposCard;
     Student student;
 
 
@@ -46,7 +49,7 @@ public class InscripcionFragment extends Fragment {
             public void onClick(View view) {
                 final Bundle bundle = new Bundle();
                 String texto = getArguments().getString("a");
-                Intent intent = new Intent(getActivity(), ChatGeneral.class); //Cambiar a clase donde esta la activity de agendar materias
+                Intent intent = new Intent(getActivity(), activity_carga_de_materias.class); //Cambiar a clase donde esta la activity de agendar materias
                 bundle.putString("a", texto);
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -79,6 +82,19 @@ public class InscripcionFragment extends Fragment {
             }
         });
 
+        monitoreoDeGruposCard = view.findViewById(R.id.cardMonitoreoDeGrupos);
+        monitoreoDeGruposCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Bundle bundle = new Bundle();
+                String texto = getArguments().getString("a");
+                Intent intent = new Intent(getActivity(), ActivityMonitoreoDeGrupos.class); //Cambiar a clase donde esta la activity de agendar materias
+                bundle.putString("a", texto);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
         DescargarKardexCard = view.findViewById(R.id.ReferenciaBancariaCard);
         DescargarKardexCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +102,7 @@ public class InscripcionFragment extends Fragment {
 
                 final Bundle bundle = new Bundle();
                 String texto = getArguments().getString("a");
-                Intent intent = new Intent(getActivity(), ListaDeNotas.class);//Cambiar a clase donde esta la activity de agendar materias
+                Intent intent = new Intent(getActivity(), ActivityVisualizarPdf.class);//Cambiar a clase donde esta la activity de agendar materias
                 bundle.putString("a", texto);
                 intent.putExtras(bundle);
                 startActivity(intent);

@@ -192,6 +192,27 @@ public class Login extends AppCompatActivity {
                 cola2.add(cal);
 
 
+                if (service.sdb().isFirstTimeUse()) {
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            System.out.println("Nombre de estudiante: " + student.getName());
+                            FirebaseCrearUsusario(student);
+                            Gson gson = new Gson();
+                            bundle.putString("a", gson.toJson(student));
+                            Intent intent = new Intent(Login.this, CheckPermisions.class);
+                            intent.putExtras(bundle);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                            startActivity(intent);
+                            //
+
+
+                        }
+                    },2000);
+
+                }
                 /*
                 mAuth.signInWithEmailAndPassword("za15011331@zapopan.tecmm.edu.mx", "15011331")
                         .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
@@ -242,30 +263,12 @@ public class Login extends AppCompatActivity {
                                     );
                                 }
                             */
-                if (service.sdb().isFirstTimeUse()) {
+                /*
 
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            System.out.println("Nombre de estudiante: " + student.getName());
-                            FirebaseCrearUsusario(student);
-                            Gson gson = new Gson();
-                            bundle.putString("a", gson.toJson(student));
-                            Intent intent = new Intent(Login.this, CheckPermisions.class);
-                            intent.putExtras(bundle);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            // service.sdb().saveUser(new User(registration_tag,password));*/
+                // service.sdb().saveUser(new User(registration_tag,password));*/
                                           /*  FirebaseUser currentUser = mAuth.getCurrentUser();
                                             DatabaseReference reference = dataBase.getReference("Usuarios/" + currentUser.getUid());
-                                            reference.setValue(student);*/
-                            startActivity(intent);
-                            //
-
-
-                        }
-                    },2000);
-
-                }  /*
+                                            reference.setValue(student);
                                 else{
 
                                     new Handler().postDelayed(new Runnable() {
@@ -344,17 +347,17 @@ public class Login extends AppCompatActivity {
                 });
     }
 
-    public void FirebaseSingin(String correo, String contraseña){
-        mAuth.signInWithEmailAndPassword(correo, contraseña)
+    public void FirebaseSingin(String correo, String contrasena){
+        mAuth.signInWithEmailAndPassword(correo, contrasena)
                 .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(Login.this, "Se logeo correctamente.", Toast.LENGTH_SHORT).show();
+                            System.out.println("Se logeo correctamente.");
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(Login.this, "Error, credenciales incorrectas.", Toast.LENGTH_SHORT).show();
+                            System.out.println("Error, credenciales incorrectas.");
                         }
 
                     }
