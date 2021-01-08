@@ -58,10 +58,10 @@ public class CheckPermisions extends TemplateActivity implements StepperLayout.S
         if( permission_list.contains(1)  ){
             permissionFragments.add(new ReadAndWriteMemory());
         }
-        if( permission_list.contains(2)){
+        /*if( permission_list.contains(2)){
             permissionFragments.add(new LocationPermission());
-        }
-        if( permission_list.contains(3)){
+        }*/
+        if( permission_list.contains(2)){
             permissionFragments.add(new CameraPermission());
         }
 
@@ -93,7 +93,7 @@ public class CheckPermisions extends TemplateActivity implements StepperLayout.S
 
                 break;
             }
-            case 2:{ // LOCATION PERMISSION
+            /*case 2:{ // LOCATION PERMISSION
 
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -107,8 +107,8 @@ public class CheckPermisions extends TemplateActivity implements StepperLayout.S
                 }
 
                 break;
-            }
-            case 3:{ // CAMERA PERMISSION
+            }*/
+            case 2:{ // CAMERA PERMISSION
 
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -167,11 +167,11 @@ public class CheckPermisions extends TemplateActivity implements StepperLayout.S
             if( errors.contains(1) ){
                 Toasty.error(this,"No podemos continuar porque no diste permisos de almacenamiento", Toast.LENGTH_LONG,true).show();
 
-            }
+            }/*
             else if( errors.contains(2) ){
                 Toasty.error(this,"No podemos continuar porque no diste permisos ubicacion", Toast.LENGTH_LONG,true).show();
 
-            }
+            }*/
             else if( errors.contains(3) ){
                 Toasty.error(this,"No podemos continuar porque no diste permisos de camara", Toast.LENGTH_LONG,true).show();
 

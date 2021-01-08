@@ -56,17 +56,17 @@ public class TemplateActivity extends AppCompatActivity {
                 ) {
             errors.add(1);
         }
-        if(ActivityCompat.checkSelfPermission(this,
+       /* if(ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
 
                 && ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
 
            errors.add(2);
-        }
+        }*/
         if( ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ){
-           errors.add(3);
+           errors.add(2);
         }
 
         return errors;

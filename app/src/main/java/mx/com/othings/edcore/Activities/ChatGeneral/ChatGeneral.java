@@ -116,6 +116,51 @@ public class ChatGeneral extends AppCompatActivity {
         rvMensajes.setLayoutManager(l);
         rvMensajes.setAdapter(adapter);
 
+        StorageReference referenceFotoPerfil;
+
+        referenceFotoPerfil = storage.getReference("Foto/FotoPerfil/" + KEY_RECEPTOR);
+        //referenceFotoPerfil.getDownloadUrl();
+        /*FirebaseDatabase.
+                getInstance().
+                getReference(Constantes.NODO_USUARIOS).
+                child(KEY_RECEPTOR).
+                child("perfil_photo");*/
+
+        FirebaseDatabase.
+                getInstance().
+                getReference(Constantes.NODO_USUARIOS).
+                child(KEY_RECEPTOR).
+                child("perfil_photo").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                fotoPerfilCadena = String.valueOf(snapshot.getValue());
+                System.out.println("EN nodo de perfil: " + fotoPerfilCadena);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        FirebaseDatabase.
+                getInstance().
+                getReference(Constantes.NODO_USUARIOS).
+                child(KEY_RECEPTOR).
+                child("name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                nombre.setText(String.valueOf(snapshot.getValue()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        Glide.with(ChatGeneral.this).load(fotoPerfilCadena).into(fotoPerfil);
 
 
 
@@ -174,6 +219,7 @@ public class ChatGeneral extends AppCompatActivity {
 
             //Trar informacion de firebase y guardarla en una lista temporal
             Map<String, LStudent> mapUsuariosTemporales = new HashMap<>();
+
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 final Mensaje mensaje = snapshot.getValue(Mensaje.class);
@@ -190,7 +236,6 @@ public class ChatGeneral extends AppCompatActivity {
                             mapUsuariosTemporales.put(mensaje.getKeyEmisor(), lStudent);
                             lMensaje.setlStudent(lStudent);
                             adapter.actualizarMensaje(posicion, lMensaje);
-                            //fotoPerfil =
                         }
 
                         @Override
