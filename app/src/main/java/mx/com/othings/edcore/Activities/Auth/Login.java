@@ -175,9 +175,9 @@ public class Login extends AppCompatActivity {
                                 nextSubject = nextSubject + 3;
                                 totalSemester = (double) totalSemester + (double) average;
                             }
-                            double semester_average = (double) totalSemester / 2;
+                            double semester_average = (double) totalSemester / totalSubject;
                             double semester_percentage = 70;
-                            int subjects_cursed = 10;
+                            int subjects_cursed = totalSubject;
 
                             studentNotes = new StudentNotes(subjectCalificationList,semester_average,semester_percentage,subjects_cursed);
 

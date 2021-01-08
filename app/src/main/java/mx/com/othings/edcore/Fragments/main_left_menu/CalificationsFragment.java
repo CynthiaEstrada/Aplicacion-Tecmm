@@ -83,9 +83,9 @@ public class CalificationsFragment extends Fragment {
         average.setProgress((float) studentNotes.getSemester_average());
         average_title.setText(String.valueOf(studentNotes.getSemester_average()));
         semester_percentage.setProgress((float)100);
-        semester_percetage_title.setText("%100");
-        subjects_cursed.setProgress((float) 2 );
-        subjects_cursed_title.setText("2");
+        semester_percetage_title.setText("100%");
+        subjects_cursed.setProgress((float) studentNotes.getSubjects_cursed());
+        subjects_cursed_title.setText(String.valueOf(studentNotes.getSubjects_cursed()));
 
         RecyclerView.Adapter adapter = new SubjectListAdapter(studentNotes.getSubjectCalificationList(), R.layout.subject_item, new SubjectListAdapter.OnItemClickListener() {
             @Override
