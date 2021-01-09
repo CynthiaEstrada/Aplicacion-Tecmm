@@ -21,8 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:icon">
-        <activity android:name=".ActivityVisualizarPdf"></activity>
+        tools:replace="android:icon"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activities.Inscripcion.ActivityVisualizarPdf"></activity>
         <activity android:name=".Activities.Inscripcion.ActivityMonitoreoDeGrupos" />
         <activity android:name=".Activities.Inscripcion.activity_carga_de_materias" />
         <activity android:name=".Activities.Inscripcion.ActivityEspeciales" />
@@ -69,6 +70,8 @@
         <activity
             android:name=".Activities.Permissions.CheckPermisions"
             android:screenOrientation="portrait" />
+
+
     </application>
 
 </manifest>
