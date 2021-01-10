@@ -59,11 +59,9 @@ public class PanelControlFragment extends Fragment {
         Chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("antes del texto");
                 final Bundle bundle = new Bundle();
                 String texto = getArguments().getString("a");
-                Intent intent = new Intent(getActivity(), VerEstudiantes.class);
-                System.out.println(texto);
+                Intent intent = new Intent(getActivity(), MenuChat.class);
                 bundle.putString("a", texto);
                 intent.putExtras(bundle);
                 startActivity(intent);
