@@ -96,8 +96,6 @@ public class ChatGeneral extends AppCompatActivity {
         }else{
             finish();
         }
-        //controlNumber = student.getStudent_id() + "";
-        System.out.println(controlNumber);
 
         fotoPerfil = (CircularImageView) findViewById(R.id.fotoPerfil);
         nombre = (TextView) findViewById(R.id.nombre);
@@ -134,7 +132,6 @@ public class ChatGeneral extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 fotoPerfilCadena = String.valueOf(snapshot.getValue());
-                System.out.println("EN nodo de perfil: " + fotoPerfilCadena);
             }
 
             @Override

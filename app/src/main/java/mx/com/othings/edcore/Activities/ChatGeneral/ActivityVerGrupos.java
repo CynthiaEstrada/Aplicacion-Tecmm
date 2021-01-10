@@ -25,8 +25,6 @@ public class ActivityVerGrupos extends AppCompatActivity {
 
         final String texto = getIntent().getExtras().getString("Datos");
 
-        System.out.println("EN menu Grupos: " + texto);
-
 
         Transporte = findViewById(R.id.cardTransporte);
         General = findViewById(R.id.cardCampus);

@@ -79,7 +79,6 @@ public class ChatGrupal extends AppCompatActivity {
 
         final String nombreGrupo = getIntent().getStringExtra("Chat Grupal");
         String texto = getIntent().getStringExtra("Datos");
-        System.out.println("En el chat grupal: " + texto);
         Gson gson = new Gson();
         final Student student = gson.fromJson(texto, Student .class);
 
