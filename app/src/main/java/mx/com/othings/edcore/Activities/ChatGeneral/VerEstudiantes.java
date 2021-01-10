@@ -58,7 +58,7 @@ public class VerEstudiantes extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(UsusarioViewHolder holder, int position, Student model) {
-                System.out.println("Model Student: " + model.getName());
+
                 Glide.with(VerEstudiantes.this).load(model.getPerfil_photo()).into(holder.getCivFotoPerfil());
                 holder.getTxtNombreEstudiante().setText(model.getName());
 

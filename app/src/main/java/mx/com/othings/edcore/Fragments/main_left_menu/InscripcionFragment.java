@@ -23,7 +23,7 @@ import mx.com.othings.edcore.Activities.Inscripcion.activity_especialidad;
 
 public class InscripcionFragment extends Fragment {
 
-    CardView agendarMateriasCard, DescargarKardexCard, escogerEspecialidadCard, especialesCard, monitoreoDeGruposCard;
+    CardView agendarMateriasCard, DescargarKardexCard, escogerEspecialidadCard, especialesCard, monitoreoDeGruposCard, descargarKardex;
     Student student;
 
 
@@ -95,6 +95,20 @@ public class InscripcionFragment extends Fragment {
         });
 
         DescargarKardexCard = view.findViewById(R.id.ReferenciaBancariaCard);
+        DescargarKardexCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Bundle bundle = new Bundle();
+                String texto = getArguments().getString("a");
+                Intent intent = new Intent(getActivity(), PDFReader.class);//Cambiar a clase donde esta la activity de agendar materias
+                bundle.putString("a", texto);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        DescargarKardexCard = view.findViewById(R.id.Kardex);
         DescargarKardexCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

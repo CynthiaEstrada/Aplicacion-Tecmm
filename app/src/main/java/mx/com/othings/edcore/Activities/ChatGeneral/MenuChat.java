@@ -7,18 +7,29 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
+import com.google.gson.Gson;
+
+import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.R;
 
 public class MenuChat extends AppCompatActivity {
 
-    private Button btnVerUsuaruios;
+    private CardView btnVerUsuaruios, cardGrupos;
+
+    Bundle bundle = new Bundle();
+    String texto;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acticity_menu_chat);
 
-        btnVerUsuaruios = findViewById(R.id.btnVerEstudiantes);
+        texto = getIntent().getExtras().getString("a");
+
+        btnVerUsuaruios = findViewById(R.id.cardEstudiantesChat);
+        cardGrupos = findViewById(R.id.cardGruposChat);
 
         btnVerUsuaruios.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,5 +38,20 @@ public class MenuChat extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        cardGrupos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                bundle.putString("Datos", texto);
+
+                Intent intent = new Intent(MenuChat.this, ActivityVerGrupos.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
+
+
     }
 }
