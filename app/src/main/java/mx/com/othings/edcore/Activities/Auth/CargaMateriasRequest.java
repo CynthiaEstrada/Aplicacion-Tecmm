@@ -10,7 +10,8 @@ import java.util.Map;
 public class CargaMateriasRequest extends StringRequest {
     private static final String ruta = "https://compact-retina-296219.wn.r.appspot.com/ejemplo";
     private Map<String, String> parametros;
-    public CargaMateriasRequest(int idA, int idM, int idP, Response.Listener<Stringa> listener){
+
+    public CargaMateriasRequest(int idA, int idM, int idP, Response.Listener<String> listener){
         super(Request.Method.POST, ruta, listener, null);
         parametros = new HashMap<>();
         parametros.put("IdAlumno", idA+"");

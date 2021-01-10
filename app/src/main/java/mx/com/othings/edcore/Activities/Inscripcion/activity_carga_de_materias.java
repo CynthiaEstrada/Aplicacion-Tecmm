@@ -12,10 +12,22 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import mx.com.othings.edcore.Activities.Auth.CargaMateriasRequest;
+import mx.com.othings.edcore.Activities.Auth.Login;
+import mx.com.othings.edcore.Activities.ControlPanel;
 import mx.com.othings.edcore.Fragments.main_left_menu.InscripcionFragment;
+import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.R;
 
 public class activity_carga_de_materias extends AppCompatActivity {
@@ -59,14 +71,55 @@ public class activity_carga_de_materias extends AppCompatActivity {
         }
 
         btnGuradarMaterias.setOnClickListener(new View.OnClickListener() {
+            //ArrayList<String> list;
+
             @Override
             public void onClick(View v) {
-                imprimirCadena(Cadena);
-                finish();
+                Response.Listener<String> respuesta = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject jsonRespuesta = new JSONObject(response);
+                        } catch (JSONException e) {
+                            e.getMessage();
+                        }
+                    }
+                };
+
+                Bundle bundle = getIntent().getExtras();
+                String texto = bundle.getString("a");
+                Gson gson = new Gson();
+                Student student = gson.fromJson(texto, Student.class);
+
+                System.out.println("Lista: " + Cadena.size());
+                for(int i=0; i<Cadena.size(); i++) {
+                    System.out.println("Cadena: " + Cadena.get(i));
+                    if(Cadena.get(i).equals("Estructura de datos")){
+                        CargaMateriasRequest carga = new CargaMateriasRequest(student.getStudent_id(), 7, 3, respuesta);
+                        RequestQueue cola = Volley.newRequestQueue(activity_carga_de_materias.this);
+                        cola.add(carga);
+                    }
+                    else if(Cadena.get(i).equals("Calculo Vectorial")){
+                        CargaMateriasRequest carga = new CargaMateriasRequest(student.getStudent_id(), 8, 4, respuesta);
+                        RequestQueue cola = Volley.newRequestQueue(activity_carga_de_materias.this);
+                        cola.add(carga);
+                    }
+                    else if(Cadena.get(i).equals("Cultura Empresarial")){
+                        CargaMateriasRequest carga = new CargaMateriasRequest(student.getStudent_id(), 9, 5, respuesta);
+                        RequestQueue cola = Volley.newRequestQueue(activity_carga_de_materias.this);
+                        cola.add(carga);
+                    }
+                }
+
+                Intent i = new Intent(activity_carga_de_materias.this, Login.class);
+                activity_carga_de_materias.this.startActivity(i);
+                activity_carga_de_materias.this.finish();
             }
         });
     }
 
+    /*
     public void imprimirCadena(ArrayList<String> list){
         System.out.println("Imprimir cadena");
 
@@ -74,6 +127,7 @@ public class activity_carga_de_materias extends AppCompatActivity {
             System.out.println("Cadena: " + list.get(i));
         }
 
-
     }
+
+     */
 }

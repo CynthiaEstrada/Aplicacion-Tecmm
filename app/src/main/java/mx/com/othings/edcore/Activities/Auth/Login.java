@@ -115,10 +115,11 @@ public class Login extends AppCompatActivity {
                             JSONArray array = new JSONArray(response);
                             List<SubjectCalification> subjectCalificationList = new ArrayList<>();
                             List<Double> parcial = new ArrayList<>();
-
+                            List<String> status = new ArrayList<>();
                             for(int i=0; i<array.length(); i++) {
                                 JSONObject j = array.getJSONObject(i);
                                 parcial.add(j.getDouble("CalificacionParcial"));
+                                status.add(j.getString("Acreditacion"));
                             }
 
                             int totalSubject = array.length() / 3;
@@ -131,9 +132,9 @@ public class Login extends AppCompatActivity {
                                 int list_number = 1;
                                 List<Score> s = new ArrayList<>();
 
-                                s.add(new Score(1,parcial.get(nextSubject),"CP"));
-                                s.add(new Score(2,parcial.get(nextSubject+1),"CP"));
-                                s.add(new Score(3,parcial.get(nextSubject+2),"CP"));
+                                s.add(new Score(1,parcial.get(nextSubject),status.get(nextSubject)));
+                                s.add(new Score(2,parcial.get(nextSubject+1),status.get(nextSubject+1)));
+                                s.add(new Score(3,parcial.get(nextSubject+2),status.get(nextSubject+2)));
 
                                 double sum = parcial.get(nextSubject) + parcial.get(nextSubject+1) + parcial.get(nextSubject+2);
                                 double average = (float) sum / 3;
