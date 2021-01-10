@@ -64,6 +64,8 @@ public class CalificationsFragment extends Fragment {
         Gson gson = new Gson();
         StudentNotes studentNotes = gson.fromJson(texto, StudentNotes.class);
 
+        System.out.println("En calificacion: " + texto);
+
         final RecyclerView recyclerView = view.findViewById(R.id.subject_list);
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         final RoundCornerProgressBar average = view.findViewById(R.id.average);
