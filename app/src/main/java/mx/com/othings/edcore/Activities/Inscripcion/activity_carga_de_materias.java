@@ -113,8 +113,10 @@ public class activity_carga_de_materias extends AppCompatActivity {
                 }
 
                 Intent i = new Intent(activity_carga_de_materias.this, Login.class);
+
                 activity_carga_de_materias.this.startActivity(i);
                 activity_carga_de_materias.this.finish();
+
             }
         });
     }
