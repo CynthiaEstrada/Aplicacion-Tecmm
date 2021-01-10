@@ -10,7 +10,7 @@
             android:title="Panel de control" />
         <item
             android:id="@+id/inscripcion_control"
-            android:icon="@drawable/inscripcion"
+            android:icon="@drawable/ic_inscripcion"
             android:title="Inscripción" />
         <item
             android:id="@+id/califications"

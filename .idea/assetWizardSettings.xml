@@ -298,8 +298,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_agendar_materias" />
-                            <entry key="sourceFile" value="C:\Users\Cynthia\Downloads\reloj.svg" />
+                            <entry key="outputName" value="ic_usuario" />
+                            <entry key="sourceFile" value="C:\Users\Cynthia\Downloads\usuario.svg" />
                           </map>
                         </option>
                       </PersistentState>
