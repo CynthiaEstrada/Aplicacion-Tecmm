@@ -77,7 +77,7 @@
                     android:id="@+id/checkBox1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Estructura de datos"
+                    android:text="ESTRUCTURA DE DATOS"
                     android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/textDocente"
@@ -206,7 +206,7 @@
                     android:id="@+id/checkBox2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Calculo Vectorial"
+                    android:text="CALCULO VECTORIAL"
                     android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/textDocente2"
@@ -335,7 +335,7 @@
                     android:id="@+id/checkBox3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cultura Empresarial"
+                    android:text="CULTURA EMPRESARIAL"
                     android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/textDocente3"

@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+
 import mx.com.othings.edcore.Activities.Inscripcion.ActivityEspeciales;
 import mx.com.othings.edcore.Activities.Inscripcion.ActivityMonitoreoDeGrupos;
 import mx.com.othings.edcore.Activities.Inscripcion.activity_carga_de_materias;
@@ -25,6 +27,7 @@ public class InscripcionFragment extends Fragment {
 
     CardView agendarMateriasCard, DescargarKardexCard, escogerEspecialidadCard, especialesCard, monitoreoDeGruposCard, descargarReferencia;
     Student student;
+    ArrayList<String> materias = new ArrayList<>();
 
 
     public InscripcionFragment() {
@@ -42,14 +45,20 @@ public class InscripcionFragment extends Fragment {
         Gson gson = new Gson();
         student = gson.fromJson(texto, Student.class);
 
+        materias = getArguments().getStringArrayList("materias");
+
+
         agendarMateriasCard = view.findViewById(R.id.cardAgendarMaterias);
         agendarMateriasCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Bundle bundle = new Bundle();
                 String texto = getArguments().getString("a");
+                //String materias = getArguments().getString("b");
+
                 Intent intent = new Intent(getActivity(), activity_carga_de_materias.class); //Cambiar a clase donde esta la activity de agendar materias
                 bundle.putString("a", texto);
+                bundle.putStringArrayList("materias", materias);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

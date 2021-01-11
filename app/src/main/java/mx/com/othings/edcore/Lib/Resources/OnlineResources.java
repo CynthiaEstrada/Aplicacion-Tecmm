@@ -120,11 +120,11 @@ public class OnlineResources {
 
     }
 
-    public void getStudentShedule( final OnlineResourceListener onl){
+   /* public void getStudentShedule( final OnlineResourceListener onl){
 
         User user = sdb.getUser();
 
-        App.getHttpClient().get(Paths.STUDENT_SCHEDULE.getStudentSchedulePath(user.getRegistration_tag()), new AsyncHttpResponseHandler() {
+//        App.getHttpClient().get(Paths.STUDENT_SCHEDULE.getStudentSchedulePath(user.getRegistration_tag()), new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -284,5 +284,5 @@ public class OnlineResources {
             }
         });
 
-    }
+    }*/
 }

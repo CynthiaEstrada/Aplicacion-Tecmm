@@ -46,7 +46,7 @@ public class StudentScheduleFragment extends Fragment {
         intent.putExtras(bundle);
         startActivity(intent);
 
-        service.Online().getStudentShedule(new OnlineResourceListener() {
+/*        service.Online().getStudentShedule(new OnlineResourceListener() {
             @Override
             public void onResponse(Object response) {
 
@@ -62,7 +62,7 @@ public class StudentScheduleFragment extends Fragment {
             public void onError(int error_code, String error_message) {
 
             }
-        });
+        });*/
 
         return view;
     }

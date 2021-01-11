@@ -80,12 +80,17 @@ public class Login extends AppCompatActivity {
     double totalSemester = 0;
     private SubjectCalification subject;
     private Uri fotoDePerfilUri;
+    //private Bundle bundle, bundleNotes;
+
+    final Bundle bundle = new Bundle();
+    final Bundle bundle2 = new Bundle();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         registration_tag_input = findViewById(R.id.registration_tag);
         password_input = findViewById(R.id.password);
@@ -99,101 +104,122 @@ public class Login extends AppCompatActivity {
         //Student student;
         mAuth = FirebaseAuth.getInstance();
 
+        final ArrayList<String> materias = new ArrayList<>();
+
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                final Bundle bundle = new Bundle();
+                //final Bundle bundle = new Bundle();
                 final Gson gson = new Gson();
                 final String registration_tag = registration_tag_input.getText().toString();
                 final String password = password_input.getText().toString();
 
-                Response.Listener<String> res2 = new Response.Listener<String>() {
+                Handler handlerResponse= new Handler();
+                handlerResponse.postDelayed(new Runnable() {
                     @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONArray array = new JSONArray(response);
-                            List<SubjectCalification> subjectCalificationList = new ArrayList<>();
-                            List<Double> parcial = new ArrayList<>();
-                            List<String> status = new ArrayList<>();
-                            for(int i=0; i<array.length(); i++) {
-                                JSONObject j = array.getJSONObject(i);
-                                parcial.add(j.getDouble("CalificacionParcial"));
-                                status.add(j.getString("Acreditacion"));
+                    public void run() {
+                        Response.Listener<String> res2 = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONArray array = new JSONArray(response);
+                                    List<SubjectCalification> subjectCalificationList = new ArrayList<>();
+                                    List<Double> parcial = new ArrayList<>();
+                                    List<String> status = new ArrayList<>();
+
+                                    for(int i=0; i<array.length(); i++) {
+                                        JSONObject j = array.getJSONObject(i);
+                                        parcial.add(j.getDouble("CalificacionParcial"));
+                                        status.add(j.getString("Acreditacion"));
+
+                                    }
+
+                                    int totalSubject = array.length() / 3;
+                                    int nextSubject = 0;
+                                    for(int i=0; i<totalSubject; i++){
+
+                                        JSONObject cali = array.getJSONObject(nextSubject);
+
+                                        String class_name = cali.getString("Nombre");
+                                        materias.add(class_name);
+
+                                        int list_number = 1;
+                                        List<Score> s = new ArrayList<>();
+
+                                        s.add(new Score(1,parcial.get(nextSubject),status.get(nextSubject)));
+                                        s.add(new Score(2,parcial.get(nextSubject+1),status.get(nextSubject+1)));
+                                        s.add(new Score(3,parcial.get(nextSubject+2),status.get(nextSubject+2)));
+
+                                        double sum = parcial.get(nextSubject) + parcial.get(nextSubject+1) + parcial.get(nextSubject+2);
+                                        double average = (float) sum / 3;
+
+                                        SubjectCalification subjectCalification = new SubjectCalification(class_name,list_number,s,average);
+                                        subjectCalificationList.add(subjectCalification);
+
+                                        nextSubject = nextSubject + 3;
+                                        totalSemester = (double) totalSemester + (double) average;
+                                    }
+                                    double semester_average = (double) totalSemester / totalSubject;
+                                    float semester_percentage = 70;
+                                    int subjects_cursed = totalSubject;
+
+                                    studentNotes = new StudentNotes(subjectCalificationList,semester_average,semester_percentage,subjects_cursed);
+
+                                    bundle2.putString("b", gson.toJson(studentNotes));
+                                    System.out.println("En login en response calificaciones: " + gson.toJson(studentNotes));
+                                } catch (JSONException e) {
+                                    e.getMessage();
+                                    System.out.println("Entro al catch");
+                                }
                             }
+                        };
+                        CalificationRequest cal = new CalificationRequest(registration_tag, res2);
+                        RequestQueue cola2 = Volley.newRequestQueue(Login.this);
+                        cola2.add(cal);
 
-                            int totalSubject = array.length() / 3;
-                            int nextSubject = 0;
-                            for(int i=0; i<totalSubject; i++){
 
-                                JSONObject cali = array.getJSONObject(nextSubject);
-
-                                String class_name = cali.getString("Nombre");
-                                int list_number = 1;
-                                List<Score> s = new ArrayList<>();
-
-                                s.add(new Score(1,parcial.get(nextSubject),status.get(nextSubject)));
-                                s.add(new Score(2,parcial.get(nextSubject+1),status.get(nextSubject+1)));
-                                s.add(new Score(3,parcial.get(nextSubject+2),status.get(nextSubject+2)));
-
-                                double sum = parcial.get(nextSubject) + parcial.get(nextSubject+1) + parcial.get(nextSubject+2);
-                                double average = (float) sum / 3;
-
-                                SubjectCalification subjectCalification = new SubjectCalification(class_name,list_number,s,average);
-                                subjectCalificationList.add(subjectCalification);
-
-                                nextSubject = nextSubject + 3;
-                                totalSemester = (double) totalSemester + (double) average;
+                        Response.Listener<String> res = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonRespuesta = new JSONObject(response);
+                                    boolean ok = jsonRespuesta.getBoolean("success");
+                                    if (ok == true) {
+                                        student = new Student(jsonRespuesta.getInt("IdAlumno"),
+                                                jsonRespuesta.getString("Nombre"), jsonRespuesta.getString("ApellidoPaterno"),
+                                                jsonRespuesta.getString("ApellidoMaterno"), jsonRespuesta.getString("FechaNacimiento"),
+                                                jsonRespuesta.getString("Sexo"), jsonRespuesta.getString("Direccion"),
+                                                jsonRespuesta.getString("Telefono"), jsonRespuesta.getString("Email"),
+                                                jsonRespuesta.getString("Password"), jsonRespuesta.getString("Carrera"),
+                                                jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"),
+                                                jsonRespuesta.getString("Kardex"), jsonRespuesta.getString("Referencia"),
+                                                jsonRespuesta.getString("Horario"));
+                                        bundle.putString("a", gson.toJson(student));
+                                        bundle.putStringArrayList("materias", materias);
+                                        String cali = gson.toJson(studentNotes);
+                                        bundle.putString("notas", cali);
+                                        FirebaseSingin(student.getEmail(), String.valueOf(student.getStudent_id()));
+                                        Intent intent = new Intent(Login.this, ControlPanel.class);
+                                        intent.putExtras(bundle);
+                                        intent.putExtras(bundle2);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toasty.error(Login.this, "error al intentar acceder", Toast.LENGTH_LONG, true).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.getMessage();
+                                }
                             }
-                            double semester_average = (double) totalSemester / totalSubject;
-                            float semester_percentage = 70;
-                            int subjects_cursed = totalSubject;
-
-                            studentNotes = new StudentNotes(subjectCalificationList,semester_average,semester_percentage,subjects_cursed);
-
-                            bundle.putString("b", gson.toJson(studentNotes));
-                        } catch (JSONException e) {
-                            e.getMessage();
-                        }
+                        };
+                        LoginRequest r = new LoginRequest(registration_tag, password, res);
+                        RequestQueue cola = Volley.newRequestQueue(Login.this);
+                        cola.add(r);
                     }
-                };
-                CalificationRequest cal = new CalificationRequest(registration_tag, res2);
-                RequestQueue cola2 = Volley.newRequestQueue(Login.this);
-                cola2.add(cal);
+                },3000);
 
 
-                Response.Listener<String> res = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonRespuesta = new JSONObject(response);
-                            boolean ok = jsonRespuesta.getBoolean("success");
-                            if (ok == true) {
-                                student = new Student(jsonRespuesta.getInt("IdAlumno"),
-                                        jsonRespuesta.getString("Nombre"), jsonRespuesta.getString("ApellidoPaterno"),
-                                        jsonRespuesta.getString("ApellidoMaterno"), jsonRespuesta.getString("FechaNacimiento"),
-                                        jsonRespuesta.getString("Sexo"), jsonRespuesta.getString("Direccion"),
-                                        jsonRespuesta.getString("Telefono"), jsonRespuesta.getString("Email"),
-                                        jsonRespuesta.getString("Password"), jsonRespuesta.getString("Carrera"),
-                                        jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"),
-                                        jsonRespuesta.getString("Kardex"), jsonRespuesta.getString("Referencia"),
-                                        jsonRespuesta.getString("Horario"));
-                                bundle.putString("a", gson.toJson(student));
-                                FirebaseSingin(student.getEmail(), String.valueOf(student.getStudent_id()));
-                                Intent intent = new Intent(Login.this, ControlPanel.class);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-                            } else {
-                                Toasty.error(Login.this, "error al intentar acceder", Toast.LENGTH_LONG, true).show();
-                            }
-                        } catch (JSONException e) {
-                            e.getMessage();
-                        }
-                    }
-                };
-                LoginRequest r = new LoginRequest(registration_tag, password, res);
-                RequestQueue cola = Volley.newRequestQueue(Login.this);
-                cola.add(r);
 
 
 

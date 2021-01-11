@@ -24,10 +24,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import mx.com.othings.edcore.Activities.Auth.CargaMateriasRequest;
 import mx.com.othings.edcore.Activities.Auth.Login;
 import mx.com.othings.edcore.Activities.ControlPanel;
 import mx.com.othings.edcore.Fragments.main_left_menu.InscripcionFragment;
+import mx.com.othings.edcore.Lib.Models.Califications.StudentNotes;
 import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.R;
 
@@ -35,12 +37,27 @@ public class activity_carga_de_materias extends AppCompatActivity {
 
     private Button btnGuradarMaterias;
     private ArrayList<String> Cadena = new ArrayList<String>();
+    private ArrayList<String> Materias = new ArrayList<String>();
     private CheckBox[] checkbox = new CheckBox[3];
+    private CheckBox check1, check2, check3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carga_de_materias);
+
+        check1 = findViewById(R.id.checkBox1);
+        check2 = findViewById(R.id.checkBox2);
+        check3 = findViewById(R.id.checkBox3);
+
+
+        String texto = getIntent().getExtras().getString("notas");
+        Materias = getIntent().getExtras().getStringArrayList("materias");
+        imprimirCadena(Materias);
+        Gson gson = new Gson();
+        StudentNotes studentNotes = gson.fromJson(texto, StudentNotes.class);
+
+
 
         btnGuradarMaterias = (Button) findViewById(R.id.btnGuardarHorario);
 
@@ -68,6 +85,17 @@ public class activity_carga_de_materias extends AppCompatActivity {
             System.out.println("ID: " + id1);
             checkbox[i] = (CheckBox) findViewById(id1);
             checkbox[i].setOnCheckedChangeListener(checker);
+            for(int k = 0; k < Materias.size(); k++){
+                System.out.println("Materia: " + Materias.get(k));
+                System.out.println("Checkbox: " + checkbox[i].getText());
+
+                if(checkbox[i].getText().equals(Materias.get(k))){
+
+                    checkbox[i].setEnabled(false);
+                    //checkbox[i].setChecked(true);
+
+                }
+            }
         }
 
         btnGuradarMaterias.setOnClickListener(new View.OnClickListener() {
@@ -95,17 +123,17 @@ public class activity_carga_de_materias extends AppCompatActivity {
                 System.out.println("Lista: " + Cadena.size());
                 for(int i=0; i<Cadena.size(); i++) {
                     System.out.println("Cadena: " + Cadena.get(i));
-                    if(Cadena.get(i).equals("Estructura de datos")){
+                    if(Cadena.get(i).equals("ESTRUCTURA DE DATOS")){
                         CargaMateriasRequest carga = new CargaMateriasRequest(student.getStudent_id(), 7, 3, respuesta);
                         RequestQueue cola = Volley.newRequestQueue(activity_carga_de_materias.this);
                         cola.add(carga);
                     }
-                    else if(Cadena.get(i).equals("Calculo Vectorial")){
+                    else if(Cadena.get(i).equals("CALCULO VECTORIAL")){
                         CargaMateriasRequest carga = new CargaMateriasRequest(student.getStudent_id(), 8, 4, respuesta);
                         RequestQueue cola = Volley.newRequestQueue(activity_carga_de_materias.this);
                         cola.add(carga);
                     }
-                    else if(Cadena.get(i).equals("Cultura Empresarial")){
+                    else if(Cadena.get(i).equals("CULTURA EMPRESARIAL")){
                         CargaMateriasRequest carga = new CargaMateriasRequest(student.getStudent_id(), 9, 5, respuesta);
                         RequestQueue cola = Volley.newRequestQueue(activity_carga_de_materias.this);
                         cola.add(carga);
@@ -114,6 +142,8 @@ public class activity_carga_de_materias extends AppCompatActivity {
 
                 Intent i = new Intent(activity_carga_de_materias.this, Login.class);
 
+                Toasty.success(activity_carga_de_materias.this,"Materias agendadas correctamente", Toast.LENGTH_LONG, true).show();
+
                 activity_carga_de_materias.this.startActivity(i);
                 activity_carga_de_materias.this.finish();
 
@@ -121,7 +151,7 @@ public class activity_carga_de_materias extends AppCompatActivity {
         });
     }
 
-    /*
+
     public void imprimirCadena(ArrayList<String> list){
         System.out.println("Imprimir cadena");
 
@@ -131,5 +161,6 @@ public class activity_carga_de_materias extends AppCompatActivity {
 
     }
 
-     */
+
+
 }

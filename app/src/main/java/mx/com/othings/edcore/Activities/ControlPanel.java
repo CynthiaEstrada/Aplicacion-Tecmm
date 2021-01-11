@@ -53,8 +53,15 @@ public class ControlPanel extends TemplateActivity
         String texto = bundle.getString("a");
         args.putString("a", texto);
 
-        String texto2 = bundle.getString("b");
+        String texto2 = getIntent().getExtras().getString("b");
         args.putString("b", texto2);
+
+        System.out.println("Desde control panel texto: " + texto);
+        System.out.println("Desde control panel texto2: " + texto2);
+
+        ArrayList<String> ma = new ArrayList<>();
+        ma = getIntent().getStringArrayListExtra("materias");
+        args.putStringArrayList("materias", ma);
 
         Gson gson = new Gson();
         Student student = gson.fromJson(texto, Student.class);
