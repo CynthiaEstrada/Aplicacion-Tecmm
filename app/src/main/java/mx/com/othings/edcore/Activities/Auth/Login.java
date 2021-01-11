@@ -175,7 +175,9 @@ public class Login extends AppCompatActivity {
                                         jsonRespuesta.getString("Sexo"), jsonRespuesta.getString("Direccion"),
                                         jsonRespuesta.getString("Telefono"), jsonRespuesta.getString("Email"),
                                         jsonRespuesta.getString("Password"), jsonRespuesta.getString("Carrera"),
-                                        jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"));
+                                        jsonRespuesta.getString("Semestre"), jsonRespuesta.getString("Perfil"),
+                                        jsonRespuesta.getString("Kardex"), jsonRespuesta.getString("Referencia"),
+                                        jsonRespuesta.getString("Horario"));
                                 bundle.putString("a", gson.toJson(student));
                                 FirebaseSingin(student.getEmail(), String.valueOf(student.getStudent_id()));
                                 Intent intent = new Intent(Login.this, ControlPanel.class);

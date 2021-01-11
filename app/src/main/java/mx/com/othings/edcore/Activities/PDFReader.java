@@ -5,19 +5,13 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.github.barteksc.pdfviewer.PDFView;
+import com.google.gson.Gson;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
 
 import mx.com.othings.edcore.Activities.Inscripcion.ActivityVisualizarPdf;
+import mx.com.othings.edcore.Lib.Models.Student;
 import mx.com.othings.edcore.R;
 
 public class PDFReader extends TemplateActivity {
@@ -44,11 +38,9 @@ public class PDFReader extends TemplateActivity {
 
         //("http://187.188.199.175:8080/alumnos/docs/getKardex?user_IdStudent=11567&cursadas=S", folder);
 
-
-
         pdfView = findViewById(R.id.pdfViewer);
         progressBar = findViewById(R.id.pogressBarPdf);
-        String urlPdf = "http://187.188.199.175:8080/alumnos/docs/getKardex?user_IdStudent=11567&cursadas=S";
+        String urlPdf = getIntent().getExtras().getString("a");
         new ActivityVisualizarPdf(pdfView, progressBar).execute(urlPdf);
         //File file = gson.fromJson(getIntent().getStringExtra("file"),File.class);
 

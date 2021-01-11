@@ -14,10 +14,13 @@ public class Student {
     private String carrera;
     private String semestre;
     private String perfil_photo;
+    private String kardex;
+    private String horario;
+    private String referencia;
 
     public Student(){}
 
-    public Student(int student_id, String name, String first_name, String last_name, String birthday, String gender, String address, String cellPhone, String email, String password, String carrera, String semestre, String perfil_photo) {
+    public Student(int student_id, String name, String first_name, String last_name, String birthday, String gender, String address, String cellPhone, String email, String password, String carrera, String semestre, String perfil_photo, String kardex, String referencia, String horario) {
         this.student_id = student_id;
         this.name = name;
         this.first_name = first_name;
@@ -31,6 +34,9 @@ public class Student {
         this.carrera = carrera;
         this.semestre = semestre;
         this.perfil_photo = perfil_photo;
+        this.kardex = kardex;
+        this.referencia = referencia;
+        this.horario = horario;
     }
 
     public int getStudent_id() {
@@ -135,5 +141,29 @@ public class Student {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getKardex() {
+        return kardex;
+    }
+
+    public void setKardex(String kardex) {
+        this.kardex = kardex;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
     }
 }

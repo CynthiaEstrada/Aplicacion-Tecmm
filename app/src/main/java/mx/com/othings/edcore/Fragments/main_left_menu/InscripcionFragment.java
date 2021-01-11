@@ -100,7 +100,8 @@ public class InscripcionFragment extends Fragment {
             public void onClick(View view) {
 
                 final Bundle bundle = new Bundle();
-                String texto = getArguments().getString("a");
+                String texto = student.getReferencia();
+
                 Intent intent = new Intent(getActivity(), PDFReader.class);//Cambiar a clase donde esta la activity de agendar materias
                 bundle.putString("a", texto);
                 intent.putExtras(bundle);
@@ -114,7 +115,7 @@ public class InscripcionFragment extends Fragment {
             public void onClick(View view) {
 
                 final Bundle bundle = new Bundle();
-                String texto = getArguments().getString("a");
+                String texto = student.getKardex();
                 Intent intent = new Intent(getActivity(), PDFReader.class);//Cambiar a clase donde esta la activity de agendar materias
                 bundle.putString("a", texto);
                 intent.putExtras(bundle);
